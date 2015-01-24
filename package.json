@@ -14,5 +14,9 @@
     "less-middleware": "1.0.x",
     "morgan": "~1.5.1",
     "serve-favicon": "~2.2.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.10",
+    "gulp-replace": "^0.5.2"
   }
 }
