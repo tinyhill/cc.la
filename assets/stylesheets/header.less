@@ -1,0 +1,96 @@
+//
+// Header
+// --------------------------------------------------
+
+.header {
+  background: #EAEAEA;
+  border-bottom: 1px solid #D3D3D3;
+  padding: 28px 0 22px;
+  .logo {
+    float: left;
+    height: 32px;
+    width: 94px;
+    margin: 7px 7% 0 0;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .searchform {
+    float: left;
+    position: relative;
+    width: 50%;
+    .s {
+      background: #FFF;
+      border: 1px solid #CBCBCB;
+      border-right: none;
+      border-radius: 2px 0 0 2px;
+      float: left;
+      height: 46px;
+      width: 99%;
+      position: relative;
+      label {
+        color: #BCBCBC;
+        cursor: text;
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 44px;
+        margin-bottom: 0;
+        position: absolute;
+        top: 0;
+        left: 15px;
+      }
+      input {
+        background: #FFF;
+        border: none;
+        color: #333;
+        font-size: 14px;
+        font-weight: bold;
+        line-height: 44px;
+        outline: none;
+        padding: 0 15px;
+        width: 82%;
+      }
+    }
+    .searchsubmit {
+      border: 1px solid #CBCBCB;
+      border-radius: 0 2px 2px 0;
+      float: left;
+      width: 70px;
+      height: 46px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      button {
+        background: #FFF;
+        border: none;
+        color: #BABABA;
+        font-size: 14px;
+        height: 100%;
+        width: 100%;
+        outline: none;
+        top: 0;
+      }
+      &:hover {
+        border-color: #018454;
+        button {
+          background: #009a61;
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .header {
+    .logo {
+      width: 80px;
+      height: 27px;
+    }
+    .searchform {
+      margin-top: 20px;
+      width: 100%;
+    }
+  }
+}

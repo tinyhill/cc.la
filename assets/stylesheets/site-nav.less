@@ -1,0 +1,47 @@
+//
+// SiteNav
+// --------------------------------------------------
+
+.site-nav {
+  background: #009A61;
+  border-bottom: 1px solid #018454;
+  font-size: 12px;
+  height: 38px;
+  line-height: 38px;
+  a {
+    color: #FFF;
+    opacity: 0.8;
+    text-decoration: none;
+    &:active,
+    &:focus,
+    &:hover {
+      opacity: 1;
+    }
+  }
+  .welcome {
+    float: left;
+  }
+  .quick-menu {
+    float: right;
+    margin-bottom: 0;
+    padding-left: 0;
+    > li {
+      float: left;
+      list-style: none;
+      > a {
+        display: block;
+        padding: 0 10px;
+        &:focus,
+        &:hover {
+          background: #018454;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .site-nav {
+    display: none;
+  }
+}

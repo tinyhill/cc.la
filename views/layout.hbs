@@ -7,33 +7,87 @@
     <title>查查啦</title>
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
     <link href="/stylesheets/theme.min.css" rel="stylesheet">
+    <link href="/stylesheets/index.min.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="/javascripts/html5shiv.min.js"></script>
     <script src="/javascripts/respond.min.js"></script>
     <![endif]-->
 </head>
 <body>
-<nav class="navbar navbar-inverse">
+<nav class="site-nav">
     <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">杭州空气质量：187 <b>中度污染</b></a>
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="#">工具大全</a></li>
-                <li><a href="#">网站排名</a></li>
-                <li><a href="#">手机访问</a></li>
-                <li><a href="#">帮助中心</a></li>
-            </ul>
-        </div>
+        <a class="welcome" href="/">查查啦，万能的站长工具</a>
+        <ul class="quick-menu">
+            <li><a href="#">工具大全</a></li>
+            <li><a href="#">网站排名</a></li>
+            <li><a href="#">手机访问</a></li>
+            <li><a href="#">帮助中心</a></li>
+        </ul>
     </div>
 </nav>
-{{{content}}}
+<header class="header">
+    <div class="container">
+        <a href="/" class="logo">
+            <img src="/images/logo.png" alt="查查啦">
+        </a>
+
+        <form class="searchform" action="/search" method="get" autocomplete="off">
+            <div class="s">
+                <label for="s">请输入域名、网址或关键字</label>
+                <input type="search" id="s" name="s" tabindex="1">
+            </div>
+            <div class="searchsubmit">
+                <button type="submit" class="glyphicon glyphicon-search" style="font-size:14px;"></button>
+            </div>
+        </form>
+        <div id="user-info" class="logged-in">
+            <a href="/~tinyhill"></a>
+        </div>
+    </div>
+</header>
+<section class="content">
+    <div class="container">
+        {{{content}}}
+    </div>
+</section>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <dl class="col-sm-3 col-md-3 col-lg-3">
+                <dt>热门工具</dt>
+                <dd><a href="/">网站综合信息</a></dd>
+                <dd><a href="/">百度权重查询</a></dd>
+                <dd><a href="/">关键词排名</a></dd>
+                <dd><a href="/">友情链接检查</a></dd>
+                <dd><a href="/">反向链接查询</a></dd>
+            </dl>
+            <dl class="col-sm-3 col-md-3 col-lg-3">
+                <dt>热门工具</dt>
+                <dd><a href="/">网站综合信息</a></dd>
+                <dd><a href="/">百度权重查询</a></dd>
+                <dd><a href="/">关键词排名</a></dd>
+                <dd><a href="/">友情链接检查</a></dd>
+                <dd><a href="/">反向链接查询</a></dd>
+            </dl>
+            <dl class="col-sm-3 col-md-3 col-lg-3">
+                <dt>热门工具</dt>
+                <dd><a href="/">网站综合信息</a></dd>
+                <dd><a href="/">百度权重查询</a></dd>
+                <dd><a href="/">关键词排名</a></dd>
+                <dd><a href="/">友情链接检查</a></dd>
+                <dd><a href="/">反向链接查询</a></dd>
+            </dl>
+            <dl class="col-sm-3 col-md-3 col-lg-3">
+                <dt>热门工具</dt>
+                <dd><a href="/">网站综合信息</a></dd>
+                <dd><a href="/">百度权重查询</a></dd>
+                <dd><a href="/">关键词排名</a></dd>
+                <dd><a href="/">友情链接检查</a></dd>
+                <dd><a href="/">反向链接查询</a></dd>
+            </dl>
+        </div>
+    </div>
+</footer>
 <script src="/javascripts/jquery.min.js"></script>
 <script src="/javascripts/bootstrap.min.js"></script>
 </body>
