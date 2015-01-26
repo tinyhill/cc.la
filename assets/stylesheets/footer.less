@@ -2,16 +2,53 @@
 // Footer
 // --------------------------------------------------
 
+body {
+  margin-bottom: 60px;
+}
+
 .footer {
-  margin: 50px 0;
-  dt {
-    border-bottom: 1px solid #EAEAEA;
-    font-size: 14px;
-    line-height: 3;
-    margin-bottom: 10px;
+  background: #FAFAFA;
+  border-top: 1px solid #D3D3D3;
+  color: #999;
+  font-size: 13px;
+  height: 60px;
+  line-height: 60px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  .copyright {
+    float: left;
+    text-align: center;
   }
-  dd {
-    font-size: 12px;
-    line-height: 2;
+  .quick-links {
+    float: right;
+    margin-bottom: 0;
+    padding-left: 0;
+    li {
+      float: left;
+      list-style: none;
+    }
+    li + li:before {
+      color: #BBB;
+      content: '•';
+      padding: 0 5px;
+    }
+    a {
+      color: #999;
+    }
+    .miibeian {
+      color: #BBB;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .footer {
+    .copyright {
+      float: none;
+    }
+    .quick-links {
+      display: none;
+    }
   }
 }
