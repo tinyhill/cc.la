@@ -1,3 +1,9 @@
+//
+// Globals
+// --------------------------------------------------
+
+@import '../../bower_components/bootstrap/less/bootstrap';
+
 body {
   margin-bottom: 60px;
 }
@@ -75,9 +81,13 @@ body {
       border-radius: 2px 0 0 2px;
       float: left;
       height: 46px;
+      *height: 44px;
       overflow: hidden;
       width: 99%;
-      position: relative;
+      position: absolute;
+      top: 0;
+      left: 0;
+      cursor: text;
       label {
         color: #BCBCBC;
         cursor: text;
@@ -85,7 +95,6 @@ body {
         font-weight: normal;
         height: 44px;
         line-height: 44px;
-        *line-height: 46px;
         margin-bottom: 0;
         position: absolute;
         top: 0;
@@ -100,21 +109,24 @@ body {
         height: 44px;
         line-height: 44px;
         outline: none;
-        padding: 0 15px;
-        width: 82%;
+        text-indent: 15px;
+        width: 80%;
       }
     }
     .searchsubmit {
+      background: #FFF;
       border: 1px solid #CBCBCB;
       border-radius: 0 2px 2px 0;
       float: left;
       width: 70px;
       height: 46px;
+      *height: 44px;
       position: absolute;
       top: 0;
       right: 0;
       button {
-        background: #FFF;
+        background-color: #FFF;
+        background-repeat: no-repeat;
         border: none;
         color: #BABABA;
         font-size: 14px;
@@ -122,12 +134,16 @@ body {
         width: 100%;
         outline: none;
         top: 0;
+        *background-image: url(/images/glyphicon-search-ie.png);
+        *background-position: 50% 0;
+        _cursor: pointer;
       }
       &:hover {
         border-color: #018454;
         button {
-          background: #009a61;
+          background-color: #009a61;
           color: #fff;
+          *background-position: 50% 100%;
         }
       }
     }
@@ -146,15 +162,13 @@ body {
   height: 60px;
   line-height: 60px;
   position: absolute;
-  right: 0;
   bottom: 0;
-  left: 0;
   width: 100%;
   .copyright {
     float: left;
     text-align: center;
   }
-  .quick-links {
+  .site-info {
     float: right;
     margin-bottom: 0;
     padding-left: 0;
@@ -182,6 +196,9 @@ body {
     display: none;
   }
   .header {
+    height: 152px;
+    *height: 151px;
+    _height: 156px;
     .logo {
       width: 80px;
       height: 27px;
@@ -195,7 +212,7 @@ body {
     .copyright {
       float: none;
     }
-    .quick-links {
+    .site-info {
       display: none;
     }
   }

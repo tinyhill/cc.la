@@ -1,25 +1,28 @@
 $(document).ready(function () {
 
-    /**
-     * 输入提示信息
-     */
-    function placeholder() {
+    // 搜索框提示信息
+    (function () {
 
-        var label = $('.s label');
-        var target = $('.s input');
-        if ($.trim(target.val()) == '') {
+        var s = $('.s');
+        var label = s.find('label');
+        var input = s.find('input');
+
+        if ($.trim(input.val()) === '') {
             label.removeClass('hidden');
         }
-        target.focus(function () {
+
+        input.focus(function () {
             label.addClass('hidden');
         }).blur(function () {
-            if ($.trim(target.val()) == '') {
+            if ($.trim(input.val()) === '') {
                 label.removeClass('hidden');
             }
         });
 
-    }
+        s.click(function () {
+            input.focus();
+        });
 
-    placeholder();
+    })();
 
 });

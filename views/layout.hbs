@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>查查啦</title>
-    <link href="/stylesheets/bootstrap.css" rel="stylesheet">
     <link href="/stylesheets/global.css" rel="stylesheet">
     <link href="/stylesheets/index.css" rel="stylesheet">
     <!--[if lt IE 9]>
@@ -17,10 +16,10 @@
     <div class="container">
         <a class="welcome" href="/">查查啦，万能的站长工具</a>
         <ul class="quick-menu clearfix">
-            <li><a href="#">工具大全</a></li>
-            <li><a href="#">网站排名</a></li>
-            <li><a href="#">手机访问</a></li>
-            <li><a href="#">帮助中心</a></li>
+            <li><a href="/">工具大全</a></li>
+            <li><a href="/">网站排名</a></li>
+            <li><a href="/">手机访问</a></li>
+            <li><a href="/">帮助中心</a></li>
         </ul>
     </div>
 </div>
@@ -29,13 +28,13 @@
         <a href="/" class="logo" title="万能的站长工具">
             <img src="/images/logo.png" width="94" height="32" alt="查查啦">
         </a>
-        <form class="searchform" action="/search" method="get" autocomplete="off">
+        <form class="searchform" action="/" method="get" autocomplete="off">
             <div class="s">
                 <label for="s" class="hidden">请输入域名、网址或关键字</label>
-                <input type="search" id="s" name="s" tabindex="1">
+                <input type="search" id="s" name="s" maxlength="100" tabindex="1">
             </div>
             <div class="searchsubmit">
-                <button type="submit" class="glyphicon glyphicon-search" style="font-size:14px;"></button>
+                <button type="submit" class="glyphicon glyphicon-search"></button>
             </div>
         </form>
         <div id="user-info" class="logged-in">
@@ -51,7 +50,7 @@
 <div class="footer">
     <div class="container">
         <div class="copyright">&copy; 2015 查查啦</div>
-        <ul class="quick-links">
+        <ul class="site-info">
             <li><a href="/">关于本站</a></li>
             <li><a href="/">联系我们</a></li>
             <li><a href="/">广告投放</a></li>
@@ -62,9 +61,6 @@
         </ul>
     </div>
 </div>
-<script src="/javascripts/jquery.js"></script>
-<script src="/javascripts/jquery.pseudo.js"></script>
-<script src="/javascripts/bootstrap.js"></script>
 <script src="/javascripts/global.js"></script>
 </body>
 </html>
