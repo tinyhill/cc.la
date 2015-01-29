@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    // 搜索框提示信息
+    // placeholder
     (function () {
 
         var s = $('.s');

@@ -9,10 +9,15 @@ var bower = './bower_components/';
 var dest = './public/';
 
 gulp.task('global:css', function () {
-    gulp.src(assets + 'stylesheets/global.less')
+    gulp.src([
+        assets + 'stylesheets/global.less',
+        assets + 'stylesheets/index.less'
+    ])
         .pipe(less())
         .pipe(concat('global.css'))
-        .pipe(minify())
+        .pipe(minify({
+            compatibility: 'ie7'
+        }))
         .pipe(gulp.dest(dest + 'stylesheets'));
 });
 

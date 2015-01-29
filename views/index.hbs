@@ -1,2 +1,26 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<div class="tool-group" style="margin-top: 25px;">
+    <h2 class="tool-label">热门工具</h2>
+    <div class="tool-controls row">
+        {{#each data}}
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                <div class="tool-control">
+                    <a class="name" target="_blank" href="/">{{name}}</a>
+                    <span class="version">1.1.0</span>
+                    <p class="desc" title="drag and drop">{{desc}}</p></div>
+            </div>
+        {{/each}}
+    </div>
+</div>
+<div class="tool-group" style="margin-bottom: 100px;">
+    <h2 class="tool-label">最新上线</h2>
+    <div class="tool-controls row">
+        {{#each data}}
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                <div class="tool-control">
+                    <a class="name" target="_blank" href="/dnd/" title="arale-dnd">{{name}}</a>
+                    <span class="version">1.1.0</span>
+                    <p class="desc" title="drag and drop">{{desc}}</p></div>
+            </div>
+        {{/each}}
+    </div>
+</div>
