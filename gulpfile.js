@@ -6,24 +6,23 @@ var uglify = require('gulp-uglify');
 
 var assets = './assets/';
 var bower = './bower_components/';
-var dest = './public/';
+var build = './public/';
 
 gulp.task('global:css', function () {
     gulp.src([
-        assets + 'stylesheets/global.less',
-        assets + 'stylesheets/index.less'
+        assets + 'stylesheets/global.less'
     ])
         .pipe(less())
         .pipe(concat('global.css'))
         .pipe(minify({
             compatibility: 'ie7'
         }))
-        .pipe(gulp.dest(dest + 'stylesheets'));
+        .pipe(gulp.dest(build + 'stylesheets'));
 });
 
 gulp.task('global:fonts', function () {
     gulp.src(bower + 'bootstrap/dist/fonts/*.*')
-        .pipe(gulp.dest(dest + 'fonts'));
+        .pipe(gulp.dest(build + 'fonts'));
 });
 
 gulp.task('global:js', function () {
@@ -34,13 +33,13 @@ gulp.task('global:js', function () {
     ])
         .pipe(concat('global.js'))
         .pipe(uglify())
-        .pipe(gulp.dest(dest + 'javascripts'));
+        .pipe(gulp.dest(build + 'javascripts'));
 });
 
 gulp.task('global:respond', function () {
     gulp.src(bower + 'respond/src/respond.js')
         .pipe(uglify())
-        .pipe(gulp.dest(dest + 'javascripts'));
+        .pipe(gulp.dest(build + 'javascripts'));
 });
 
 gulp.task('default', [

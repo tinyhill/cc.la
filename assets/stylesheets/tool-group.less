@@ -1,0 +1,77 @@
+//
+// ToolGroup
+// --------------------------------------------------
+
+.tool-group {
+  margin-bottom: 10px;
+}
+
+.tool-label {
+  color: #333;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0 0 20px;
+}
+
+.tool-control {
+  background: #FFF;
+  border: 1px solid #DBDBDB;
+  border-left-width: 3px;
+  border-left-color: #009A61;
+  border-radius: 2px;
+  color: #999;
+  margin-bottom: 15px;
+  padding: 12px 15px;
+  a {
+    color: #009A61;
+  }
+  &:hover {
+    border-top-color: #BDBDBD;
+    border-right-color: #BDBDBD;
+    border-bottom-color: #BDBDBD;
+    color: #777;
+  }
+  .name,
+  .desc {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .name {
+    display: inline-block;
+    font-size: 14px;
+    vertical-align: middle;
+  }
+  .desc {
+    margin: 5px 0 0 0;
+    font-size: 13px;
+  }
+}
+
+.tool-controls {
+  *overflow: hidden;
+  *zoom: 1;
+  .col-xs-6,
+  .col-sm-4,
+  .col-md-3,
+  .col-lg-3 {
+    *padding-left: 0;
+    *padding-right: 0;
+    .tool-control {
+      *margin-left: 15px;
+      *margin-right: 15px;
+    }
+  }
+}
+
+//
+// Media Queries
+// --------------------------------------------------
+
+@media (max-width: 767px) {
+  .tool-controls {
+    .col-xs-6 {
+      *width: 49.99%;
+    }
+  }
+}
