@@ -49,10 +49,19 @@ gulp.task('default', [
     'global:respond'
 ]);
 
-gulp.watch(assets + 'stylesheets/*.less', [
-    'global:css'
-]);
+gulp.task('watch:css', function () {
+    gulp.watch(assets + 'stylesheets/*.less', [
+        'global:css'
+    ]);
+});
 
-gulp.watch(assets + 'javascripts/*.js', [
-    'global:js'
+gulp.task('watch:js', function () {
+    gulp.watch(assets + 'javascripts/*.js', [
+        'global:js'
+    ]);
+});
+
+gulp.task('watch', [
+    'watch:css',
+    'watch:js'
 ]);
