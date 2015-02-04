@@ -1,13 +1,12 @@
-var PageRank = require('pagerank');
 var parse = require('domain-name-parser');
+var whois = require('node-whois');
 
 exports.index = function (req, res) {
 
     var host = parse(req.params.host);
     var domainName = host.domainName;
 
-    PageRank.HOST = 'toolbarqueries.google.com.hk';
-    PageRank.get(domainName, function (err, pr) {
+    whois.lookup(domainName, function (err, data) {
 
         var result = {};
 
@@ -16,8 +15,8 @@ exports.index = function (req, res) {
             result.data = err;
         } else {
             result.status = 'success';
-            result.data = pr;
+            result.data = data;
         }
-        res.json(result);
+        res.send(result);
     });
 };
