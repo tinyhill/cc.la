@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
-var ip = require('../controllers/ip');
-var pr = require('../controllers/pr');
-var whois = require('../controllers/whois');
+var ip = require('../controllers/ip/api');
+var pr = require('../controllers/pr/api');
+var whois = require('../controllers/whois/api');
 
-router.get('/ip/:host', ip.index);
-router.get('/pr/:host', pr.index);
-router.get('/whois/:host', whois.index);
+router.get('/ip/:q', ip.index);
+router.get('/pr/:q', pr.index);
+router.get('/whois/:q', whois.index);
 
 module.exports = router;
