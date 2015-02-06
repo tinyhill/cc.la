@@ -1,11 +1,15 @@
 var dns = require('dns');
+var ip = require('ip');
 var isIp = require('is-ip');
 var parseDomain = require('parse-domain');
 var qqwry = require('lib-qqwry').info();
 
 function getQQWry(ip) {
+
     var data = qqwry.searchIP(ip);
-    data.Area = data.Area.replace(/\s*CZ88\.NET/g, '');
+    var regex = /(\s*CZ88\.NET|对方和您在同一内部网)/g;
+
+    data.Area = data.Area.replace(regex, '');
     return data;
 }
 
@@ -22,7 +26,7 @@ exports.index = function (req, res) {
         q = parseDomain(q);
         if (q) {
             q = q.domain + '.' + q.tld;
-            dns.lookup(q, function (err, data) {
+            dns.lookup(q, 4, function (err, data) {
                 if (err) {
                     res.json({
                         status: 'fail',
@@ -42,4 +46,14 @@ exports.index = function (req, res) {
             });
         }
     }
+};
+
+exports.client = function (req, res) {
+
+    var addr = ip.address();
+
+    res.json({
+        status: 'success',
+        data: getQQWry(addr)
+    });
 };
