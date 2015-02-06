@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var index = require('../controllers');
+var index = require('../controllers/index');
 var whois = require('../controllers/whois');
 
 router.get('/', index.index);
