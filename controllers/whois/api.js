@@ -3,11 +3,10 @@ var whois = require('node-whois');
 
 exports.index = function (req, res) {
 
-    var q = req.params.q;
-    var parsed = parseDomain(q);
+    var q = parseDomain(req.params.q);
 
-    if (parsed) {
-        q = parsed.domain + '.' + parsed.tld;
+    if (q) {
+        q = q.domain + '.' + q.tld;
         whois.lookup(q, function (err, data) {
             if (err) {
                 res.send({
@@ -24,7 +23,7 @@ exports.index = function (req, res) {
     } else {
         res.send({
             status: 'error',
-            message: parsed
+            message: q
         });
     }
 };
