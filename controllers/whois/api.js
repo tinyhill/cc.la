@@ -15,7 +15,7 @@ exports.index = function (req, res) {
                 });
             } else {
                 res.send({
-                    status: 'fail',
+                    status: 'success',
                     data: data
                 });
             }
