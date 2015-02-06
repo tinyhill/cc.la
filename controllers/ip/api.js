@@ -5,7 +5,7 @@ var qqwry = require('lib-qqwry').info();
 
 function getQQWry(ip) {
     var data = qqwry.searchIP(ip);
-    data.Area = data.Area.replace('CZ88.NET', '');
+    data.Area = data.Area.replace(/\s*CZ88\.NET/g, '');
     return data;
 }
 
