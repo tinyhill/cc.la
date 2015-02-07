@@ -6,6 +6,7 @@ var whois = require('../controllers/whois');
 
 router.get('/', index.index);
 router.get('/test/:q', index.test);
+router.get('/whois', whois.index);
 router.get('/whois/:q', whois.index);
 
 module.exports = router;

@@ -1,5 +1,6 @@
 var parseDomain = require('parse-domain');
 var whois = require('node-whois');
+var _ = require('lodash');
 
 exports.index = function (req, res) {
 
@@ -16,7 +17,7 @@ exports.index = function (req, res) {
             } else {
                 res.send({
                     status: 'success',
-                    data: data
+                    data: _.trim(data).replace(/(\n|\r\n)/g, '<br>')
                 });
             }
         });

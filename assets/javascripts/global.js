@@ -3,9 +3,9 @@ $(document).ready(function () {
     // placeholder
     (function () {
 
-        var s = $('.s');
-        var label = s.find('label');
-        var input = s.find('input');
+        var q = $('.q');
+        var label = q.find('label');
+        var input = q.find('input');
 
         if ($.trim(input.val()) === '') {
             label.removeClass('hidden');
@@ -19,7 +19,7 @@ $(document).ready(function () {
             }
         });
 
-        s.click(function () {
+        q.click(function () {
             input.focus();
         });
 

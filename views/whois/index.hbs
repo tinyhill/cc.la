@@ -1,38 +1,46 @@
-<div class="btn-group btn-group-sm">
-    <a href="/" class="btn btn-primary">网站综合信息</a>
-    <a href="/" class="btn btn-primary">网站收录数据</a>
-    <a href="/whois/mangguo.org" class="btn btn-primary active">WHOIS</a>
-    <a href="/" class="btn btn-primary">网站综合信息</a>
-    <a href="/" class="btn btn-primary">网站收录数据</a>
-    <a href="/" class="btn btn-primary">网站综合信息</a>
+<div class="whois-group">
+    <h2 class="whois-label">
+        <span>域名 WHOIS 查询</span>
+    </h2>
+    <div class="whois-result">
+        {{result}}
+    </div>
 </div>
-<div class="btn-group btn-group-sm">
-    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-        更多工具 <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu">
-        <li><a href="#">网站综合信息</a></li>
-        <li><a href="#">网站综合信息</a></li>
-        <li><a href="#">网站综合信息</a></li>
-        <li class="divider"></li>
-        <li><a href="#">网站综合信息</a></li>
-    </ul>
-</div>
-<script>
-    $.ajax({
-        url: '/api/whois/mangguo.org',
-        success: function (res) {
-            switch(res.status) {
-                case 'success':
-                    $('#whois-data').html(res.data);
-                    break;
-                case 'fail':
-                    //todo
-                    break;
-                default:
-                    //todo
-            }
-        },
-        dataType: 'json'
-    });
+<script type="text/template" id="template-loading">
+    <img src="/images/loading.gif" width="16" height="16" alt="">
 </script>
+<script type="text/template" id="template-retry">
+    查询失败，<a href="javascript:;" class="retry">点此重试</a>
+</script>
+{{#q}}
+    <script>
+        (function () {
+
+            var result = $('.whois-result');
+
+            function request() {
+                $.ajax({
+                    url: '/api/whois/{{.}}',
+                    beforeSend: function () {
+                        result.html($('#template-loading').html());
+                    },
+                    success: function (res) {
+                        switch (res.status) {
+                            case 'success':
+                                result.html(res.data);
+                                break;
+                            default:
+                                result.html($('#template-retry').html());
+                        }
+                    },
+                    dataType: 'json'
+                });
+            }
+
+            result.delegate('.retry', 'click', request);
+
+            request();
+
+        })();
+    </script>
+{{/q}}

@@ -1,5 +1,6 @@
 exports.index = function (req, res) {
     res.render('index', {
+        action: 'site',
         data: [
             {"name": "网站信息查询", "desc": "最好用的网站信息查询工具"},
             {"name": "网站信息查询", "desc": "最好用的网站信息查询工具"},

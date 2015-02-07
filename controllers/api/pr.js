@@ -8,7 +8,7 @@ exports.index = function (req, res) {
     if (q) {
         PageRank.HOST = 'toolbarqueries.google.com.hk';
         PageRank.get(q, function (err, data) {
-            if (err) {
+            if (err || data === null) {
                 res.send({
                     status: 'fail',
                     data: err
