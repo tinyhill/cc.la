@@ -1,0 +1,33 @@
+<div class="toolbar">
+    <div class="container">
+        <ul class="tool-nav">
+            <li{{#equal action 'site'}} class="active"{{/equal}}>
+                <a href="/site/{{q}}">综合查询</a>
+            </li>
+            <li{{#equal action 'indexed'}} class="active"{{/equal}}>
+                <a href="/indexed/{{q}}">收录查询</a>
+            </li>
+            <li{{#equal action 'link'}} class="active"{{/equal}}>
+                <a href="/link/{{q}}">友链检测</a>
+            </li>
+            <li{{#equal action 'pr'}} class="active"{{/equal}}>
+                <a href="/pr/{{q}}">PR</a>
+            </li>
+            <li{{#equal action 'whois'}} class="active"{{/equal}}>
+                <a href="/whois/{{q}}">WHOIS</a>
+            </li>
+        </ul>
+        <div class="tool-more">
+            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                更多<span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="/">百度排名</a></li>
+                <li><a href="/">反链查询</a></li>
+                <li><a href="/">安全监控</a></li>
+                <li class="divider"></li>
+                <li><a href="/all">更多 &raquo;</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

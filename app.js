@@ -6,6 +6,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var hbs = require('hbs');
+var hbsHelper = require('handlebars-helper');
 
 var routes = require('./routes/index');
 var api = require('./routes/api');
@@ -61,5 +62,6 @@ app.use(function (err, req, res, next) {
 
 // hbs setup
 hbs.registerPartials(__dirname + '/views/partials');
+hbsHelper.help(hbs);
 
 module.exports = app;
