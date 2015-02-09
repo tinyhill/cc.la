@@ -8,24 +8,22 @@ var assets = './assets/';
 var bower = './bower_components/';
 var build = './public/';
 
-gulp.task('global:css', function () {
+gulp.task('css', function () {
     gulp.src([
         assets + 'stylesheets/global.less'
     ])
         .pipe(less())
         .pipe(concat('global.css'))
-        .pipe(minify({
-            compatibility: 'ie7'
-        }))
+        .pipe(minify())
         .pipe(gulp.dest(build + 'stylesheets'));
 });
 
-gulp.task('global:fonts', function () {
+gulp.task('fonts', function () {
     gulp.src(bower + 'bootstrap/dist/fonts/*.*')
         .pipe(gulp.dest(build + 'fonts'));
 });
 
-gulp.task('global:js', function () {
+gulp.task('js', function () {
     gulp.src([
         bower + 'jquery/dist/jquery.js',
         bower + 'bootstrap/dist/js/bootstrap.js',
@@ -36,23 +34,23 @@ gulp.task('global:js', function () {
         .pipe(gulp.dest(build + 'javascripts'));
 });
 
-gulp.task('global:respond', function () {
+gulp.task('respond', function () {
     gulp.src(bower + 'respond/src/respond.js')
         .pipe(uglify())
         .pipe(gulp.dest(build + 'javascripts'));
 });
 
 gulp.task('default', [
-    'global:css',
-    'global:fonts',
-    'global:js',
-    'global:respond'
+    'css',
+    'fonts',
+    'js',
+    'respond'
 ]);
 
 gulp.watch(assets + 'stylesheets/*.less', [
-    'global:css'
+    'css'
 ]);
 
 gulp.watch(assets + 'javascripts/*.js', [
-    'global:js'
+    'js'
 ]);

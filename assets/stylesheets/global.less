@@ -1,7 +1,275 @@
 @import 'bootstrap';
-@import 'site-nav';
-@import 'header';
-@import 'toolbar';
-@import 'content';
-@import 'footer';
-@import 'media-queries';
+
+//
+// SiteNav
+// --------------------------------------------------
+
+.site-nav {
+  background: #009A61;
+  border-bottom: 1px solid #018454;
+  font-size: 13px;
+  height: 38px;
+  line-height: 38px;
+  overflow: hidden;
+  a {
+    color: #FFF;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+    text-decoration: none;
+    &:active,
+    &:focus,
+    &:hover {
+      color: #FFF;
+      opacity: 1;
+      filter: alpha(opacity=100);
+      text-decoration: none;
+    }
+  }
+  .welcome {
+    float: left;
+  }
+  .quick-menu {
+    float: right;
+    margin-bottom: 0;
+    padding-left: 0;
+    li {
+      float: left;
+      list-style: none;
+      a {
+        display: inline-block;
+        padding: 0 10px;
+        &:focus,
+        &:hover {
+          background: #018454;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .site-nav {
+    display: none;
+  }
+}
+
+//
+// Header
+// --------------------------------------------------
+
+.header {
+  background: #F1F1F1;
+  border-bottom: 1px solid #E5E5E5;
+  height: 98px;
+  .logo {
+    float: left;
+    height: 32px;
+    width: 94px;
+    margin: 35px 7% 0 0;
+  }
+  .searchform {
+    float: left;
+    margin-top: 28px;
+    position: relative;
+    width: 50%;
+    .q {
+      background: #FFF;
+      border: 1px solid #CBCBCB;
+      border-right: none;
+      border-radius: 2px 0 0 2px;
+      float: left;
+      height: 46px;
+      overflow: hidden;
+      width: 99%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      cursor: text;
+      label {
+        color: #BCBCBC;
+        cursor: text;
+        font-size: 14px;
+        font-weight: normal;
+        height: 44px;
+        line-height: 44px;
+        margin-bottom: 0;
+        position: absolute;
+        top: 0;
+        left: 15px;
+      }
+      input {
+        background: #FFF;
+        border: none;
+        color: #333;
+        font-size: 14px;
+        font-weight: bold;
+        height: 44px;
+        line-height: 44px;
+        outline: none;
+        text-indent: 15px;
+        width: 80%;
+      }
+    }
+    .searchsubmit {
+      background: #FFF;
+      border: 1px solid #CBCBCB;
+      border-radius: 0 2px 2px 0;
+      float: left;
+      width: 70px;
+      height: 46px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      button {
+        background-color: #FFF;
+        background-repeat: no-repeat;
+        border: none;
+        color: #BABABA;
+        font-size: 14px;
+        height: 100%;
+        width: 100%;
+        outline: none;
+        top: 0;
+      }
+      &:hover {
+        border-color: #018454;
+        button {
+          background-color: #009a61;
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .header {
+    height: 152px;
+    .logo {
+      width: 80px;
+      height: 27px;
+    }
+    .searchform {
+      margin-top: 20px;
+      width: 100%;
+    }
+  }
+}
+
+//
+// Toolbar
+// --------------------------------------------------
+
+.toolbar {
+  border-bottom: 1px solid #EBEBEB;
+  height: 44px;
+  line-height: 44px;
+  a {
+    color: #666;
+    display: inline-block;
+    text-decoration: none;
+    &:hover {
+      color: #009A61;
+    }
+  }
+  .tool-nav {
+    float: left;
+    margin-bottom: 0;
+    padding-left: 0;
+    li {
+      float: left;
+      list-style: none;
+      margin-right: 20px;
+    }
+    .active {
+      border-bottom: 2px solid #009A61;
+      font-weight: bold;
+      height: 44px;
+      a {
+        color: #009A61;
+      }
+    }
+  }
+  .tool-more {
+    float: left;
+    position: relative;
+    .dropdown-menu {
+      min-width: 100px;
+      top: 35px;
+      a {
+        color: #666;
+      }
+    }
+  }
+}
+
+//
+// Content
+// --------------------------------------------------
+
+.content {
+  margin-top: 25px;
+  margin-bottom: 35px;
+}
+
+//
+// Footer
+// --------------------------------------------------
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  padding-bottom: 60px;
+}
+
+.footer {
+  background: #FAFAFA;
+  border-top: 1px solid #E4E4E4;
+  color: #999;
+  font-size: 13px;
+  height: 60px;
+  line-height: 60px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  .copyright {
+    float: left;
+    text-align: center;
+  }
+  .site-info {
+    float: right;
+    margin-bottom: 0;
+    padding-left: 0;
+    li {
+      float: left;
+      list-style: none;
+      padding-left: 10px;
+    }
+    a {
+      color: #999;
+    }
+    .miibeian {
+      color: #BBB;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .footer {
+    .copyright {
+      float: none;
+    }
+    .site-info {
+      display: none;
+    }
+  }
+}
+
+//
+// Import Pages
+// --------------------------------------------------
+
+@import 'pages';
