@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    // placeholder
+    // Placeholder
     (function () {
 
         var q = $('.q');

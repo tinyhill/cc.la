@@ -1,20 +1,20 @@
 <div class="toolbar">
     <div class="container">
         <ul class="tool-nav">
-            <li{{#equal action 'site'}} class="active"{{/equal}}>
-                <a href="/site/{{q}}">综合查询</a>
+            <li{{#equal active 'site'}} class="active"{{/equal}}>
+                <a href="/site{{#q}}/{{.}}{{/q}}">综合查询</a>
             </li>
-            <li{{#equal action 'indexed'}} class="active"{{/equal}}>
-                <a href="/indexed/{{q}}">收录查询</a>
+            <li{{#equal active 'indexed'}} class="active"{{/equal}}>
+                <a href="/indexed{{#q}}/{{.}}{{/q}}">收录查询</a>
             </li>
-            <li{{#equal action 'link'}} class="active"{{/equal}}>
-                <a href="/link/{{q}}">友链检测</a>
+            <li{{#equal active 'link'}} class="active"{{/equal}}>
+                <a href="/link{{#q}}/{{.}}{{/q}}">友链检测</a>
             </li>
-            <li{{#equal action 'pr'}} class="active"{{/equal}}>
-                <a href="/pr/{{q}}">PR</a>
+            <li{{#equal active 'pr'}} class="active"{{/equal}}>
+                <a href="/pr{{#q}}/{{.}}{{/q}}">PR</a>
             </li>
-            <li{{#equal action 'whois'}} class="active"{{/equal}}>
-                <a href="/whois/{{q}}">WHOIS</a>
+            <li{{#equal active 'whois'}} class="active"{{/equal}}>
+                <a href="/whois{{#q}}/{{.}}{{/q}}">WHOIS</a>
             </li>
         </ul>
         <div class="tool-more">

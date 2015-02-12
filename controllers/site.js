@@ -4,7 +4,7 @@ exports.index = function (req, res) {
 
     var q = req.params.q || req.query.q || '';
     var data = {
-        action: 'site',
+        active: 'site',
         layout: 'layouts/result'
     };
 

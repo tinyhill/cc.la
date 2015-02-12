@@ -3,7 +3,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>查查啦</title>
+    <title>{{#title}}{{.}}_{{/title}}查查啦</title>
     <link rel="stylesheet" href="/stylesheets/global.css">
     <script src="/javascripts/global.js"></script>
     <!--[if lt IE 9]>
@@ -15,10 +15,10 @@
     <div class="container">
         <a class="welcome" href="/">查查啦，万能的站长工具</a>
         <ul class="quick-menu clearfix">
-            <li><a href="/">工具大全</a></li>
-            <li><a href="/">网站排名</a></li>
-            <li><a href="/">手机访问</a></li>
-            <li><a href="/">帮助中心</a></li>
+            <li><a href="/tools">工具大全</a></li>
+            <li><a href="/rank">网站排名</a></li>
+            <li><a href="/m">手机访问</a></li>
+            <li><a href="/help">帮助中心</a></li>
         </ul>
     </div>
 </div>
@@ -27,7 +27,7 @@
         <a href="/" class="logo" title="万能的站长工具">
             <img src="/images/logo.png" width="94" height="32" alt="查查啦">
         </a>
-        <form class="searchform" action="/{{action}}/" method="get" autocomplete="off">
+        <form class="searchform" action="/{{#active}}{{.}}/{{/active}}" method="get" autocomplete="off">
             <div class="q">
                 <label for="q" class="hidden">请输入域名、网址或关键字</label>
                 <input type="search" id="q" name="q" maxlength="100" tabindex="1" value="{{q}}">

@@ -1,6 +1,18 @@
 @import 'bootstrap';
 
 //
+// Loading
+// --------------------------------------------------
+
+.loading {
+  background: url(/images/loading.gif) no-repeat;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+}
+
+//
 // SiteNav
 // --------------------------------------------------
 
@@ -74,7 +86,7 @@
     width: 50%;
     .q {
       background: #FFF;
-      border: 1px solid #CBCBCB;
+      border: 1px solid #D7D7D7;
       border-right: none;
       border-radius: 2px 0 0 2px;
       float: left;
@@ -112,7 +124,7 @@
     }
     .searchsubmit {
       background: #FFF;
-      border: 1px solid #CBCBCB;
+      border: 1px solid #D7D7D7;
       border-radius: 0 2px 2px 0;
       float: left;
       width: 70px;
@@ -208,8 +220,49 @@
 // --------------------------------------------------
 
 .content {
-  margin-top: 25px;
-  margin-bottom: 35px;
+  margin-bottom: 30px;
+  .main {
+    .hd {
+      color: #999;
+      font-size: 13px;
+      padding: 15px 0 13px;
+      .control {
+        margin-bottom: 8px;
+        a {
+          color: #999;
+          margin-left: 10px;
+          text-decoration: underline;
+          &:hover {
+            color: #666;
+          }
+        }
+      }
+      .related {
+        margin-bottom: 0;
+        dt {
+          float: left;
+          font-weight: normal;
+        }
+        dd {
+          float: left;
+          margin-right: 10px;
+        }
+      }
+    }
+    .bd {
+      font-size: 13px;
+      .panel-heading {
+        font-weight: bold;
+      }
+      .panel .table {
+        th, td {
+          padding-left: 15px;
+          padding-right: 15px;
+          vertical-align: middle;
+        }
+      }
+    }
+  }
 }
 
 //

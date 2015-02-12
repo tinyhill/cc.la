@@ -28,3 +28,7 @@ exports.index = function (req, res) {
         });
     }
 };
+
+exports.refresh = function (req, res) {
+    //todo
+};
