@@ -1,10 +1,10 @@
 <div class="main whois">
     <div class="hd">
-        {{#q}}
+        {{#touched}}
             <div class="control">
-                缓存时间：2015-02-10 02:15:14<a href="javascript:;" id="refresh">强制更新</a>
+                缓存时间：{{.}}<a href="javascript:;" id="refresh">强制更新</a>
             </div>
-        {{/q}}
+        {{/touched}}
         <dl class="related clearfix">
             <dt>相关查询：</dt>
             <dd><a href="/whois/reverse/domain{{#q}}/{{.}}{{/q}}">按域名反查</a></dd>
@@ -14,45 +14,61 @@
     </div>
     <div class="bd">
         <div class="panel panel-default">
-            <div class="panel-heading">{{#q}}域名 {{.}} 的{{/q}}注册商记录</div>
+            <div class="panel-heading">注册商记录</div>
             <div class="panel-body">
-                <div class="result" id="result">
-                    {{result}}
+                <div class="body" id="body">
+                    {{body}}
                 </div>
             </div>
         </div>
     </div>
 </div>
-{{#q}}
+{{#if touched}}
     <script>
-        (function () {
-
-            var result = $('#result');
-
-            function request() {
-                $.ajax({
-                    url: '/api/whois/{{.}}',
-                    beforeSend: function () {
-                        result.html('<span class="loading"></span>');
-                    },
-                    success: function (data) {
-                        if (data.status === 'success') {
-                            result.html(data.data);
-                        } else {
-                            result.html('查询失败，<a href="javascript:;" id="retry">点此重试</a>');
-                        }
-                    },
-                    error: function () {
-                        result.html('服务器繁忙，请稍候重试');
-                    },
-                    dataType: 'json'
-                });
-            }
-
-            result.delegate('#retry', 'click', request);
-
-            request();
-
-        })();
+        $('#refresh').click(function () {
+            $.ajax({
+                url: '/api/whois/refresh/{{q}}',
+                success: function (data) {
+                    if (data.status === 'success') {
+                        location.href = '/whois/{{q}}';
+                    } else {
+                        alert('服务器错误，请稍候重试');
+                    }
+                },
+                error: function () {
+                    alert('服务器繁忙，请稍候重试');
+                },
+                dataType: 'json'
+            });
+        });
     </script>
-{{/q}}
+{{/if}}
+{{#if q}}
+    <script>
+        var body = $('#body');
+
+        function request() {
+            $.ajax({
+                url: '/api/whois/{{q}}',
+                beforeSend: function () {
+                    body.html('<span class="loading"></span>');
+                },
+                success: function (data) {
+                    if (data.status === 'success') {
+                        body.html(data.data);
+                    } else {
+                        body.html('查询失败，<a href="javascript:;" id="retry">点此重试</a>');
+                    }
+                },
+                error: function () {
+                    body.html('服务器繁忙，请稍候重试');
+                },
+                dataType: 'json'
+            });
+        }
+
+        body.delegate('#retry', 'click', request);
+
+        request();
+    </script>
+{{/if}}
