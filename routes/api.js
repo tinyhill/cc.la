@@ -9,6 +9,7 @@ var WhoisController = require('../controllers/api/WhoisController');
 router.get('/ip/client', IpController.client);
 router.get('/ip/:q', IpController.index);
 router.get('/pr/:q', PrController.index);
+router.get('/pr/refresh/:q', PrController.refresh);
 router.get('/whois/:q', WhoisController.index);
 router.get('/whois/refresh/:q', WhoisController.refresh);
 

@@ -19,15 +19,14 @@ function fail(res, err) {
 
 exports.index = function (req, res) {
 
-    var q = parseDomain(req.params.q);
+    var parsed = parseDomain(req.params.q);
 
-    if (q) {
-        q = q.domain + '.' + q.tld;
+    if (parsed) {
 
+        var q = parsed.domain + '.' + parsed.tld;
         var key = 'api/whois/' + q;
 
         cache.get(key, function (err, entries) {
-
             if (err) {
                 fail(res, err);
             } else {
@@ -54,17 +53,19 @@ exports.index = function (req, res) {
     } else {
         res.send({
             status: 'error',
-            message: q
+            message: parsed
         });
     }
 };
 
 exports.refresh = function (req, res) {
 
-    var q = parseDomain(req.params.q);
+    var parsed = parseDomain(req.params.q);
 
-    if (q) {
-        q = q.domain + '.' + q.tld;
+    if (parsed) {
+
+        var q = parsed.domain + '.' + parsed.tld;
+
         cache.del('api/whois/' + q, function (err, deletions) {
             if (err) {
                 fail(res, err);
@@ -78,7 +79,7 @@ exports.refresh = function (req, res) {
     } else {
         res.send({
             status: 'error',
-            message: q
+            message: parsed
         });
     }
 };

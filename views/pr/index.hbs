@@ -1,0 +1,74 @@
+<div class="main whois">
+    <div class="hd">
+        {{#touched}}
+            <div class="control">
+                缓存时间：{{.}}<a href="javascript:;" id="refresh">强制更新</a>
+            </div>
+        {{/touched}}
+        <dl class="related clearfix">
+            <dt>相关查询：</dt>
+            <dd><a href="/whois/reverse/domain{{#q}}/{{.}}{{/q}}">按域名反查</a></dd>
+            <dd><a href="/whois/reverse/mail{{#q}}/{{.}}{{/q}}">按邮箱反查</a></dd>
+            <dd><a href="/whois/reverse/registrant{{#q}}/{{.}}{{/q}}">按注册人反查</a></dd>
+        </dl>
+    </div>
+    <div class="bd">
+        <div class="panel panel-default">
+            <div class="panel-heading">查询结果</div>
+            <div class="panel-body">
+                <div class="body" id="body">
+                    {{body}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{#if touched}}
+    <script>
+        $('#refresh').click(function () {
+            $.ajax({
+                url: '/api/pr/refresh/{{q}}',
+                success: function (data) {
+                    if (data.status === 'success') {
+                        location.href = '/pr/{{q}}';
+                    } else {
+                        alert('服务器错误，请稍候重试');
+                    }
+                },
+                error: function () {
+                    alert('服务器繁忙，请稍候重试');
+                },
+                dataType: 'json'
+            });
+        });
+    </script>
+{{/if}}
+{{#if q}}
+    <script>
+        var body = $('#body');
+
+        function request() {
+            $.ajax({
+                url: '/api/pr/{{q}}',
+                beforeSend: function () {
+                    body.html('<span class="loading"></span>');
+                },
+                success: function (data) {
+                    if (data.status === 'success') {
+                        body.html('<img src="/images/pr/xl' + data.data + '.gif" width="88" height="31" alt="">');
+                    } else {
+                        body.html('查询失败，<a href="javascript:;" id="retry">点此重试</a>');
+                    }
+                },
+                error: function () {
+                    body.html('服务器繁忙，请稍候重试');
+                },
+                dataType: 'json'
+            });
+        }
+
+        body.delegate('#retry', 'click', request);
+
+        request();
+    </script>
+{{/if}}
