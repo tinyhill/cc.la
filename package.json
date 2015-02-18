@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "body-parser": "~1.10.1",
+    "cheerio": "^0.18.0",
     "compression": "^1.3.0",
     "cookie-parser": "~1.3.3",
     "debug": "~2.1.1",
@@ -21,6 +22,7 @@
     "lodash": "~3.1.0",
     "moment": "^2.9.0",
     "morgan": "~1.5.1",
+    "needle": "^0.7.11",
     "node-whois": "^2.1.0",
     "pagerank": "~1.2.0",
     "parse-domain": "~0.1.2",

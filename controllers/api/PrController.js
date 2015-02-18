@@ -16,6 +16,13 @@ function fail(res, err) {
     });
 }
 
+function error(res) {
+    res.send({
+        status: 'error',
+        message: '参数错误'
+    });
+}
+
 exports.index = function (req, res) {
 
     var parsed = parseDomain(req.params.q);
@@ -52,35 +59,6 @@ exports.index = function (req, res) {
             }
         });
     } else {
-        res.send({
-            status: 'error',
-            message: parsed
-        });
-    }
-};
-
-exports.refresh = function (req, res) {
-
-    var parsed = parseDomain(req.params.q);
-
-    if (parsed) {
-
-        var q = parsed.domain + '.' + parsed.tld;
-
-        cache.del('api/pr/' + q, function (err, deletions) {
-            if (err) {
-                fail(res, err);
-            } else {
-                res.send({
-                    status: 'success',
-                    data: deletions
-                });
-            }
-        });
-    } else {
-        res.send({
-            status: 'error',
-            message: parsed
-        });
+        error(res);
     }
 };
