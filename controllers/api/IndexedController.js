@@ -37,7 +37,7 @@ exports.index = function (req, res) {
 exports.baidu = function (req, res) {
 
     var c = req.params.c;
-    var cmds = ['site', 'domain'];
+    var cmds = ['site', 'link'];
 
     if (_.includes(cmds, c)) {
 
@@ -58,6 +58,7 @@ exports.baidu = function (req, res) {
                     if (body) {
                         success(res, body);
                     } else {
+                        c = c === 'link' ? 'domain' : c;
 
                         var url = 'http://www.baidu.com/s?wd=' + c + '%3A' + q;
 
