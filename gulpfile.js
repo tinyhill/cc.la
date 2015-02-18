@@ -26,7 +26,6 @@ gulp.task('fonts', function () {
 gulp.task('js', function () {
     gulp.src([
         bower + 'jquery/dist/jquery.js',
-        bower + 'underscore/underscore.js',
         bower + 'bootstrap/dist/js/bootstrap.js',
         assets + 'javascripts/*.js'
     ])

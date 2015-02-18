@@ -68,7 +68,7 @@ exports.baidu = function (req, res) {
                             } else {
                                 $ = cheerio.load(data.body);
                                 data = $('.nums').text();
-                                data = _.trim(data.replace(/(百度为您找到相关结果约|个)/g, ''));
+                                data = _.trim(data.replace(/[\u4e00-\u9fa5]+/g, ''));
                                 cache.add(key, data, {
                                     expire: 3600 * 24
                                 }, function () {
@@ -122,7 +122,7 @@ exports.haosou = function (req, res) {
                             } else {
                                 $ = cheerio.load(data.body);
                                 data = $('.nums').text();
-                                data = _.trim(data.replace(/(找到相关结果约|个)/g, ''));
+                                data = _.trim(data.replace(/[\u4e00-\u9fa5]+/g, ''));
                                 cache.add(key, data, {
                                     expire: 3600 * 24
                                 }, function () {

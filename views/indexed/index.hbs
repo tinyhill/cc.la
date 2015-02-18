@@ -1,0 +1,102 @@
+<div class="main indexed">
+    <div class="hd">
+        <dl class="related clearfix">
+            <dt>相关查询：</dt>
+            <dd><a href="/ip/server{{#q}}/{{.}}{{/q}}">同机房网站</a></dd>
+        </dl>
+    </div>
+    <div class="bd">
+        <div class="panel panel-default">
+            <div class="panel-heading">查询结果</div>
+            {{#if q}}
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <td colspan="5">百度排名：xxx</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th width="20%">搜索引擎</th>
+                        <th width="20%">百度</th>
+                        <th width="20%">好搜</th>
+                        <th width="20%">搜狗</th>
+                        <th width="20%">谷歌</th>
+                    </tr>
+                    <tr>
+                        <td>收录情况</td>
+                        <td data-search="baidu/site">
+                            <a href="http://www.baidu.com/s?wd=site%3A{{q}}" target="_blank"></a>
+                        </td>
+                        <td data-search="haosou/site">
+                            <a href="http://www.haosou.com/s?q=site%3A{{q}}" target="_blank"></a>
+                        </td>
+                        <td data-search="sogou/site">
+                            <a href="http://www.sogou.com/web?query=site%3A{{q}}" target="_blank"></a>
+                        </td>
+                        <td data-search="google/site">
+                            <a href="http://www.google.com.hk/search?hl=zh-CN&q=site%3A{{q}}" target="_blank"></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>反向链接</td>
+                        <td data-search="baidu/link">
+                            <a href="http://www.baidu.com/s?wd=domain%3A{{q}}" target="_blank"></a>
+                        </td>
+                        <td data-search="haosou/link">
+                            <a href='http://www.haosou.com/s?q="{{q}}"' target="_blank"></a>
+                        </td>
+                        <td data-search="sogou/link">
+                            <a href='http://www.sogou.com/web?query="{{q}}"' target="_blank"></a>
+                        </td>
+                        <td data-search="google/link">
+                            <a href="http://www.google.com.hk/search?hl=zh-CN&q=link%3A{{q}}" target="_blank"></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            {{else}}
+                <div class="panel-body">
+                    <div class="body" id="body">
+                        {{body}}
+                    </div>
+                </div>
+            {{/if}}
+        </div>
+    </div>
+</div>
+{{#if q}}
+    <script>
+        function request(el) {
+
+            var target = $(el);
+            var parent = target.parent();
+            var search = parent.attr('data-search');
+
+            $.ajax({
+                url: '/api/indexed/' + search + '/{{q}}',
+                beforeSend: function () {
+                    target.addClass('loading');
+                },
+                complete: function () {
+                    target.removeClass('loading');
+                },
+                success: function (data) {
+                    if (data.status === 'success') {
+                        target.html(data.data);
+                    } else {
+                        parent.html('--');
+                    }
+                },
+                error: function () {
+                    parent.html('--');
+                },
+                dataType: 'json'
+            });
+        }
+
+        $('td a').each(function (k, v) {
+            request(v);
+        });
+    </script>
+{{/if}}
