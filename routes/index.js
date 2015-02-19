@@ -2,12 +2,17 @@ var express = require('express');
 var router = express.Router();
 
 var IndexController = require('../controllers/IndexController');
+
+var AlexaController = require('../controllers/AlexaController');
 var IndexedController = require('../controllers/IndexedController');
 var IpController = require('../controllers/IpController');
 var PrController = require('../controllers/PrController');
 var WhoisController = require('../controllers/WhoisController');
 
 router.get('/', IndexController.index);
+
+router.get('/alexa', AlexaController.index);
+router.get('/alexa/:q', AlexaController.index);
 router.get('/indexed', IndexedController.index);
 router.get('/indexed/:q', IndexedController.index);
 router.get('/ip', IpController.index);

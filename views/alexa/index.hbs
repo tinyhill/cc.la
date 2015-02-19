@@ -1,0 +1,49 @@
+<div class="main alexa">
+    <div class="hd">
+        <dl class="related clearfix">
+            <dt>相关查询：</dt>
+            <dd><a href="/pr/site{{#q}}/{{.}}{{/q}}">全站查询</a></dd>
+            <dd><a href="/pr/realtime{{#q}}/{{.}}{{/q}}">实时查询</a></dd>
+            <dd><a href="/pr/history{{#q}}/{{.}}{{/q}}">查看变化历史</a></dd>
+        </dl>
+    </div>
+    <div class="bd">
+        <div class="panel panel-default">
+            <div class="panel-heading">查询结果</div>
+            <div class="panel-body">
+                <div class="body" id="body">
+                    {{body}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{#if q}}
+    <script>
+        var body = $('#body');
+
+        function request() {
+            $.ajax({
+                url: '/api/alexa/{{q}}',
+                beforeSend: function () {
+                    body.html('<span class="loading"></span>');
+                },
+                success: function (data) {
+                    if (data.status === 'success') {
+                        body.html('全球排名位于 <b>' + data.data.rank + '</b>');
+                    } else {
+                        body.html('查询失败，<a href="javascript:;" id="retry">点此重试</a>');
+                    }
+                },
+                error: function () {
+                    body.html('服务器繁忙，请稍候重试');
+                },
+                dataType: 'json'
+            });
+        }
+
+        body.delegate('#retry', 'click', request);
+
+        request();
+    </script>
+{{/if}}

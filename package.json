@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "alexarank": "^0.1.1",
     "body-parser": "~1.10.1",
     "cheerio": "^0.18.0",
     "compression": "^1.3.0",

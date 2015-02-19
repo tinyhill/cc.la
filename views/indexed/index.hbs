@@ -12,7 +12,9 @@
                 <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <td colspan="5">百度排名：xxx</td>
+                        <td colspan="5">
+                            百度快照：<span data-search="baidu/cached"><a href="http://www.baidu.com/s?wd=http://{{q}}" target="_blank"></a></span>
+                        </td>
                     </tr>
                     </thead>
                     <tbody>
@@ -40,14 +42,14 @@
                     </tr>
                     <tr>
                         <td>反向链接</td>
-                        <td data-search="baidu/link">
+                        <td data-search="baidu/domain">
                             <a href="http://www.baidu.com/s?wd=domain%3A{{q}}" target="_blank"></a>
                         </td>
-                        <td data-search="haosou/link">
-                            <a href='http://www.haosou.com/s?q="{{q}}"' target="_blank"></a>
+                        <td data-search="haosou/domain">
+                            <a href="http://www.haosou.com/s?q=domain%3A{{q}}" target="_blank"></a>
                         </td>
-                        <td data-search="sogou/link">
-                            <a href='http://www.sogou.com/web?query="{{q}}"' target="_blank"></a>
+                        <td data-search="sogou/domain">
+                            <a href="http://www.sogou.com/web?query=domain%3A{{q}}" target="_blank"></a>
                         </td>
                         <td data-search="google/link">
                             <a href="http://www.google.com.hk/search?hl=zh-CN&q=link%3A{{q}}" target="_blank"></a>
@@ -76,6 +78,7 @@
             $.ajax({
                 url: '/api/indexed/' + search + '/{{q}}',
                 beforeSend: function () {
+                    target.html('');
                     target.addClass('loading');
                 },
                 complete: function () {
@@ -85,7 +88,8 @@
                     if (data.status === 'success') {
                         target.html(data.data);
                     } else {
-                        parent.html('--');
+                        target.html('重查');
+                        target.addClass('retry');
                     }
                 },
                 error: function () {
@@ -95,7 +99,12 @@
             });
         }
 
-        $('td a').each(function (k, v) {
+        $('.table').delegate('.retry', 'click', function (e) {
+            e.preventDefault();
+            request(e.currentTarget);
+        });
+
+        $('.table a').each(function (k, v) {
             request(v);
         });
     </script>

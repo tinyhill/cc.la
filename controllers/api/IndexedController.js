@@ -37,7 +37,7 @@ exports.index = function (req, res) {
 exports.baidu = function (req, res) {
 
     var c = req.params.c;
-    var cmds = ['site', 'link'];
+    var cmds = ['site', 'domain', 'cached'];
 
     if (_.includes(cmds, c)) {
 
@@ -58,17 +58,35 @@ exports.baidu = function (req, res) {
                     if (body) {
                         success(res, body);
                     } else {
-                        c = c === 'link' ? 'domain' : c;
 
-                        var url = 'http://www.baidu.com/s?wd=' + c + '%3A' + q;
+                        var url = 'http://www.baidu.com/s?wd=';
 
+                        switch (c) {
+                            case 'cached':
+                                url += 'http://' + q;
+                                break;
+                            default:
+                                url += c + '%3A' + q;
+                        }
                         needle.get(url, function (err, data) {
                             if (err || data.statusCode !== 200) {
                                 fail(res, err);
                             } else {
                                 $ = cheerio.load(data.body);
-                                data = $('.nums').text();
-                                data = _.trim(data.replace(/[\u4e00-\u9fa5]+/g, ''));
+                                if (c === 'cached') {
+                                    data = _.trim($('.g').first().text());
+                                    if (new RegExp('^(www.)?' + q + '\/').test(data)) {
+
+                                        var match = data.match(/(\d{4}-\d{2}-\d{2})(&nbsp;)?$/);
+
+                                        data = _.isArray(match) && match[1] ? match[1] : '暂无快照';
+                                    } else {
+                                        data = '暂无快照';
+                                    }
+                                } else {
+                                    data = $('.nums').text();
+                                    data = _.trim(data.replace(/[\u4e00-\u9fa5]+/g, '')) || '0';
+                                }
                                 cache.add(key, data, {
                                     expire: 3600 * 24
                                 }, function () {
@@ -91,7 +109,7 @@ exports.baidu = function (req, res) {
 exports.haosou = function (req, res) {
 
     var c = req.params.c;
-    var cmds = ['site', 'link'];
+    var cmds = ['site', 'domain'];
 
     if (_.includes(cmds, c)) {
 
@@ -113,8 +131,7 @@ exports.haosou = function (req, res) {
                         success(res, body);
                     } else {
 
-                        var query = c === 'link' ? '"' + q + '"' : c + '%3A' + q;
-                        var url = 'http://www.haosou.com/s?q=' + query;
+                        var url = 'http://www.haosou.com/s?q=' + c + '%3A' + q;
 
                         needle.get(url, function (err, data) {
                             if (err || data.statusCode !== 200) {
@@ -122,7 +139,7 @@ exports.haosou = function (req, res) {
                             } else {
                                 $ = cheerio.load(data.body);
                                 data = $('.nums').text();
-                                data = _.trim(data.replace(/[\u4e00-\u9fa5]+/g, ''));
+                                data = _.trim(data.replace(/[\u4e00-\u9fa5]+/g, '')) || '0';
                                 cache.add(key, data, {
                                     expire: 3600 * 24
                                 }, function () {
@@ -145,7 +162,7 @@ exports.haosou = function (req, res) {
 exports.sogou = function (req, res) {
 
     var c = req.params.c;
-    var cmds = ['site', 'link'];
+    var cmds = ['site', 'domain'];
 
     if (_.includes(cmds, c)) {
 
@@ -167,15 +184,14 @@ exports.sogou = function (req, res) {
                         success(res, body);
                     } else {
 
-                        var query = c === 'link' ? '"' + q + '"' : c + '%3A' + q;
-                        var url = 'http://www.sogou.com/web?query=' + query;
+                        var url = 'http://www.sogou.com/web?query=' + c + '%3A' + q;
 
                         needle.get(url, function (err, data) {
                             if (err || data.statusCode !== 200) {
                                 fail(res, err);
                             } else {
                                 $ = cheerio.load(data.body);
-                                data = $('#scd_num').text();
+                                data = $('#scd_num').text() || '0';
                                 cache.add(key, data, {
                                     expire: 3600 * 24
                                 }, function () {
