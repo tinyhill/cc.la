@@ -9,7 +9,8 @@ var PrController = require('../controllers/api/PrController');
 var WhoisController = require('../controllers/api/WhoisController');
 
 router.get('/alexa/:q', AlexaController.index);
-router.get('/indexed/:e/:c/:q', IndexedController.index);
+router.get('/indexed/:engine/:cmd/:q', IndexedController.index);
+router.get('/indexed/:engine/:cmd/:q/:period', IndexedController.index);
 router.get('/ip/client', IpController.client);
 router.get('/ip/:q', IpController.index);
 router.get('/pr/:q', PrController.index);

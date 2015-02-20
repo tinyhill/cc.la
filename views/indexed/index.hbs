@@ -2,18 +2,25 @@
     <div class="hd">
         <dl class="related clearfix">
             <dt>相关查询：</dt>
-            <dd><a href="/ip/server{{#q}}/{{.}}{{/q}}">同机房网站</a></dd>
+            <dd><a href="/indexed/history{{#q}}/{{.}}{{/q}}">收录历史查询</a></dd>
         </dl>
     </div>
     <div class="bd">
         <div class="panel panel-default">
-            <div class="panel-heading">查询结果</div>
+            <div class="panel-heading">网站收录</div>
             {{#if q}}
                 <table class="table table-bordered">
                     <thead>
                     <tr>
                         <td colspan="5">
-                            百度快照：<span data-search="baidu/cached"><a href="http://www.baidu.com/s?wd=http://{{q}}" target="_blank"></a></span>
+                            <ul class="clearfix">
+                                <li>
+                                    百度快照日期：<span data-search="baidu/cached"><a href="http://www.baidu.com/s?wd=http://{{q}}" target="_blank"></a></span>
+                                </li>
+                                <li>
+                                    百度首页位置：<span data-search="baidu/position"><a href="http://www.baidu.com/s?wd=site%3A{{q}}" target="_blank"></a></span>
+                                </li>
+                            </ul>
                         </td>
                     </tr>
                     </thead>
@@ -65,6 +72,49 @@
                 </div>
             {{/if}}
         </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">近期收录</div>
+            {{#if q}}
+                <table class="table table-bordered">
+                    <tbody>
+                    <tr>
+                        <th width="20%">时间范围</th>
+                        <th width="20%">近一天</th>
+                        <th width="20%">近一周</th>
+                        <th width="20%">近一月</th>
+                        <th width="20%">近三月</th>
+                    </tr>
+                    <tr>
+                        <td>百度</td>
+                        <td data-search="baidu/site" data-period="1">
+                            <a href="http://www.baidu.com/s?q1=site%3A{{q}}&lm=1" target="_blank"></a>
+                        </td>
+                        <td data-search="baidu/site" data-period="7">
+                            <a href="http://www.baidu.com/s?q1=site%3A{{q}}&lm=7" target="_blank"></a>
+                        </td>
+                        <td data-search="baidu/site" data-period="30">
+                            <a href="http://www.baidu.com/s?q1=site%3A{{q}}&lm=30" target="_blank"></a>
+                        </td>
+                        <td data-search="baidu/site" data-period="90">
+                            <a href="http://www.baidu.com/s?q1=site%3A{{q}}&lm=90" target="_blank"></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            {{else}}
+                <div class="panel-body">
+                    <div class="body" id="body">
+                        {{body}}
+                    </div>
+                </div>
+            {{/if}}
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">查询说明</div>
+            <div class="panel-body">
+                网站收录查询工具，可以查询网站在百度、好搜、搜狗、谷歌等搜索引擎的收录情况和反向链接，还可以查询网站的百度快照日期，百度首页位置等信息。
+            </div>
+        </div>
     </div>
 </div>
 {{#if q}}
@@ -74,9 +124,11 @@
             var target = $(el);
             var parent = target.parent();
             var search = parent.attr('data-search');
+            var period = parent.attr('data-period');
+            var periodKey = period ? '/' + period : '';
 
             $.ajax({
-                url: '/api/indexed/' + search + '/{{q}}',
+                url: '/api/indexed/' + search + '/{{q}}' + periodKey,
                 beforeSend: function () {
                     target.html('');
                     target.addClass('loading');
@@ -101,7 +153,7 @@
 
         $('.table').delegate('.retry', 'click', function (e) {
             e.preventDefault();
-            request(e.currentTarget);
+            request(this);
         });
 
         $('.table a').each(function (k, v) {

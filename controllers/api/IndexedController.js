@@ -27,7 +27,7 @@ function error(res) {
 
 exports.index = function (req, res) {
 
-    var fn = exports[req.params.e];
+    var fn = exports[req.params.engine];
 
     if (fn) {
         fn(req, res);
@@ -36,71 +36,80 @@ exports.index = function (req, res) {
 
 exports.baidu = function (req, res) {
 
-    var c = req.params.c;
-    var cmds = ['site', 'domain', 'cached'];
+    var cmd = req.params.cmd;
+    var period = req.params.period;
+    var periodKey = period ? '/' + period : '';
+    var periodParams = period ? '&lm=' + period : '';
+    var parsed = parseDomain(req.params.q);
 
-    if (_.includes(cmds, c)) {
+    if (parsed) {
 
-        var parsed = parseDomain(req.params.q);
+        var q = parsed.domain + '.' + parsed.tld;
+        var key = 'api/indexed/baidu/' + cmd + '/' + q + periodKey;
 
-        if (parsed) {
+        cache.get(key, function (err, entries) {
+            if (err) {
+                fail(res, err);
+            } else {
 
-            var q = parsed.domain + '.' + parsed.tld;
-            var key = 'api/indexed/baidu/' + c + '/' + q;
+                var body = entries[0] ? entries[0].body : null;
 
-            cache.get(key, function (err, entries) {
-                if (err) {
-                    fail(res, err);
+                if (body) {
+                    success(res, body);
                 } else {
 
-                    var body = entries[0] ? entries[0].body : null;
+                    var url = 'http://www.baidu.com/s?wd=';
 
-                    if (body) {
-                        success(res, body);
-                    } else {
-
-                        var url = 'http://www.baidu.com/s?wd=';
-
-                        switch (c) {
-                            case 'cached':
-                                url += 'http://' + q;
-                                break;
-                            default:
-                                url += c + '%3A' + q;
-                        }
-                        needle.get(url, function (err, data) {
-                            if (err || data.statusCode !== 200) {
-                                fail(res, err);
-                            } else {
-                                $ = cheerio.load(data.body);
-                                if (c === 'cached') {
-                                    data = _.trim($('.g').first().text());
-                                    if (new RegExp('^(www.)?' + q + '\/').test(data)) {
-
-                                        var match = data.match(/(\d{4}-\d{2}-\d{2})(&nbsp;)?$/);
-
-                                        data = _.isArray(match) && match[1] ? match[1] : '暂无快照';
-                                    } else {
-                                        data = '暂无快照';
-                                    }
-                                } else {
-                                    data = $('.nums').text();
-                                    data = _.trim(data.replace(/[\u4e00-\u9fa5]+/g, '')) || '0';
-                                }
-                                cache.add(key, data, {
-                                    expire: 3600 * 24
-                                }, function () {
-                                    success(res, data);
-                                });
-                            }
-                        });
+                    switch (cmd) {
+                        case 'cached':
+                            url += 'http://' + q;
+                            break;
+                        case 'position':
+                            url += 'site%3A' + q;
+                            break;
+                        default:
+                            url += cmd + '%3A' + q;
                     }
+                    console.log(url + periodParams);
+                    needle.get(url + periodParams, function (err, data) {
+                        if (err || data.statusCode !== 200) {
+                            fail(res, err);
+                        } else {
+                            $ = cheerio.load(data.body);
+                            if (cmd === 'cached') {
+                                data = _.trim($('span.g').first().text());
+                                if (new RegExp('^(www.)?' + q + '\/').test(data)) {
 
+                                    var match = data.match(/(\d{4}-\d{2}-\d{2})(&nbsp;)?$/);
+
+                                    data = _.isArray(match) && match[1] ? match[1] : '暂无快照';
+                                } else {
+                                    data = '暂无快照';
+                                }
+                            } else if (cmd === 'position') {
+                                data = '暂无信息';
+                                $('span.g').each(function (k, v) {
+                                    data = $(v).text().replace(/^www./, '');
+                                    if (data.substr(0, q.length + 1) === q + '/') {
+                                        data = k + 1;
+                                        return false;
+                                    }
+                                });
+                            } else {
+                                data = $('.nums').text();
+                                data = _.trim(data.replace(/[\u4e00-\u9fa5]+/g, '')) || '0';
+                            }
+                            cache.add(key, data, {
+                                expire: 3600 * 24
+                            }, function () {
+                                success(res, data);
+                            });
+                        }
+                    });
                 }
-            });
-        } else {
-            error(res);
-        }
+
+            }
+        });
     } else {
         error(res);
     }
@@ -108,52 +117,45 @@ exports.baidu = function (req, res) {
 
 exports.haosou = function (req, res) {
 
-    var c = req.params.c;
-    var cmds = ['site', 'domain'];
+    var cmd = req.params.cmd;
+    var parsed = parseDomain(req.params.q);
 
-    if (_.includes(cmds, c)) {
+    if (parsed) {
 
-        var parsed = parseDomain(req.params.q);
+        var q = parsed.domain + '.' + parsed.tld;
+        var key = 'api/indexed/haosou/' + cmd + '/' + q;
 
-        if (parsed) {
+        cache.get(key, function (err, entries) {
+            if (err) {
+                fail(res, err);
+            } else {
 
-            var q = parsed.domain + '.' + parsed.tld;
-            var key = 'api/indexed/haosou/' + c + '/' + q;
+                var body = entries[0] ? entries[0].body : null;
 
-            cache.get(key, function (err, entries) {
-                if (err) {
-                    fail(res, err);
+                if (body) {
+                    success(res, body);
                 } else {
 
-                    var body = entries[0] ? entries[0].body : null;
+                    var url = 'http://www.haosou.com/s?q=' + cmd + '%3A' + q;
 
-                    if (body) {
-                        success(res, body);
-                    } else {
-
-                        var url = 'http://www.haosou.com/s?q=' + c + '%3A' + q;
-
-                        needle.get(url, function (err, data) {
-                            if (err || data.statusCode !== 200) {
-                                fail(res, err);
-                            } else {
-                                $ = cheerio.load(data.body);
-                                data = $('.nums').text();
-                                data = _.trim(data.replace(/[\u4e00-\u9fa5]+/g, '')) || '0';
-                                cache.add(key, data, {
-                                    expire: 3600 * 24
-                                }, function () {
-                                    success(res, data);
-                                });
-                            }
-                        });
-                    }
-
+                    needle.get(url, function (err, data) {
+                        if (err || data.statusCode !== 200) {
+                            fail(res, err);
+                        } else {
+                            $ = cheerio.load(data.body);
+                            data = $('.nums').text();
+                            data = _.trim(data.replace(/[\u4e00-\u9fa5]+/g, '')) || '0';
+                            cache.add(key, data, {
+                                expire: 3600 * 24
+                            }, function () {
+                                success(res, data);
+                            });
+                        }
+                    });
                 }
-            });
-        } else {
-            error(res);
-        }
+
+            }
+        });
     } else {
         error(res);
     }
@@ -161,51 +163,44 @@ exports.haosou = function (req, res) {
 
 exports.sogou = function (req, res) {
 
-    var c = req.params.c;
-    var cmds = ['site', 'domain'];
+    var cmd = req.params.cmd;
+    var parsed = parseDomain(req.params.q);
 
-    if (_.includes(cmds, c)) {
+    if (parsed) {
 
-        var parsed = parseDomain(req.params.q);
+        var q = parsed.domain + '.' + parsed.tld;
+        var key = 'api/indexed/sogou/' + cmd + '/' + q;
 
-        if (parsed) {
+        cache.get(key, function (err, entries) {
+            if (err) {
+                fail(res, err);
+            } else {
 
-            var q = parsed.domain + '.' + parsed.tld;
-            var key = 'api/indexed/sogou/' + c + '/' + q;
+                var body = entries[0] ? entries[0].body : null;
 
-            cache.get(key, function (err, entries) {
-                if (err) {
-                    fail(res, err);
+                if (body) {
+                    success(res, body);
                 } else {
 
-                    var body = entries[0] ? entries[0].body : null;
+                    var url = 'http://www.sogou.com/web?query=' + cmd + '%3A' + q;
 
-                    if (body) {
-                        success(res, body);
-                    } else {
-
-                        var url = 'http://www.sogou.com/web?query=' + c + '%3A' + q;
-
-                        needle.get(url, function (err, data) {
-                            if (err || data.statusCode !== 200) {
-                                fail(res, err);
-                            } else {
-                                $ = cheerio.load(data.body);
-                                data = $('#scd_num').text() || '0';
-                                cache.add(key, data, {
-                                    expire: 3600 * 24
-                                }, function () {
-                                    success(res, data);
-                                });
-                            }
-                        });
-                    }
-
+                    needle.get(url, function (err, data) {
+                        if (err || data.statusCode !== 200) {
+                            fail(res, err);
+                        } else {
+                            $ = cheerio.load(data.body);
+                            data = $('#scd_num').text() || '0';
+                            cache.add(key, data, {
+                                expire: 3600 * 24
+                            }, function () {
+                                success(res, data);
+                            });
+                        }
+                    });
                 }
-            });
-        } else {
-            error(res);
-        }
+
+            }
+        });
     } else {
         error(res);
     }
@@ -213,52 +208,45 @@ exports.sogou = function (req, res) {
 
 exports.google = function (req, res) {
 
-    var c = req.params.c;
-    var cmds = ['site', 'link'];
+    var cmd = req.params.cmd;
+    var parsed = parseDomain(req.params.q);
 
-    if (_.includes(cmds, c)) {
+    if (parsed) {
 
-        var parsed = parseDomain(req.params.q);
+        var q = parsed.domain + '.' + parsed.tld;
+        var key = 'api/indexed/google/' + cmd + '/' + q;
 
-        if (parsed) {
+        cache.get(key, function (err, entries) {
+            if (err) {
+                fail(res, err);
+            } else {
 
-            var q = parsed.domain + '.' + parsed.tld;
-            var key = 'api/indexed/google/' + c + '/' + q;
+                var body = entries[0] ? entries[0].body : null;
 
-            cache.get(key, function (err, entries) {
-                if (err) {
-                    fail(res, err);
+                if (body) {
+                    success(res, body);
                 } else {
 
-                    var body = entries[0] ? entries[0].body : null;
+                    var url = 'http://216.58.217.35/search?q=' + cmd + '%3A' + q + '&hl=zh_CN';
 
-                    if (body) {
-                        success(res, body);
-                    } else {
-
-                        var url = 'http://216.58.217.35/search?q=' + c + '%3A' + q + '&hl=zh_CN';
-
-                        needle.get(url, function (err, data) {
-                            if (err || data.statusCode !== 200) {
-                                fail(res, err);
-                            } else {
-                                $ = cheerio.load(data.body);
-                                data = $('#resultStats').text().split(' ');
-                                data = data[1] ? data[1] : '0';
-                                cache.add(key, data, {
-                                    expire: 3600 * 24
-                                }, function () {
-                                    success(res, data);
-                                });
-                            }
-                        });
-                    }
-
+                    needle.get(url, function (err, data) {
+                        if (err || data.statusCode !== 200) {
+                            fail(res, err);
+                        } else {
+                            $ = cheerio.load(data.body);
+                            data = $('#resultStats').text().split(' ');
+                            data = data[1] ? data[1] : '0';
+                            cache.add(key, data, {
+                                expire: 3600 * 24
+                            }, function () {
+                                success(res, data);
+                            });
+                        }
+                    });
                 }
-            });
-        } else {
-            error(res);
-        }
+
+            }
+        });
     } else {
         error(res);
     }
