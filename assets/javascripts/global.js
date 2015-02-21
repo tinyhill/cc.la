@@ -1,6 +1,8 @@
 $(document).ready(function () {
 
-    // Placeholder
+    /**
+     * placeholder
+     */
     (function () {
 
         var q = $('.q');
