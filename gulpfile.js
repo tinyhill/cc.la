@@ -47,7 +47,10 @@ gulp.task('default', [
     'respond'
 ]);
 
-gulp.watch(assets + 'stylesheets/*.less', [
+gulp.watch([
+    assets + 'stylesheets/*.less',
+    assets + 'stylesheets/*/*.less'
+], [
     'css'
 ]);
 

@@ -2,18 +2,57 @@
     <div class="hd">
         <dl class="related clearfix">
             <dt>相关查询：</dt>
-            <dd><a href="/pr/site{{#q}}/{{.}}{{/q}}">全站查询</a></dd>
-            <dd><a href="/pr/realtime{{#q}}/{{.}}{{/q}}">实时查询</a></dd>
-            <dd><a href="/pr/history{{#q}}/{{.}}{{/q}}">查看变化历史</a></dd>
+            <dd><a href="/alexa/site{{#q}}/{{.}}{{/q}}">全站查询</a></dd>
+            <dd><a href="/alexa/realtime{{#q}}/{{.}}{{/q}}">实时查询</a></dd>
+            <dd><a href="/alexa/history{{#q}}/{{.}}{{/q}}">查看变化历史</a></dd>
         </dl>
     </div>
     <div class="bd">
         <div class="panel panel-default">
-            <div class="panel-heading">查询结果</div>
+            <div class="panel-heading">网站排名</div>
             <div class="panel-body">
                 <div class="body" id="body">
                     {{body}}
                 </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">排名趋势</div>
+            {{#if q}}
+                <table class="table table-bordered">
+                    <tr>
+                        <td>
+                            <p>六个月平均排名曲线</p>
+                            <img src="http://traffic.alexa.com/graph?w=360&h=300&r=6m&y=t&u={{q}}" alt="">
+                        </td>
+                        <td>
+                            <p>三个月平均排名曲线</p>
+                            <img src="http://traffic.alexa.com/graph?w=360&h=300&r=3m&y=t&u={{q}}" alt="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>一个月平均排名曲线</p>
+                            <img src="http://traffic.alexa.com/graph?w=360&h=300&r=1m&y=t&u={{q}}" alt="">
+                        </td>
+                        <td>
+                            <p>一星期平均排名曲线</p>
+                            <img src="http://traffic.alexa.com/graph?w=360&h=300&r=7d&y=t&u={{q}}" alt="">
+                        </td>
+                    </tr>
+                </table>
+            {{else}}
+                <div class="panel-body">
+                    <div class="body">
+                        {{body}}
+                    </div>
+                </div>
+            {{/if}}
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">查询说明</div>
+            <div class="panel-body">
+                网站排名查询工具，可以查询网站的全球排名信息，是目前较为权威的网站访问量评价指标。
             </div>
         </div>
     </div>

@@ -15,10 +15,16 @@
     <div class="bd">
         <div class="panel panel-default">
             <div class="panel-heading">注册商记录</div>
-            <div class="panel-body">
-                <div class="body" id="body">
+            <div class="panel-body" id="result">
+                <div class="body">
                     {{body}}
                 </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">查询说明</div>
+            <div class="panel-body">
+                WHOIS 查询工具，可以查询域名的注册信息，包括注册人、注册邮箱、注册机构、注册日期、到期日期、联系人等信息。
             </div>
         </div>
     </div>
@@ -45,29 +51,29 @@
 {{/if}}
 {{#if q}}
     <script>
-        var body = $('#body');
+        var result = $('#result');
 
         function request() {
             $.ajax({
                 url: '/api/whois/{{q}}',
                 beforeSend: function () {
-                    body.html('<span class="loading"></span>');
+                    result.html('<span class="loading"></span>');
                 },
                 success: function (data) {
                     if (data.status === 'success') {
-                        body.html(data.data);
+                        result.html('<div class="result">' + data.data + '</div>');
                     } else {
-                        body.html('查询失败，<a href="javascript:;" id="retry">点此重试</a>');
+                        result.html('查询失败，<a href="javascript:;" id="retry">点此重试</a>');
                     }
                 },
                 error: function () {
-                    body.html('服务器繁忙，请稍候重试');
+                    result.html('服务器繁忙，请稍候重试');
                 },
                 dataType: 'json'
             });
         }
 
-        body.delegate('#retry', 'click', request);
+        result.delegate('#retry', 'click', request);
 
         request();
     </script>

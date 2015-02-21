@@ -7,7 +7,8 @@ exports.index = function (req, res) {
     var q = req.params.q || req.query.q || '';
     var data = {
         active: 'whois',
-        layout: 'layouts/default'
+        layout: 'layouts/default',
+        title: 'WHOIS查询_域名WHOIS查询_域名注册信息查询'
     };
 
     if (q) {

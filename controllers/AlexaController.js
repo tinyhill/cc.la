@@ -5,7 +5,8 @@ exports.index = function (req, res) {
     var q = req.params.q || req.query.q || '';
     var data = {
         active: 'alexa',
-        layout: 'layouts/default'
+        layout: 'layouts/default',
+        title: 'ALEXA排名_网站排名_网站排名查询'
     };
 
     if (q) {

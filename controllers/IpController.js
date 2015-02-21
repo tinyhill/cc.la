@@ -5,7 +5,8 @@ exports.index = function (req, res) {
     var q = req.params.q || req.query.q || '';
     var data = {
         active: 'ip',
-        layout: 'layouts/default'
+        layout: 'layouts/default',
+        title: 'IP地址_IP地址查询_IP查询'
     };
 
     if (q) {

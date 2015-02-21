@@ -5,7 +5,8 @@ exports.index = function (req, res) {
     var q = req.params.q || req.query.q || '';
     var data = {
         active: 'pr',
-        layout: 'layouts/default'
+        layout: 'layouts/default',
+        title: 'PR值_PR查询_PR真假查询_PR劫持检测'
     };
 
     if (q) {

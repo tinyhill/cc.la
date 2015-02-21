@@ -5,7 +5,8 @@ exports.index = function (req, res) {
     var q = req.params.q || req.query.q || '';
     var data = {
         active: 'indexed',
-        layout: 'layouts/default'
+        layout: 'layouts/default',
+        title: '网站收录_收录查询_网站收录查询_百度收录查询'
     };
 
     if (q) {
