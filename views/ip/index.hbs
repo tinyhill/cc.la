@@ -34,7 +34,7 @@
                 },
                 success: function (data) {
                     if (data.status === 'success') {
-                        body.html('IP 地址 <b>' + data.data.ip + '</b> 位于 ' + '<b>' + data.data.Country + data.data.Area + '</b>');
+                        body.html('{{^isip}}域名&nbsp;&nbsp;<b>{{q}}</b>，{{/isip}}IP 地址&nbsp;&nbsp;<b>' + data.data.ip + '</b>&nbsp;&nbsp;位于&nbsp;&nbsp;' + '<b>' + data.data.Country + data.data.Area + '</b>');
                     } else {
                         body.html('查询失败，<a href="javascript:;" id="retry">点此重试</a>');
                     }

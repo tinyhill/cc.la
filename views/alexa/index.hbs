@@ -69,7 +69,26 @@
                 },
                 success: function (data) {
                     if (data.status === 'success') {
-                        body.html('全球排名位于 <b>' + data.data.rank + '</b>');
+
+                        var sd = data.data || {};
+                        var text = '全球排名位于&nbsp;&nbsp;';
+
+                        if (sd.popularityText) {
+                            text += '<b>' + sd.popularityText + '</b>&nbsp;&nbsp;名';
+                            if (sd.rankDelta) {
+
+                                var delta = parseInt(sd.rankDelta);
+                                var deltaText = delta < 0 ? '上升' : '下降';
+
+                                text += '，排名' + deltaText + '&nbsp;&nbsp;<b>' + Math.abs(delta) + '</b>&nbsp;&nbsp;名';
+                            }
+                            if (sd.countryCode && sd.countryCode === 'CN') {
+                                text += '，中国排名位于&nbsp;&nbsp;<b>' + sd.countryRank + '</b>&nbsp;&nbsp;名';
+                            }
+                        } else {
+                            text += '暂无信息';
+                        }
+                        body.html(text);
                     } else {
                         body.html('查询失败，<a href="javascript:;" id="retry">点此重试</a>');
                     }

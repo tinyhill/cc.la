@@ -1,7 +1,7 @@
 <div class="main whois">
     <div class="hd">
         {{#touched}}
-            <div class="control">
+            <div class="refresh">
                 缓存时间：{{.}}<a href="javascript:;" id="refresh">强制更新</a>
             </div>
         {{/touched}}
@@ -15,7 +15,7 @@
     <div class="bd">
         <div class="panel panel-default">
             <div class="panel-heading">注册商记录</div>
-            <div class="panel-body" id="result">
+            <div class="panel-body" id="body">
                 <div class="body">
                     {{body}}
                 </div>
@@ -51,29 +51,29 @@
 {{/if}}
 {{#if q}}
     <script>
-        var result = $('#result');
+        var body = $('#body');
 
         function request() {
             $.ajax({
                 url: '/api/whois/{{q}}',
                 beforeSend: function () {
-                    result.html('<span class="loading"></span>');
+                    body.html('<span class="loading"></span>');
                 },
                 success: function (data) {
                     if (data.status === 'success') {
-                        result.html('<div class="result">' + data.data + '</div>');
+                        body.html('<div class="result">' + data.data + '</div>');
                     } else {
-                        result.html('查询失败，<a href="javascript:;" id="retry">点此重试</a>');
+                        body.html('查询失败，<a href="javascript:;" id="retry">点此重试</a>');
                     }
                 },
                 error: function () {
-                    result.html('服务器繁忙，请稍候重试');
+                    body.html('服务器繁忙，请稍候重试');
                 },
                 dataType: 'json'
             });
         }
 
-        result.delegate('#retry', 'click', request);
+        body.delegate('#retry', 'click', request);
 
         request();
     </script>

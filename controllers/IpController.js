@@ -1,3 +1,4 @@
+var isIp = require('is-ip');
 var parseDomain = require('parse-domain');
 
 exports.index = function (req, res) {
@@ -11,14 +12,21 @@ exports.index = function (req, res) {
 
     if (q) {
 
-        var parsed = parseDomain(q);
-
-        if (parsed) {
-            data.q = parsed.domain + '.' + parsed.tld;
+        if (isIp(q)) {
+            data.isip = true;
+            data.q = q;
             res.render('ip', data);
         } else {
-            data.body = '请输入正确的网址';
-            res.render('ip', data);
+
+            var parsed = parseDomain(q);
+
+            if (parsed) {
+                data.q = parsed.domain + '.' + parsed.tld;
+                res.render('ip', data);
+            } else {
+                data.body = '请输入正确的网址';
+                res.render('ip', data);
+            }
         }
     } else {
         data.body = '请输入要查询的网址';
