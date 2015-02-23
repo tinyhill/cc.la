@@ -1,45 +1,63 @@
 //
-// Index
+// Home
 // --------------------------------------------------
 
-.tool-group {
-  margin-bottom: 10px;
-}
-
-.tool-label {
-  color: #333;
-  font-size: 14px;
-  font-weight: bold;
-  margin: 0 0 20px;
-}
-
-.tool-control {
-  background: #FFF;
-  border: 1px solid #DBDBDB;
-  border-left-width: 3px;
-  border-left-color: #009A61;
-  border-radius: 2px;
-  color: #999;
-  margin-bottom: 15px;
-  padding: 12px 15px;
-  &:hover {
-    border-top-color: #BDBDBD;
-    border-right-color: #BDBDBD;
-    border-bottom-color: #BDBDBD;
-    color: #777;
+.home {
+  .intro {
+    border-bottom: 2px solid #EAEAEA;
+    margin-bottom: 25px;
+    padding: 10px 0;
+    text-align: center;
+    h1 {
+      font-size: 16px;
+      small {
+        font-size: 14px;
+      }
+    }
+    p {
+      color: #777;
+      b {
+        color: #333;
+      }
+    }
   }
-  .name,
-  .desc {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
+  .tool-group {
+    margin-bottom: 10px;
   }
-  .name {
-    display: inline-block;
-    vertical-align: middle;
+  .tool-label {
+    color: #333;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0 0 15px;
   }
-  .desc {
-    font-size: 13px;
-    margin: 5px 0 0 0;
+  .tool-control {
+    background: #FFF;
+    border: 1px solid #DBDBDB;
+    border-left-width: 3px;
+    border-left-color: #009A61;
+    border-radius: 2px;
+    color: #999;
+    margin-bottom: 15px;
+    padding: 12px 15px;
+    &:hover {
+      border-top-color: #BDBDBD;
+      border-right-color: #BDBDBD;
+      border-bottom-color: #BDBDBD;
+      color: #777;
+    }
+    .name,
+    .desc {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .name {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .desc {
+      font-size: 13px;
+      margin: 5px 0 0 0;
+    }
   }
 }

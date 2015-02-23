@@ -1,23 +1,26 @@
+var ip = require('ip');
+var qqwry = require('lib-qqwry').info();
+var uaParser = require('ua-parser');
+
+function getQQWry(ip) {
+
+    var data = qqwry.searchIP(ip);
+    var regex = /(\s*CZ88\.NET|对方和您在同一内部网)/g;
+
+    data.Area = data.Area.replace(regex, '');
+    return data;
+}
+
 exports.index = function (req, res) {
+
+    var addr = ip.address();
+    var ua = req.headers['user-agent'];
+    var r = uaParser.parse(ua);
+
     res.render('home', {
         active: 'indexed',
-        data: [
-            {"name": "网站信息查询", "desc": "最好用的网站信息查询工具"},
-            {"name": "网站信息查询", "desc": "最好用的网站信息查询工具"},
-            {"name": "网站信息查询", "desc": "最好用的网站信息查询工具"},
-            {"name": "网站信息查询", "desc": "最好用的网站信息查询工具"},
-            {"name": "网站信息查询", "desc": "最好用的网站信息查询工具"},
-            {"name": "网站信息查询", "desc": "最好用的网站信息查询工具"},
-            {"name": "网站信息查询", "desc": "最好用的网站信息查询工具"},
-            {"name": "网站信息查询", "desc": "最好用的网站信息查询工具"},
-            {"name": "网站信息查询", "desc": "最好用的网站信息查询工具"}
-        ]
+        ip: getQQWry(addr),
+        os: r.os.toString(),
+        ua: r.ua.toString()
     });
-};
-
-exports.test = function (req, res) {
-    var parseDomain = require('parse-domain');
-    var ret = parseDomain('afdsdf%@#$sadfadddd.cnx');
-    console.log(ret);
-    res.send(ret);
 };

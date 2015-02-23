@@ -1,24 +1,79 @@
-<div class="tool-group">
-    <h2 class="tool-label">热门工具</h2>
-    <div class="tool-controls row">
-        {{#each data}}
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-                <div class="tool-control">
-                    <a class="name" href="/indexed/chinaz.com">{{name}}</a>
-                    <p class="desc" title="drag and drop">{{desc}}</p></div>
-            </div>
-        {{/each}}
+<div class="home">
+    <div class="intro">
+        <h1>
+            <small>您的 IP 地址&nbsp;&nbsp;</small>{{ip.ip}}
+            <small>&nbsp;&nbsp;来自&nbsp;&nbsp;</small>{{ip.Country}}{{ip.Area}}
+        </h1>
+        <p>正在使用&nbsp;&nbsp;<b>{{os}}</b>&nbsp;&nbsp;操作系统和&nbsp;&nbsp;<b>{{ua}}</b>&nbsp;&nbsp;浏览器访问本站</p>
     </div>
-</div>
-<div class="tool-group">
-    <h2 class="tool-label">最新上线</h2>
-    <div class="tool-controls row">
-        {{#each data}}
+    <div class="tool-group">
+        <h2 class="tool-label">热门工具</h2>
+        <div class="tool-controls row">
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
                 <div class="tool-control">
-                    <a class="name" href="/">{{name}}</a>
-                    <p class="desc" title="drag and drop">{{desc}}</p></div>
+                    <a class="name" href="/indexed/">网站收录查询</a>
+                    <p class="desc">查询网站收录情况和反向链接</p>
+                </div>
             </div>
-        {{/each}}
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                <div class="tool-control">
+                    <a class="name" href="/alexa/">网站排名查询</a>
+                    <p class="desc">查询网站排名信息和升降趋势</p>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                <div class="tool-control">
+                    <a class="name" href="/ip/">IP 查询</a>
+                    <p class="desc">查询网站所在国家、城市和线路信息</p>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                <div class="tool-control">
+                    <a class="name" href="/pr/">PR 查询</a>
+                    <p class="desc">查询网站 Google PR 值和真假情况</p>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                <div class="tool-control">
+                    <a class="name" href="/whois/">WHOIS 查询</a>
+                    <p class="desc">查询网站域名注册信息</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tool-group">
+        <h2 class="tool-label">最新上线</h2>
+        <div class="tool-controls row">
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                <div class="tool-control">
+                    <a class="name" href="/indexed/">网站收录查询</a>
+                    <p class="desc">查询网站收录情况和反向链接</p>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                <div class="tool-control">
+                    <a class="name" href="/alexa/">网站排名查询</a>
+                    <p class="desc">查询网站排名信息和升降趋势</p>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                <div class="tool-control">
+                    <a class="name" href="/ip/">IP 查询</a>
+                    <p class="desc">查询网站所在国家、城市和线路信息</p>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                <div class="tool-control">
+                    <a class="name" href="/pr/">PR 查询</a>
+                    <p class="desc">查询网站 Google PR 值和真假情况</p>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                <div class="tool-control">
+                    <a class="name" href="/whois/">WHOIS 查询</a>
+                    <p class="desc">查询网站域名注册信息</p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
