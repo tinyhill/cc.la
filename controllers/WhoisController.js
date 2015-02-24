@@ -17,6 +17,7 @@ exports.index = function (req, res) {
 
         if (parsed) {
             data.q = parsed.domain + '.' + parsed.tld;
+            res.cookie['q'] = data.q;
             cache.get('api/whois/' + data.q, function (err, entries) {
                 if (err) {
                     data.body = '服务器错误，请稍候重试';

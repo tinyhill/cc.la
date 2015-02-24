@@ -26,7 +26,7 @@
         <a href="/" class="logo" title="万能的站长工具">
             <img src="/images/logo.png" width="94" height="32" alt="查查啦">
         </a>
-        <form class="searchform" action="/{{#active}}{{.}}/{{/active}}" method="get">
+        <form class="searchform" action="/{{#equal active 'home'}}indexed/{{else}}{{#active}}{{.}}/{{/active}}{{/equal}}" method="get">
             <div class="q">
                 <label for="q" class="hidden">请输入域名、网址或关键字</label>
                 <input type="search" id="q" name="q" maxlength="100" tabindex="1" value="{{q}}">

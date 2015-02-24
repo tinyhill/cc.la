@@ -18,9 +18,10 @@ exports.index = function (req, res) {
     var r = uaParser.parse(ua);
 
     res.render('home', {
-        active: 'indexed',
+        active: 'home',
         ip: getQQWry(addr),
         os: r.os.toString(),
+        q: res.cookie['q'],
         ua: r.ua.toString()
     });
 };

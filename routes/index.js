@@ -10,7 +10,6 @@ var PrController = require('../controllers/PrController');
 var WhoisController = require('../controllers/WhoisController');
 
 router.get('/', HomeController.index);
-
 router.get('/alexa', AlexaController.index);
 router.get('/alexa/:q', AlexaController.index);
 router.get('/indexed', IndexedController.index);

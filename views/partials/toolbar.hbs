@@ -1,6 +1,9 @@
 <div class="toolbar">
     <div class="container">
         <ul class="tool-nav">
+            <li{{#equal active 'home'}} class="active"{{/equal}}>
+                <a href="/">首页</a>
+            </li>
             <li{{#equal active 'indexed'}} class="active"{{/equal}}>
                 <a href="/indexed{{#q}}/{{.}}{{/q}}">网站收录</a>
             </li>
