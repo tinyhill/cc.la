@@ -1,11 +1,12 @@
 <div class="home">
-    <div class="intro">
-        <h1>
-            <small>您的 IP 地址&nbsp;&nbsp;</small>{{ip.ip}}
-            <small>&nbsp;&nbsp;来自&nbsp;&nbsp;</small>{{ip.Country}}{{ip.Area}}
-        </h1>
-        <p>正在使用&nbsp;&nbsp;<b>{{os}}</b>&nbsp;&nbsp;操作系统和&nbsp;&nbsp;<b>{{ua}}</b>&nbsp;&nbsp;浏览器访问本站</p>
-    </div>
+    <dl class="welcome">
+        <dt>
+            您的 IP 地址&nbsp;&nbsp;<b>{{ip.ip}}</b>&nbsp;&nbsp;来自&nbsp;&nbsp;<b>{{ip.Country}}{{ip.Area}}</b>
+        </dt>
+        <dd>
+            正在使用&nbsp;&nbsp;<b>{{os}}</b>&nbsp;&nbsp;操作系统和&nbsp;&nbsp;<b>{{ua}}</b>&nbsp;&nbsp;浏览器访问本站
+        </dd>
+    </dl>
     <div class="tool-group">
         <h2 class="tool-label">热门工具</h2>
         <div class="tool-controls row">
