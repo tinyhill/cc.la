@@ -12,16 +12,14 @@ function getQQWry(ip) {
 
 exports.index = function (req, res) {
 
-    var addr = req.headers['x-forwarded-for']
-        || req.connection.remoteAddress;
-    var ua = req.headers['user-agent'];
-    var r = uaParser.parse(ua);
+    var addr = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    var r = uaParser.parse(req.headers['user-agent']);
 
     res.render('home', {
         active: 'home',
         ip: getQQWry(addr),
         os: r.os.toString(),
-        q: res.cookie['q'],
+        q: req.cookies.q,
         ua: r.ua.toString()
     });
 };
