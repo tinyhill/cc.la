@@ -15,7 +15,7 @@ exports.index = function (req, res) {
 
         if (parsed) {
             data.q = parsed.domain + '.' + parsed.tld;
-            res.cookie['q'] = data.q;
+            res.cookie('q', data.q);
             res.render('indexed', data);
         } else {
             data.body = '请输入正确的网址';
