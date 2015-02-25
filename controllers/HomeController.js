@@ -1,4 +1,3 @@
-var ip = require('ip');
 var qqwry = require('lib-qqwry').info();
 var uaParser = require('ua-parser');
 
@@ -13,7 +12,8 @@ function getQQWry(ip) {
 
 exports.index = function (req, res) {
 
-    var addr = ip.address();
+    var addr = req.headers['x-forwarded-for']
+        || req.connection.remoteAddress;
     var ua = req.headers['user-agent'];
     var r = uaParser.parse(ua);
 
