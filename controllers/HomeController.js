@@ -1,3 +1,4 @@
+var parseDomain = require('parse-domain');
 var qqwry = require('lib-qqwry').info();
 var uaParser = require('ua-parser');
 
@@ -13,8 +14,12 @@ function getQQWry(ip) {
 exports.index = function (req, res) {
 
     var addr = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    var q = req.params.q || req.query.q || req.cookies.q || '';
     var r = uaParser.parse(req.headers['user-agent']);
-    var q = req.params.q || req.query.q || req.cookies.q;
+
+    if (q && parseDomain(q)) {
+        res.cookie('q', q);
+    }
 
     res.render('home', {
         active: 'home',
