@@ -14,12 +14,13 @@ exports.index = function (req, res) {
 
     var addr = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     var r = uaParser.parse(req.headers['user-agent']);
+    var q = req.params.q || req.query.q || req.cookies.q;
 
     res.render('home', {
         active: 'home',
+        q: q,
         ip: getQQWry(addr),
         os: r.os.toString(),
-        q: req.cookies.q,
         ua: r.ua.toString()
     });
 };
