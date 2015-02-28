@@ -2,9 +2,9 @@
     <div class="hd">
         <dl class="related clearfix">
             <dt>相关查询：</dt>
-            <dd><a href="/alexa/site{{#q}}/{{.}}{{/q}}">全站查询</a></dd>
-            <dd><a href="/alexa/realtime{{#q}}/{{.}}{{/q}}">实时查询</a></dd>
-            <dd><a href="/alexa/history{{#q}}/{{.}}{{/q}}">查看变化历史</a></dd>
+            <dd><a href="/alexa/site{{#if q}}/{{q}}{{/if}}">全站查询</a></dd>
+            <dd><a href="/alexa/realtime{{#if q}}/{{q}}{{/if}}">实时查询</a></dd>
+            <dd><a href="/alexa/history{{#if q}}/{{q}}{{/if}}">查看变化历史</a></dd>
         </dl>
     </div>
     <div class="bd">

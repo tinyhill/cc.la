@@ -1,15 +1,15 @@
 <div class="main whois">
     <div class="hd">
-        {{#touched}}
+        {{#if touched}}
             <div class="refresh">
-                缓存时间：{{.}}<a href="javascript:;" id="refresh">强制更新</a>
+                缓存时间：{{touched}}<a href="javascript:;" id="refresh">强制更新</a>
             </div>
-        {{/touched}}
+        {{/if}}
         <dl class="related clearfix">
             <dt>相关查询：</dt>
-            <dd><a href="/whois/reverse/domain{{#q}}/{{.}}{{/q}}">按域名反查</a></dd>
-            <dd><a href="/whois/reverse/mail{{#q}}/{{.}}{{/q}}">按邮箱反查</a></dd>
-            <dd><a href="/whois/reverse/registrant{{#q}}/{{.}}{{/q}}">按注册人反查</a></dd>
+            <dd><a href="/whois/reverse/domain{{#if q}}/{{q}}{{/if}}">按域名反查</a></dd>
+            <dd><a href="/whois/reverse/mail{{#if q}}/{{q}}{{/if}}">按邮箱反查</a></dd>
+            <dd><a href="/whois/reverse/registrant{{#if q}}/{{q}}{{/if}}">按注册人反查</a></dd>
         </dl>
     </div>
     <div class="bd">

@@ -2,6 +2,11 @@ var parseDomain = require('parse-domain');
 var qqwry = require('lib-qqwry').info();
 var uaParser = require('ua-parser');
 
+function getClientIp(req) {
+    return req.headers['x-forwarded-for'] ||
+        req.connection.remoteAddress.replace(/^::ffff:/, '');
+}
+
 function getQQWry(ip) {
 
     var data = qqwry.searchIP(ip);
@@ -13,7 +18,7 @@ function getQQWry(ip) {
 
 exports.index = function (req, res) {
 
-    var addr = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    var ip = getClientIp(req);
     var q = req.params.q || req.query.q || req.cookies.q || '';
     var r = uaParser.parse(req.headers['user-agent']);
 
@@ -24,7 +29,7 @@ exports.index = function (req, res) {
     res.render('home', {
         active: 'home',
         q: q,
-        ip: getQQWry(addr),
+        qqwry: getQQWry(ip),
         os: r.os.toString(),
         ua: r.ua.toString()
     });

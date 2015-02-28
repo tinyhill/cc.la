@@ -1,7 +1,7 @@
 <div class="home">
     <dl class="welcome">
         <dt>
-            您的 IP 地址&nbsp;&nbsp;<b>{{ip.ip}}</b>&nbsp;&nbsp;来自&nbsp;&nbsp;<b>{{ip.Country}}{{ip.Area}}</b>
+            您的 IP 地址&nbsp;&nbsp;<b>{{qqwry.ip}}</b>&nbsp;&nbsp;来自&nbsp;&nbsp;<b>{{qqwry.Country}}{{qqwry.Area}}</b>
         </dt>
         <dd>
             正在使用&nbsp;&nbsp;<b>{{os}}</b>&nbsp;&nbsp;操作系统和&nbsp;&nbsp;<b>{{ua}}</b>&nbsp;&nbsp;浏览器访问本站
@@ -12,31 +12,31 @@
         <div class="tool-controls row">
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
                 <div class="tool-control">
-                    <a class="name" href="/indexed{{#q}}/{{.}}{{/q}}">网站收录查询</a>
+                    <a class="name" href="/indexed{{#if q}}/{{q}}{{/if}}">网站收录查询</a>
                     <p class="desc">查询网站收录情况和反向链接</p>
                 </div>
             </div>
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
                 <div class="tool-control">
-                    <a class="name" href="/alexa{{#q}}/{{.}}{{/q}}">网站排名查询</a>
+                    <a class="name" href="/alexa{{#if q}}/{{q}}{{/if}}">网站排名查询</a>
                     <p class="desc">查询网站排名信息和升降趋势</p>
                 </div>
             </div>
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
                 <div class="tool-control">
-                    <a class="name" href="/ip{{#q}}/{{.}}{{/q}}">IP 查询</a>
+                    <a class="name" href="/ip{{#if q}}/{{q}}{{/if}}">IP 查询</a>
                     <p class="desc">查询网站所在国家、城市和线路信息</p>
                 </div>
             </div>
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
                 <div class="tool-control">
-                    <a class="name" href="/pr{{#q}}/{{.}}{{/q}}">PR 查询</a>
+                    <a class="name" href="/pr{{#if q}}/{{q}}{{/if}}">PR 查询</a>
                     <p class="desc">查询网站 Google PR 值和真假情况</p>
                 </div>
             </div>
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
                 <div class="tool-control">
-                    <a class="name" href="/whois{{#q}}/{{.}}{{/q}}">WHOIS 查询</a>
+                    <a class="name" href="/whois{{#if q}}/{{q}}{{/if}}">WHOIS 查询</a>
                     <p class="desc">查询网站域名注册信息</p>
                 </div>
             </div>
@@ -47,31 +47,31 @@
         <div class="tool-controls row">
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
                 <div class="tool-control">
-                    <a class="name" href="/indexed{{#q}}/{{.}}{{/q}}">网站收录查询</a>
+                    <a class="name" href="/indexed{{#if q}}/{{q}}{{/if}}">网站收录查询</a>
                     <p class="desc">查询网站收录情况和反向链接</p>
                 </div>
             </div>
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
                 <div class="tool-control">
-                    <a class="name" href="/alexa{{#q}}/{{.}}{{/q}}">网站排名查询</a>
+                    <a class="name" href="/alexa{{#if q}}/{{q}}{{/if}}">网站排名查询</a>
                     <p class="desc">查询网站排名信息和升降趋势</p>
                 </div>
             </div>
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
                 <div class="tool-control">
-                    <a class="name" href="/ip{{#q}}/{{.}}{{/q}}">IP 查询</a>
+                    <a class="name" href="/ip{{#if q}}/{{q}}{{/if}}">IP 查询</a>
                     <p class="desc">查询网站所在国家、城市和线路信息</p>
                 </div>
             </div>
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
                 <div class="tool-control">
-                    <a class="name" href="/pr{{#q}}/{{.}}{{/q}}">PR 查询</a>
+                    <a class="name" href="/pr{{#if q}}/{{q}}{{/if}}">PR 查询</a>
                     <p class="desc">查询网站 Google PR 值和真假情况</p>
                 </div>
             </div>
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
                 <div class="tool-control">
-                    <a class="name" href="/whois{{#q}}/{{.}}{{/q}}">WHOIS 查询</a>
+                    <a class="name" href="/whois{{#if q}}/{{q}}{{/if}}">WHOIS 查询</a>
                     <p class="desc">查询网站域名注册信息</p>
                 </div>
             </div>
