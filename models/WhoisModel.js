@@ -2,10 +2,7 @@ var mongoose = require('mongoose');
 var timestamp = require('mongoose-timestamp');
 var schema = new mongoose.Schema({
     q: String,
-    countryCode: String,
-    countryRank: String,
-    popularityText: String,
-    rankDelta: String
+    data: String
 });
 
 schema.plugin(timestamp, {
@@ -13,4 +10,4 @@ schema.plugin(timestamp, {
     updatedAt: 'updated_at'
 });
 
-module.exports = db.model('alexa', schema, 'alexa');
+module.exports = db.model('whois', schema, 'whois');

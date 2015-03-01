@@ -56,7 +56,7 @@ app.use(function (err, req, res, next) {
     });
 });
 
-// hbs setup
+// hbs handler
 hbs.registerPartials(__dirname + '/views/partials');
 hbsHelper.help(hbs);
 

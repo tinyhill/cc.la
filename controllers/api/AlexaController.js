@@ -3,8 +3,6 @@ var parseDomain = require('parse-domain');
 var request = require('request');
 var xml2js = require('xml2js');
 
-//var AlexaModel = require('../../models/AlexaModel');
-
 function success(res, data) {
     res.send({
         status: 'success',
@@ -89,7 +87,6 @@ exports.index = function (req, res) {
                             cache.add(key, JSON.stringify(data), {
                                 expire: 3600 * 24
                             }, function () {
-                                //AlexaModel.insert();
                                 success(res, data);
                             });
                         }

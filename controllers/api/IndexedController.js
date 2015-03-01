@@ -70,7 +70,6 @@ exports.baidu = function (req, res) {
                         default:
                             url += cmd + '%3A' + q;
                     }
-                    console.log(url + periodParams);
                     needle.get(url + periodParams, function (err, data) {
                         if (err || data.statusCode !== 200) {
                             fail(res, err);
