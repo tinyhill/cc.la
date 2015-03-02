@@ -4,6 +4,8 @@ var isIp = require('is-ip');
 var parseDomain = require('parse-domain');
 var qqwry = require('lib-qqwry').info();
 
+var model = require('../../models/IpModel');
+
 function getQQWry(ip) {
 
     var data = qqwry.searchIP(ip);
@@ -33,9 +35,15 @@ exports.index = function (req, res) {
                         data: err
                     });
                 } else {
+                    data = getQQWry(data);
                     res.json({
                         status: 'success',
-                        data: getQQWry(data)
+                        data: data
+                    });
+                    model.create({
+                        body: JSON.stringify(data),
+                        key: 'api/ip/' + q,
+                        name: q
                     });
                 }
             });

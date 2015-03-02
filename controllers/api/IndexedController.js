@@ -4,6 +4,8 @@ var parseDomain = require('parse-domain');
 var cheerio = require('cheerio');
 var _ = require('lodash');
 
+var model = require('../../models/IndexedModel');
+
 function success(res, data) {
     res.send({
         status: 'success',
@@ -88,8 +90,10 @@ exports.baidu = function (req, res) {
                             } else if (cmd === 'position') {
                                 data = '暂无信息';
                                 $('span.g').each(function (k, v) {
-                                    data = $(v).text().replace(/^www./, '');
-                                    if (data.substr(0, q.length + 1) === q + '/') {
+
+                                    var text = $(v).text().replace(/^www./, '');
+
+                                    if (text.substr(0, q.length + 1) === q + '/') {
                                         data = k + 1;
                                         return false;
                                     }
@@ -102,6 +106,11 @@ exports.baidu = function (req, res) {
                                 expire: 3600 * 24
                             }, function () {
                                 success(res, data);
+                                model.create({
+                                    body: data,
+                                    key: key,
+                                    name: q
+                                });
                             });
                         }
                     });
@@ -148,6 +157,11 @@ exports.haosou = function (req, res) {
                                 expire: 3600 * 24
                             }, function () {
                                 success(res, data);
+                                model.create({
+                                    body: data,
+                                    key: key,
+                                    name: q
+                                });
                             });
                         }
                     });
@@ -193,6 +207,11 @@ exports.sogou = function (req, res) {
                                 expire: 3600 * 24
                             }, function () {
                                 success(res, data);
+                                model.create({
+                                    body: data,
+                                    key: key,
+                                    name: q
+                                });
                             });
                         }
                     });
@@ -226,7 +245,7 @@ exports.google = function (req, res) {
                     success(res, body);
                 } else {
 
-                    var url = 'http://216.58.217.35/search?q=' + cmd + '%3A' + q + '&hl=zh_CN';
+                    var url = 'http://64.233.169.103/search?q=' + cmd + '%3A' + q + '&hl=zh_CN';
 
                     needle.get(url, function (err, data) {
                         if (err || data.statusCode !== 200) {
@@ -239,6 +258,11 @@ exports.google = function (req, res) {
                                 expire: 3600 * 24
                             }, function () {
                                 success(res, data);
+                                model.create({
+                                    body: data,
+                                    key: key,
+                                    name: q
+                                });
                             });
                         }
                     });

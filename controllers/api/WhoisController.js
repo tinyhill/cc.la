@@ -3,6 +3,8 @@ var parseDomain = require('parse-domain');
 var whois = require('node-whois');
 var _ = require('lodash');
 
+var model = require('../../models/WhoisModel');
+
 function success(res, data) {
     res.send({
         status: 'success',
@@ -51,6 +53,11 @@ exports.index = function (req, res) {
                                 expire: 3600 * 24 * 30
                             }, function () {
                                 success(res, data);
+                                model.create({
+                                    body: data,
+                                    key: key,
+                                    name: q
+                                });
                             });
                         }
                     });

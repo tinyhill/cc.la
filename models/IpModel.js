@@ -1,10 +1,11 @@
 var mongoose = require('mongoose');
 var timestamp = require('mongoose-timestamp');
+
+var db = mongoose.createConnection('mongodb://localhost/cc_la');
 var schema = new mongoose.Schema({
-    q: String,
-    ip: String,
-    Country: String,
-    Area: String
+    body: String,
+    key: String,
+    name: String
 });
 
 schema.plugin(timestamp, {
