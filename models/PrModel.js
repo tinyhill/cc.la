@@ -5,7 +5,7 @@ var db = mongoose.createConnection('mongodb://localhost/cc_la');
 var schema = new mongoose.Schema({
     body: String,
     key: String,
-    name: String
+    q: String
 });
 
 schema.plugin(timestamp, {

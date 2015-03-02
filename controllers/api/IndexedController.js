@@ -105,10 +105,10 @@ exports.baidu = function (req, res) {
                                 data = $('.nums').text();
                                 data = _.trim(data.replace(/[\u4e00-\u9fa5]+/g, '')) || '0';
                             }
+                            success(res, data);
                             cache.add(key, data, {
                                 expire: 3600 * 24
                             }, function () {
-                                success(res, data);
                                 model.create({
                                     body: data,
                                     key: key,
@@ -159,10 +159,10 @@ exports.haosou = function (req, res) {
                             $ = cheerio.load(result.body);
                             data = $('.nums').text();
                             data = _.trim(data.replace(/[\u4e00-\u9fa5]+/g, '')) || '0';
+                            success(res, data);
                             cache.add(key, data, {
                                 expire: 3600 * 24
                             }, function () {
-                                success(res, data);
                                 model.create({
                                     body: data,
                                     key: key,
@@ -212,10 +212,10 @@ exports.sogou = function (req, res) {
                         } else {
                             $ = cheerio.load(result.body);
                             data = $('#scd_num').text() || '0';
+                            success(res, data);
                             cache.add(key, data, {
                                 expire: 3600 * 24
                             }, function () {
-                                success(res, data);
                                 model.create({
                                     body: data,
                                     key: key,
@@ -266,10 +266,10 @@ exports.google = function (req, res) {
                             $ = cheerio.load(result.body);
                             data = $('#resultStats').text().split(' ');
                             data = data[1] ? data[1] : '0';
+                            success(res, data);
                             cache.add(key, data, {
                                 expire: 3600 * 24
                             }, function () {
-                                success(res, data);
                                 model.create({
                                     body: data,
                                     key: key,

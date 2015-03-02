@@ -89,10 +89,10 @@ exports.index = function (req, res) {
 
                             var body = JSON.stringify(data);
 
+                            success(res, data);
                             cache.add(key, body, {
                                 expire: 3600 * 24
                             }, function () {
-                                success(res, data);
                                 model.create({
                                     body: body,
                                     key: key,

@@ -49,10 +49,10 @@ exports.index = function (req, res) {
                         if (err || rank === null) {
                             fail(res, err);
                         } else {
+                            success(res, rank);
                             cache.add(key, rank, {
                                 expire: 3600 * 24 * 30
                             }, function () {
-                                success(res, rank);
                                 model.create({
                                     body: rank,
                                     key: key,

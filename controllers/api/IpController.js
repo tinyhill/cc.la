@@ -1,3 +1,4 @@
+var cache = require('express-redis-cache')();
 var dns = require('dns');
 var ip = require('ip');
 var isIp = require('is-ip');
@@ -15,45 +16,74 @@ function getQQWry(ip) {
     return data;
 }
 
+function success(res, data) {
+    res.send({
+        status: 'success',
+        data: data
+    });
+}
+
+function fail(res, err) {
+    res.send({
+        status: 'fail',
+        data: err
+    });
+}
+
+function error(res) {
+    res.send({
+        status: 'error',
+        message: '参数错误'
+    });
+}
+
 exports.index = function (req, res) {
 
     var q = req.params.q;
 
     if (isIp(q)) {
-        res.json({
-            status: 'success',
-            data: getQQWry(q)
-        });
+        success(res, getQQWry(q));
     } else {
-        q = parseDomain(q);
-        if (q) {
-            q = q.domain + '.' + q.tld;
-            dns.lookup(q, 4, function (err, addr) {
+
+        var parsed = parseDomain(req.params.q);
+
+        if (parsed) {
+            q = parsed.domain + '.' + parsed.tld;
+
+            var key = 'api/ip/' + q;
+
+            cache.get(key, function (err, entries) {
                 if (err) {
-                    res.json({
-                        status: 'fail',
-                        data: err
-                    });
+                    fail(res, err);
                 } else {
 
-                    var data = getQQWry(addr);
+                    var body = entries[0] ? entries[0].body : null;
 
-                    res.json({
-                        status: 'success',
-                        data: data
-                    });
-                    model.create({
-                        body: JSON.stringify(data),
-                        key: 'api/ip/' + q,
-                        q: q
-                    });
+                    if (body) {
+                        success(res, getQQWry(body));
+                    } else {
+                        dns.lookup(q, 4, function (err, ip) {
+                            if (err) {
+                                fail(res, err);
+                            } else {
+                                success(res, getQQWry(ip));
+                                cache.add(key, ip, {
+                                    expire: 3600 * 24
+                                }, function () {
+                                    model.create({
+                                        body: ip,
+                                        key: key,
+                                        q: q
+                                    });
+                                });
+                            }
+                        });
+                    }
+
                 }
             });
         } else {
-            res.json({
-                status: 'error',
-                message: '参数错误'
-            });
+            error(res);
         }
     }
 };
