@@ -72,11 +72,14 @@ exports.baidu = function (req, res) {
                         default:
                             url += cmd + '%3A' + q;
                     }
-                    needle.get(url + periodParams, function (err, data) {
-                        if (err || data.statusCode !== 200) {
+                    needle.get(url + periodParams, function (err, result) {
+
+                        var data = null;
+
+                        if (err || result.statusCode !== 200) {
                             fail(res, err);
                         } else {
-                            $ = cheerio.load(data.body);
+                            $ = cheerio.load(result.body);
                             if (cmd === 'cached') {
                                 data = _.trim($('span.g').first().text());
                                 if (new RegExp('^(www.)?' + q + '\/').test(data)) {
@@ -109,7 +112,7 @@ exports.baidu = function (req, res) {
                                 model.create({
                                     body: data,
                                     key: key,
-                                    name: q
+                                    q: q
                                 });
                             });
                         }
@@ -146,11 +149,14 @@ exports.haosou = function (req, res) {
 
                     var url = 'http://www.haosou.com/s?q=' + cmd + '%3A' + q;
 
-                    needle.get(url, function (err, data) {
-                        if (err || data.statusCode !== 200) {
+                    needle.get(url, function (err, result) {
+
+                        var data = null;
+
+                        if (err || result.statusCode !== 200) {
                             fail(res, err);
                         } else {
-                            $ = cheerio.load(data.body);
+                            $ = cheerio.load(result.body);
                             data = $('.nums').text();
                             data = _.trim(data.replace(/[\u4e00-\u9fa5]+/g, '')) || '0';
                             cache.add(key, data, {
@@ -160,7 +166,7 @@ exports.haosou = function (req, res) {
                                 model.create({
                                     body: data,
                                     key: key,
-                                    name: q
+                                    q: q
                                 });
                             });
                         }
@@ -197,11 +203,14 @@ exports.sogou = function (req, res) {
 
                     var url = 'http://www.sogou.com/web?query=' + cmd + '%3A' + q;
 
-                    needle.get(url, function (err, data) {
-                        if (err || data.statusCode !== 200) {
+                    needle.get(url, function (err, result) {
+
+                        var data = null;
+
+                        if (err || result.statusCode !== 200) {
                             fail(res, err);
                         } else {
-                            $ = cheerio.load(data.body);
+                            $ = cheerio.load(result.body);
                             data = $('#scd_num').text() || '0';
                             cache.add(key, data, {
                                 expire: 3600 * 24
@@ -210,7 +219,7 @@ exports.sogou = function (req, res) {
                                 model.create({
                                     body: data,
                                     key: key,
-                                    name: q
+                                    q: q
                                 });
                             });
                         }
@@ -245,13 +254,16 @@ exports.google = function (req, res) {
                     success(res, body);
                 } else {
 
-                    var url = 'http://64.233.169.103/search?q=' + cmd + '%3A' + q + '&hl=zh_CN';
+                    var url = 'http://61.219.131.118/search?q=' + cmd + '%3A' + q + '&hl=zh_CN';
 
-                    needle.get(url, function (err, data) {
-                        if (err || data.statusCode !== 200) {
+                    needle.get(url, function (err, result) {
+
+                        var data = null;
+
+                        if (err || result.statusCode !== 200) {
                             fail(res, err);
                         } else {
-                            $ = cheerio.load(data.body);
+                            $ = cheerio.load(result.body);
                             data = $('#resultStats').text().split(' ');
                             data = data[1] ? data[1] : '0';
                             cache.add(key, data, {
@@ -261,7 +273,7 @@ exports.google = function (req, res) {
                                 model.create({
                                     body: data,
                                     key: key,
-                                    name: q
+                                    q: q
                                 });
                             });
                         }

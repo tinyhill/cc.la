@@ -61,7 +61,7 @@
                 },
                 success: function (data) {
                     if (data.status === 'success') {
-                        body.html('<div class="result">' + data.data + '</div>');
+                        body.html('<div class="result">' + data.data.raw + '</div>');
                     } else {
                         body.html('查询失败，<a href="javascript:;" id="retry">点此重试</a>');
                     }

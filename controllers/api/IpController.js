@@ -28,14 +28,16 @@ exports.index = function (req, res) {
         q = parseDomain(q);
         if (q) {
             q = q.domain + '.' + q.tld;
-            dns.lookup(q, 4, function (err, data) {
+            dns.lookup(q, 4, function (err, addr) {
                 if (err) {
                     res.json({
                         status: 'fail',
                         data: err
                     });
                 } else {
-                    data = getQQWry(data);
+
+                    var data = getQQWry(addr);
+
                     res.json({
                         status: 'success',
                         data: data
@@ -43,7 +45,7 @@ exports.index = function (req, res) {
                     model.create({
                         body: JSON.stringify(data),
                         key: 'api/ip/' + q,
-                        name: q
+                        q: q
                     });
                 }
             });

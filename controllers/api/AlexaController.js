@@ -86,14 +86,17 @@ exports.index = function (req, res) {
                         if (err) {
                             fail(res, err);
                         } else {
-                            cache.add(key, JSON.stringify(data), {
+
+                            var body = JSON.stringify(data);
+
+                            cache.add(key, body, {
                                 expire: 3600 * 24
                             }, function () {
                                 success(res, data);
                                 model.create({
-                                    body: JSON.stringify(data),
+                                    body: body,
                                     key: key,
-                                    name: q
+                                    q: q
                                 });
                             });
                         }

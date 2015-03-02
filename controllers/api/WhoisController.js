@@ -6,9 +6,13 @@ var _ = require('lodash');
 var model = require('../../models/WhoisModel');
 
 function success(res, data) {
+
+    var raw = data.raw;
+
+    data.raw = _.trim(raw).replace(/(\n|\r\n)/g, '<br>');
     res.send({
         status: 'success',
-        data: _.trim(data).replace(/(\n|\r\n)/g, '<br>')
+        data: data
     });
 }
 
@@ -43,20 +47,26 @@ exports.index = function (req, res) {
                 var body = entries[0] ? entries[0].body : null;
 
                 if (body) {
-                    success(res, body);
+                    success(res, JSON.parse(body));
                 } else {
-                    whois.lookup(q, function (err, data) {
+                    whois.lookup(q, function (err, raw) {
                         if (err) {
                             fail(res, err);
                         } else {
-                            cache.add(key, data, {
+
+                            var data = {
+                                raw: raw
+                            };
+                            var body = JSON.stringify(data);
+
+                            success(res, data);
+                            cache.add(key, body, {
                                 expire: 3600 * 24 * 30
                             }, function () {
-                                success(res, data);
                                 model.create({
-                                    body: data,
+                                    body: body,
                                     key: key,
-                                    name: q
+                                    q: q
                                 });
                             });
                         }
