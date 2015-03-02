@@ -37,6 +37,22 @@ $ npm install pm2 -g
 $ export NODE_ENV=production
 ```
 
+## 清理 redis
+
+```
+$ cd /usr/local/redis/bin
+$ ./redis-cli
+$ FLUSHALL
+```
+
+## 清理 mongodb
+
+```
+$ mongo
+$ use cc_la
+$ db.dropDatabase()
+```
+
 ## 启动
 
 ```
