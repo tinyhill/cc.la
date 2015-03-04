@@ -27,7 +27,7 @@ gulp.task('js', function () {
     gulp.src([
         bower + 'jquery/dist/jquery.js',
         bower + 'bootstrap/dist/js/bootstrap.js',
-        assets + 'javascripts/*.js'
+        assets + 'javascripts/global.js'
     ])
         .pipe(concat('global.js'))
         .pipe(uglify())
