@@ -40,11 +40,21 @@ gulp.task('respond', function () {
         .pipe(gulp.dest(build + 'javascripts'));
 });
 
+gulp.task('anti-ie', function () {
+    gulp.src(assets + 'stylesheets/anti-ie.css')
+        .pipe(minify())
+        .pipe(gulp.dest(build + 'stylesheets'));
+    gulp.src(assets + 'javascripts/anti-ie.js')
+        .pipe(uglify())
+        .pipe(gulp.dest(build + 'javascripts'));
+});
+
 gulp.task('default', [
     'css',
     'fonts',
     'js',
-    'respond'
+    'respond',
+    'anti-ie'
 ]);
 
 gulp.watch([
