@@ -1,7 +1,4 @@
 (function(){
-  if (/anti_ie_do_not_remind=1/.test(document.cookie)) {
-    return;
-  }
   var html = [
     '<div class="anti-ie-mask">',
       '<div class="anti-ie-dialog" id="anti-ie-dialog">',
@@ -44,7 +41,6 @@
           '</p>',
         '</div>',
         '<div class="anti-ie-btn-ctnr">',
-          '<input type="checkbox" id="anti-ie-remind"><label for="anti-ie-remind">30天内不再提醒我</label>&nbsp;&nbsp;',
           '<a class="anti-ie-btn anti-ie-btn-cancel" id="anti-ie-keep-ie" href="javascript:void(0);">继续用低版本IE浏览（不推荐）</a>&nbsp;&nbsp;',
           '<a class="anti-ie-btn" id="anti-ie-try-new" href="http://www.google.cn/chrome/browser/desktop/index.html" target="_blank">下载Chrome试试</a>',
         '</div>',
@@ -103,19 +99,11 @@
       }
     }
 
-    remindChk = document.getElementById('anti-ie-remind');
     cancelBtn = document.getElementById('anti-ie-keep-ie');
 
     cancelBtn.attachEvent('onclick', function(){
-      var isRemindChecked = !!remindChk.getAttribute('checked');
-      if (isRemindChecked) {
-        var date = new Date();
-        date.setDate(date.getDate() + 30);
-        document.cookie = 'anti_ie_do_not_remind=1;expires=' + date.toGMTString();
-      }
       divNode.style.display = 'none';
     });
-    document.cookie = 'anti_ie_do_not_remind=1';
   });
 
   cssNode.setAttribute('rel' , 'stylesheet');
