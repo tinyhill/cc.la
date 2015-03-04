@@ -17,7 +17,7 @@
             '为了您的良好浏览体验，请安装以下浏览器：',
           '</p>',
           '<div class="anti-ie-para">',
-            '<a class="anti-ie-browser-link" href="http://www.google.cn/chrome" target="_blank" hidefocus>',
+            '<a class="anti-ie-browser-link" href="http://www.google.cn/chrome/browser/desktop/index.html" target="_blank" hidefocus>',
               '<i class="anti-ie-browser-icon anti-ie-browser-icon-chrome"></i>',
               'Chrome浏览器',
             '</a>',
@@ -46,7 +46,7 @@
         '<div class="anti-ie-btn-ctnr">',
           '<input type="checkbox" id="anti-ie-remind"><label for="anti-ie-remind">30天内不再提醒我</label>&nbsp;&nbsp;',
           '<a class="anti-ie-btn anti-ie-btn-cancel" id="anti-ie-keep-ie" href="javascript:void(0);">继续用低版本IE浏览（不推荐）</a>&nbsp;&nbsp;',
-          '<a class="anti-ie-btn" id="anti-ie-try-new" href="http://www.google.cn/chrome" target="_blank">下载Chrome试试</a>',
+          '<a class="anti-ie-btn" id="anti-ie-try-new" href="http://www.google.cn/chrome/browser/desktop/index.html" target="_blank">下载Chrome试试</a>',
         '</div>',
       '</div>',
     '</div>'
