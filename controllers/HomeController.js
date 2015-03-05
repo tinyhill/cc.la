@@ -1,5 +1,6 @@
 var parseDomain = require('parse-domain');
-var qqwry = require('lib-qqwry').info();
+var path = require('path');
+var qqwry = require('lib-qqwry').info(path.join(__dirname, '../data/qqwry/qqwry.dat'));
 var uaParser = require('ua-parser');
 
 function getClientIp(req) {
