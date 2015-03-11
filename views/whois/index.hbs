@@ -1,10 +1,5 @@
 <div class="main whois">
     <div class="hd">
-        {{#if touched}}
-            <div class="refresh">
-                缓存时间：{{touched}}<a href="javascript:;" id="refresh">强制更新</a>
-            </div>
-        {{/if}}
         <dl class="related clearfix">
             <dt>相关查询：</dt>
             <dd><a href="/whois/reverse/domain{{#if q}}/{{q}}{{/if}}">按域名反查</a></dd>
@@ -15,8 +10,13 @@
     <div class="bd">
         <div class="panel panel-default">
             <div class="panel-heading">注册商记录</div>
-            <div class="panel-body" id="body">
-                <div class="body">
+            <div class="panel-body">
+                {{#if touched}}
+                    <div class="refresh">
+                        缓存时间：{{touched}}<a href="javascript:;" id="refresh">强制更新</a>
+                    </div>
+                {{/if}}
+                <div class="body" id="body">
                     {{body}}
                 </div>
             </div>
