@@ -18,7 +18,7 @@
     float: left;
     margin-bottom: 0;
     padding-left: 0;
-    li {
+    > li {
       float: left;
       list-style: none;
       margin-right: 20px;
@@ -31,15 +31,16 @@
         color: #009A61;
       }
     }
-  }
-  .tool-more {
-    float: left;
-    position: relative;
-    .dropdown-menu {
-      min-width: 100px;
-      top: 35px;
-      a {
-        color: #666;
+    .more {
+      float: left;
+      height: 44px;
+      position: relative;
+      .dropdown-menu {
+        min-width: 100px;
+        top: 35px;
+        a {
+          color: #666;
+        }
       }
     }
   }
@@ -47,10 +48,20 @@
 
 @media (max-width: 767px) {
   .toolbar {
-    overflow-x: scroll;
-    overflow-y: hidden;
+    position: relative;
     .container {
-      width: 406px;
+      overflow-x: scroll;
+      overflow-y: hidden;
+      .tool-nav {
+        width: 397px;
+        .more {
+          position: inherit;
+          .dropdown-menu {
+            left: auto;
+            right: 15px;
+          }
+        }
+      }
     }
   }
 }
