@@ -10,12 +10,12 @@ var build = './public/';
 
 gulp.task('css', function () {
     gulp.src([
-        assets + 'stylesheets/global.less'
+        assets + 'less/global.less'
     ])
         .pipe(less())
         .pipe(concat('global.css'))
         .pipe(minify())
-        .pipe(gulp.dest(build + 'stylesheets'));
+        .pipe(gulp.dest(build + 'css'));
 });
 
 gulp.task('fonts', function () {
@@ -31,29 +31,29 @@ gulp.task('js', function () {
     ])
         .pipe(concat('global.js'))
         .pipe(uglify())
-        .pipe(gulp.dest(build + 'javascripts'));
+        .pipe(gulp.dest(build + 'js'));
 });
 
-gulp.task('respond', function () {
+gulp.task('js:respond', function () {
     gulp.src(bower + 'respond/src/respond.js')
         .pipe(uglify())
-        .pipe(gulp.dest(build + 'javascripts'));
+        .pipe(gulp.dest(build + 'js'));
 });
 
 gulp.task('default', [
     'css',
     'fonts',
     'js',
-    'respond'
+    'js:respond'
 ]);
 
-gulp.watch([
-    assets + 'stylesheets/*.less',
-    assets + 'stylesheets/*/*.less'
-], [
-    'css'
-]);
-
-gulp.watch(assets + 'javascripts/*.js', [
-    'js'
-]);
+gulp.task('watch', function () {
+    gulp.watch([
+        assets + 'less/*.less',
+        assets + 'less/*/*.less',
+        assets + 'js/*.js'
+    ], [
+        'css',
+        'js'
+    ]);
+});

@@ -13,9 +13,14 @@ var api = require('./routes/api');
 
 var app = express();
 
+hbs.registerPartials(__dirname + '/views/partials');
+hbsHelper.help(hbs);
+
+// settings
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
+// middlewares
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -24,6 +29,7 @@ app.use(cookieParser());
 app.use(compression());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// routes
 app.use('/', routes);
 app.use('/api', api);
 
@@ -55,9 +61,5 @@ app.use(function (err, req, res, next) {
         error: {}
     });
 });
-
-// hbs
-hbs.registerPartials(__dirname + '/views/partials');
-hbsHelper.help(hbs);
 
 module.exports = app;
