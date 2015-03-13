@@ -45,16 +45,16 @@ exports.index = function (req, res) {
                     success(res, body);
                 } else {
                     PageRank.HOST = 'toolbarqueries.google.com.hk';
-                    PageRank.get(q, function (err, rank) {
-                        if (err || rank === null) {
+                    PageRank.get(q, function (err, data) {
+                        if (err || data === null) {
                             fail(res, err);
                         } else {
-                            success(res, rank);
-                            cache.add(key, rank, {
+                            success(res, data);
+                            cache.add(key, data, {
                                 expire: 3600 * 24 * 30
                             }, function () {
                                 model.create({
-                                    body: rank,
+                                    body: data,
                                     key: key,
                                     q: q
                                 });
