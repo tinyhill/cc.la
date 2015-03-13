@@ -64,16 +64,16 @@ exports.index = function (req, res) {
                     if (body) {
                         success(res, getQQWry(body));
                     } else {
-                        dns.lookup(q, 4, function (err, ip) {
+                        dns.lookup(q, 4, function (err, data) {
                             if (err) {
                                 fail(res, err);
                             } else {
-                                success(res, getQQWry(ip));
-                                cache.add(key, ip, {
+                                success(res, getQQWry(data));
+                                cache.add(key, data, {
                                     expire: 3600 * 24
                                 }, function () {
                                     model.create({
-                                        body: ip,
+                                        body: data,
                                         key: key,
                                         q: q
                                     });
