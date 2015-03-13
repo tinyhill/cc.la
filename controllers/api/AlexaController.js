@@ -30,10 +30,10 @@ function alexa(url, cb) {
 
     url = 'http://data.alexa.com/data?cli=10&url=' + url;
 
-    request(url, function (err, data, body) {
+    request(url, function (err, resp, body) {
         if (err) {
             cb(new Error('Not Reached'));
-        } else if (data.statusCode !== 200) {
+        } else if (resp.statusCode !== 200) {
             cb(new Error('Not Fetched'));
         } else {
             xml2js.parseString(body, {
