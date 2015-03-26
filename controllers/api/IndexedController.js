@@ -256,7 +256,9 @@ exports.google = function (req, res) {
 
                     var url = 'http://216.58.220.220/search?q=' + cmd + '%3A' + q + '&hl=zh_CN';
 
-                    needle.get(url, function (err, resp, body) {
+                    needle.get(url, {
+                        proxy: '192.155.83.76:9999'
+                    }, function (err, resp, body) {
 
                         var data = null;
 
