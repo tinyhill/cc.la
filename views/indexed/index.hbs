@@ -128,7 +128,7 @@
             var periodKey = period ? '/' + period : '';
 
             $.ajax({
-                url: '/api/indexed/' + search + '/{{q}}' + periodKey,
+                url: '/api/indexed/{{q}}/' + search + periodKey,
                 beforeSend: function () {
                     target.html('');
                     target.addClass('loading');
