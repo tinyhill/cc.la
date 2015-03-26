@@ -1,0 +1,127 @@
+<div class="main link">
+    <div class="hd">
+        <dl class="related clearfix">
+            <dt>相关查询：</dt>
+            <dd><a href="javascript:;">暂无</a></dd>
+        </dl>
+    </div>
+    <div class="bd">
+        <div class="panel panel-default">
+            <div class="panel-heading">查询结果</div>
+            {{#if q}}
+                <table class="table table-bordered table-responsive">
+                    <thead>
+                    <tr>
+                        <td colspan="3">
+                            <ul class="clearfix">
+                                <li>出站链接：<span class="count" id="count-external" style="color:green"></span></li>
+                                <li>图片链接：<span class="count" id="count-image" style="color:red"></span></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    </thead>
+                    <tbody id="body">
+                    <tr>
+                        <th width="10%">序号</th>
+                        <th width="40%">链接信息</th>
+                        <th width="40%">反链情况</th>
+                    </tr>
+                    </tbody>
+                </table>
+            {{else}}
+                <div class="panel-body">
+                    <div class="body">
+                        {{body}}
+                    </div>
+                </div>
+            {{/if}}
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">查询说明</div>
+            <div class="panel-body">
+                友链检查工具，可以查询指定网站的友情链接是否链至本站，可以识破欺骗链接。
+            </div>
+        </div>
+    </div>
+</div>
+{{#if q}}
+    <script>
+        var body = $('#body');
+
+        function request(el) {
+
+            var target = $(el);
+            var link = target.attr('data-link');
+
+            $.ajax({
+                url: '/api/link/backlink/{{q}}/' + link,
+                beforeSend: function () {
+                    target.html('');
+                    target.addClass('loading');
+                },
+                complete: function () {
+                    target.removeClass('loading');
+                },
+                success: function (data) {
+                    if (data.status === 'success') {
+                        target.html(data.data);
+                        target.removeClass('retry');
+                    } else {
+                        target.html('重查');
+                        target.addClass('retry');
+                    }
+                },
+                error: function () {
+                    target.html('--');
+                },
+                dataType: 'json'
+            });
+        }
+
+        $.ajax({
+            url: '/api/link/{{q}}',
+            beforeSend: function () {
+
+                $('.count').addClass('loading');
+
+                body.append('<tr id="loading">' +
+                '<td colspan="3" class="text-center"><span class="loading"></span></td>' +
+                '</tr>');
+            },
+            complete: function () {
+
+                $('.count').removeClass('loading');
+
+                $('#loading').remove();
+            },
+            success: function (data) {
+
+                var idx = 0;
+                var img = 0;
+
+                $.each(data.data, function (k, v) {
+                    idx = idx + 1;
+                    if (v.text === '图片链接') {
+                        img = img + 1;
+                    }
+                    body.append('<tr><td class="text-center">' + idx + '</td>' +
+                    '<td class="text-muted"><a href="' + v.href + '" target="_blank">' + v.text + '</a><br>' + k + '</td>' +
+                    '<td class="text-muted"><span id="link' + idx + '" data-link="' + k + '"></span></td></tr>');
+                    request('#link' + idx);
+                });
+
+                $('#count-external').html(idx);
+                $('#count-image').html(img);
+
+            },
+            error: function () {
+                alert(111);
+            }
+        });
+
+        $('.table').delegate('.retry', 'click', function (e) {
+            e.preventDefault();
+            request(this);
+        });
+    </script>
+{{/if}}

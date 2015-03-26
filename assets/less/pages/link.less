@@ -1,0 +1,35 @@
+//
+// Link
+// --------------------------------------------------
+
+.link {
+  .bd {
+    .table {
+      thead {
+        ul {
+          margin: 0;
+          padding: 7px 0;
+          text-align: center;
+          li {
+            display: inline;
+            list-style: none;
+            padding: 0 5px;
+          }
+        }
+      }
+      tbody {
+        th {
+          text-align: center;
+        }
+        .retry {
+          color: @link-color;
+          cursor: pointer;
+          &:hover {
+            color: @link-hover-color;
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}

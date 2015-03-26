@@ -7,6 +7,7 @@ var AboutController = require('../controllers/AboutController');
 var AlexaController = require('../controllers/AlexaController');
 var IndexedController = require('../controllers/IndexedController');
 var IpController = require('../controllers/IpController');
+var LinkController = require('../controllers/LinkController');
 var PrController = require('../controllers/PrController');
 var WhoisController = require('../controllers/WhoisController');
 
@@ -22,6 +23,8 @@ router.get('/indexed', IndexedController.index);
 router.get('/indexed/:q', IndexedController.index);
 router.get('/ip', IpController.index);
 router.get('/ip/:q', IpController.index);
+router.get('/link', LinkController.index);
+router.get('/link/:q', LinkController.index);
 router.get('/pr', PrController.index);
 router.get('/pr/:q', PrController.index);
 router.get('/whois', WhoisController.index);

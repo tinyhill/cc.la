@@ -1,12 +1,13 @@
 {
   "name": "cc.la",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.10.1",
+    "charset": "^1.0.0",
     "cheerio": "^0.18.0",
     "compression": "^1.3.0",
     "cookie-parser": "~1.3.3",
@@ -16,6 +17,7 @@
     "gulp-less": "~2.0.1",
     "handlebars-helper": "0.0.12",
     "hbs": "~2.8.0",
+    "iconv-lite": "^0.4.7",
     "ip": "~0.3.2",
     "is-ip": "^1.0.0",
     "lib-qqwry": "0.0.5",
@@ -24,13 +26,15 @@
     "mongoose": "~3.8.24",
     "mongoose-timestamp": "^0.4.0",
     "morgan": "~1.5.1",
-    "needle": "^0.7.11",
+    "needle": "^0.8.2",
     "node-whois": "^2.1.0",
     "pagerank": "~1.2.0",
     "parse-domain": "~0.1.2",
     "request": "^2.53.0",
+    "robots": "~0.9.4",
     "serve-favicon": "~2.2.0",
     "ua-parser": "^0.3.5",
+    "url": "~0.10.3",
     "xml2js": "^0.4.5"
   },
   "devDependencies": {
