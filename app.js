@@ -16,7 +16,7 @@ var app = express();
 hbs.registerPartials(__dirname + '/views/partials');
 hbsHelper.help(hbs);
 
-// settings
+// views
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 

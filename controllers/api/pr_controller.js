@@ -2,7 +2,7 @@ var cache = require('express-redis-cache')();
 var PageRank = require('pagerank');
 var parseDomain = require('parse-domain');
 
-var model = require('../../models/PrModel');
+var model = require('../../models/pr_model');
 
 function success(res, data) {
     res.send({

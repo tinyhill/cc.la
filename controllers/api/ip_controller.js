@@ -7,7 +7,7 @@ var path = require('path');
 var qqwry = require('lib-qqwry').info(path.join(__dirname, '../../data/qqwry/qqwry.dat'));
 
 
-var model = require('../../models/IpModel');
+var model = require('../../models/ip_model');
 
 function getQQWry(ip) {
 

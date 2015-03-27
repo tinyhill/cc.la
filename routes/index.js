@@ -1,33 +1,33 @@
 var express = require('express');
 var router = express.Router();
 
-var HomeController = require('../controllers/HomeController');
-var AboutController = require('../controllers/AboutController');
+var homeController = require('../controllers/home_controller');
+var aboutController = require('../controllers/about_controller');
 
-var AlexaController = require('../controllers/AlexaController');
-var IndexedController = require('../controllers/IndexedController');
-var IpController = require('../controllers/IpController');
-var LinkController = require('../controllers/LinkController');
-var PrController = require('../controllers/PrController');
-var WhoisController = require('../controllers/WhoisController');
+var alexaController = require('../controllers/alexa_controller');
+var indexedController = require('../controllers/indexed_controller');
+var ipController = require('../controllers/ip_controller');
+var linkController = require('../controllers/link_controller');
+var prController = require('../controllers/pr_controller');
+var whoisController = require('../controllers/whois_controller');
 
-router.get('/', HomeController.index);
-router.get('/about', AboutController.index);
-router.get('/contact', AboutController.contact);
-router.get('/help', AboutController.help);
-router.get('/links', AboutController.links);
+router.get('/', homeController.index);
+router.get('/about', aboutController.index);
+router.get('/contact', aboutController.contact);
+router.get('/help', aboutController.help);
+router.get('/links', aboutController.links);
 
-router.get('/alexa', AlexaController.index);
-router.get('/alexa/:q', AlexaController.index);
-router.get('/indexed', IndexedController.index);
-router.get('/indexed/:q', IndexedController.index);
-router.get('/ip', IpController.index);
-router.get('/ip/:q', IpController.index);
-router.get('/link', LinkController.index);
-router.get('/link/:q', LinkController.index);
-router.get('/pr', PrController.index);
-router.get('/pr/:q', PrController.index);
-router.get('/whois', WhoisController.index);
-router.get('/whois/:q', WhoisController.index);
+router.get('/alexa', alexaController.index);
+router.get('/alexa/:q', alexaController.index);
+router.get('/indexed', indexedController.index);
+router.get('/indexed/:q', indexedController.index);
+router.get('/ip', ipController.index);
+router.get('/ip/:q', ipController.index);
+router.get('/link', linkController.index);
+router.get('/link/:q', linkController.index);
+router.get('/pr', prController.index);
+router.get('/pr/:q', prController.index);
+router.get('/whois', whoisController.index);
+router.get('/whois/:q', whoisController.index);
 
 module.exports = router;

@@ -3,7 +3,7 @@ var parseDomain = require('parse-domain');
 var whois = require('node-whois');
 var _ = require('lodash');
 
-var model = require('../../models/WhoisModel');
+var model = require('../../models/whois_model');
 
 function success(res, data) {
 

@@ -4,7 +4,8 @@ var parseDomain = require('parse-domain');
 var cheerio = require('cheerio');
 var _ = require('lodash');
 
-var model = require('../../models/IndexedModel');
+var model = require('../../models/indexed_model');
+var proxyServer = require('../../config/proxy_server');
 
 function success(res, data) {
     res.send({
@@ -257,7 +258,7 @@ exports.google = function (req, res) {
                     var url = 'http://216.58.220.220/search?q=' + cmd + '%3A' + q + '&hl=zh_CN';
 
                     needle.get(url, {
-                        proxy: '192.155.83.76:9999'
+                        proxy: proxyServer.tokyo
                     }, function (err, resp, body) {
 
                         var data = null;

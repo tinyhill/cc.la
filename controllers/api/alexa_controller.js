@@ -3,7 +3,7 @@ var parseDomain = require('parse-domain');
 var request = require('request');
 var xml2js = require('xml2js');
 
-var model = require('../../models/AlexaModel');
+var model = require('../../models/alexa_model');
 
 function success(res, data) {
     res.send({
