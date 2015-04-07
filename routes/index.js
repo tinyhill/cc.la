@@ -16,6 +16,9 @@ router.get('/about', aboutController.index);
 router.get('/contact', aboutController.contact);
 router.get('/help', aboutController.help);
 router.get('/links', aboutController.links);
+router.get('/sitemap', aboutController.sitemap);
+router.get('/sitemap', aboutController.sitemap);
+router.get('/sitemap/:id', aboutController.sitemap);
 
 router.get('/alexa', alexaController.index);
 router.get('/alexa/:q', alexaController.index);

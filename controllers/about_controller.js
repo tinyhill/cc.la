@@ -1,3 +1,6 @@
+var lineReader = require('line-reader');
+var path = require('path');
+
 exports.index = function (req, res) {
     res.render('about', {
         active: 'about',
@@ -32,4 +35,25 @@ exports.links = function (req, res) {
         title: '友情链接',
         q: req.cookies.q
     });
+};
+
+exports.sitemap = function (req, res) {
+
+    var id = req.params.id;
+    var data = {
+        id: id,
+        lines: []
+    };
+
+    if (id) {
+
+        var log = '../data/q/' + id.replace(/_/g, '/') + '.log';
+        var file = path.join(__dirname, log);
+
+        lineReader.eachLine(file, function (line) {
+            data.lines.push(line);
+        });
+    }
+
+    res.render('about/sitemap', data);
 };

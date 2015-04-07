@@ -1,0 +1,22 @@
+{{#if id}}
+{{else}}
+{{/if}}
+<div class="row about">
+    <h2>{{id}}</h2>
+    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-9">
+        <ul>
+            {{#lines}}
+                <li><a href="http://www.cc.la/indexed/{{.}}">http://www.cc.la/indexed/{{.}}</a></li>
+                <li><a href="http://www.cc.la/link/{{.}}">http://www.cc.la/link/{{.}}</a></li>
+                <li><a href="http://www.cc.la/alexa/{{.}}">http://www.cc.la/alexa/{{.}}</a></li>
+                <li><a href="http://www.cc.la/ip/{{.}}">http://www.cc.la/ip/{{.}}</a></li>
+                <li><a href="http://www.cc.la/pr/{{.}}">http://www.cc.la/pr/{{.}}</a></li>
+                <li><a href="http://www.cc.la/whois/{{.}}">http://www.cc.la/whois/{{.}}</a></li>
+            {{/lines}}
+        </ul>
+    </div>
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
+        <div class="list-group">123
+        </div>
+    </div>
+</div>
