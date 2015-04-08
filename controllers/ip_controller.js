@@ -22,6 +22,7 @@ exports.index = function (req, res) {
 
             if (parsed) {
                 data.q = parsed.domain + '.' + parsed.tld;
+                data.q = parsed.subdomain ? parsed.subdomain + '.' + data.q : data.q;
                 res.cookie('q', data.q);
                 res.render('ip', data);
             } else {

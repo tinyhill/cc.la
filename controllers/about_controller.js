@@ -1,5 +1,8 @@
+var fs = require('fs');
+var glob = require('glob');
 var lineReader = require('line-reader');
 var path = require('path');
+var _ = require('lodash');
 
 exports.index = function (req, res) {
     res.render('about', {
@@ -40,20 +43,32 @@ exports.links = function (req, res) {
 exports.sitemap = function (req, res) {
 
     var id = req.params.id;
-    var data = {
-        id: id,
-        lines: []
-    };
+    var data = {}, file;
 
     if (id) {
 
-        var log = '../data/q/' + id.replace(/_/g, '/') + '.log';
-        var file = path.join(__dirname, log);
+        file = path.join(__dirname, '../data/q/' + id.replace(/_/g, '/') + '.log');
+        data.id = id;
+        data.lines = [];
+        data.time =  id.replace(/_\d{2}$/g, '');
 
-        lineReader.eachLine(file, function (line) {
-            data.lines.push(line);
+        fs.exists(file, function (exists) {
+            if (exists) {
+                lineReader.eachLine(file, function (line) {
+                    data.lines.push(line);
+                }).then(function () {
+                    res.render('about/sitemap', data);
+                });
+            }
+        });
+    } else {
+
+        file = path.join(__dirname, '../data/q/*/*/*/*.log');
+        glob(file, function (err, files) {
+            _.each(files, function (v) {
+                data.lines.push(v.replace(/^(.*)\/data\/q\//, '').replace('.log', '').replace(/\//g, '_'));
+            });
+            res.render('about/sitemap', data);
         });
     }
-
-    res.render('about/sitemap', data);
 };
