@@ -43,15 +43,14 @@ exports.links = function (req, res) {
 exports.sitemap = function (req, res) {
 
     var id = req.params.id;
-    var data = {}, file;
+    var data = {lines: []};
+    var file = null;
 
     if (id) {
 
         file = path.join(__dirname, '../data/q/' + id.replace(/_/g, '/') + '.log');
         data.id = id;
-        data.lines = [];
-        data.time =  id.replace(/_\d{2}$/g, '');
-
+        data.time = id.replace(/_\d{2}$/g, '');
         fs.exists(file, function (exists) {
             if (exists) {
                 lineReader.eachLine(file, function (line) {
