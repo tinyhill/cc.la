@@ -225,10 +225,10 @@ exports.sogou = function (req, res) {
                             fail(res, err);
                         } else {
                             if (cmd === 'rank') {
+                                data = _.trim(body).replace('sogourank=', '');
+                            } else {
                                 $ = cheerio.load(body);
                                 data = $('#scd_num').text() || '0';
-                            } else {
-                                data = _.trim(body).replace('sogourank=', '');
                             }
                             success(res, data);
                             cache.add(key, data, {
