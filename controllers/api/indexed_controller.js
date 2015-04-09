@@ -191,11 +191,6 @@ exports.sogou = function (req, res) {
     var cmd = req.params.cmd;
     var parsed = parseDomain(q);
 
-    if (cmd === 'rank') {
-        this.sogou_rank(req, res);
-        return;
-    }
-
     if (parsed) {
         q = parsed.domain + '.' + parsed.tld;
         q = parsed.subdomain ? parsed.subdomain + '.' + q : q;
@@ -213,8 +208,15 @@ exports.sogou = function (req, res) {
                     success(res, body);
                 } else {
 
-                    var url = 'http://www.sogou.com/web?query=' + cmd + '%3A' + q;
+                    var url = 'http://';
 
+                    switch (cmd) {
+                        case 'rank':
+                            url += 'rank.ie.sogou.com/sogourank.php?ur=http://' + q + '/';
+                            break;
+                        default:
+                            url += 'www.sogou.com/web?query=' + cmd + '%3A' + q;
+                    }
                     needle.get(url, function (err, resp, body) {
 
                         var data = null;
@@ -222,8 +224,12 @@ exports.sogou = function (req, res) {
                         if (err || resp.statusCode !== 200) {
                             fail(res, err);
                         } else {
-                            $ = cheerio.load(body);
-                            data = $('#scd_num').text() || '0';
+                            if (cmd === 'rank') {
+                                $ = cheerio.load(body);
+                                data = $('#scd_num').text() || '0';
+                            } else {
+                                data = _.trim(body).replace('sogourank=', '');
+                            }
                             success(res, data);
                             cache.add(key, data, {
                                 expire: 3600 * 24
@@ -282,59 +288,6 @@ exports.google = function (req, res) {
                             $ = cheerio.load(body);
                             data = $('#resultStats').text().split(' ');
                             data = data[1] ? data[1] : '0';
-                            success(res, data);
-                            cache.add(key, data, {
-                                expire: 3600 * 24
-                            }, function () {
-                                model.create({
-                                    body: data,
-                                    key: key,
-                                    q: q
-                                });
-                            });
-                        }
-                    });
-                }
-
-            }
-        });
-    } else {
-        error(res);
-    }
-};
-
-exports.sogou_rank = function (req, res) {
-
-    var q = req.params.q;
-    var parsed = parseDomain(q);
-
-    if (parsed) {
-        q = parsed.domain + '.' + parsed.tld;
-        q = parsed.subdomain ? parsed.subdomain + '.' + q : q;
-
-        var key = 'api/indexed/sogou/rank/' + q;
-
-        cache.get(key, function (err, entries) {
-            if (err) {
-                fail(res, err);
-            } else {
-
-                var body = entries[0] ? entries[0].body : null;
-
-                if (body) {
-                    success(res, body);
-                } else {
-
-                    var url = 'http://rank.ie.sogou.com/sogourank.php?ur=http://' + q + '/';
-
-                    needle.get(url, function (err, resp, body) {
-
-                        var data = null;
-
-                        if (err || resp.statusCode !== 200) {
-                            fail(res, err);
-                        } else {
-                            data = _.trim(body).replace('sogourank=', '');
                             success(res, data);
                             cache.add(key, data, {
                                 expire: 3600 * 24
