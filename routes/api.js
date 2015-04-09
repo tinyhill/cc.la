@@ -18,6 +18,7 @@ router.get('/link/:q', linkController.index);
 router.get('/link/backlink/:q/:link', linkController.backlink);
 router.get('/link/backlink/:q/:link/:spider', linkController.backlink);
 router.get('/pr/:q', prController.index);
+router.get('/pr/sr/:q', prController.sr);
 router.get('/whois/:q', whoisController.index);
 router.get('/whois/refresh/:q', whoisController.refresh);
 

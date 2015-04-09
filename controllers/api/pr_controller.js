@@ -1,6 +1,8 @@
 var cache = require('express-redis-cache')();
+var needle = require('needle');
 var PageRank = require('pagerank');
 var parseDomain = require('parse-domain');
+var _ = require('lodash');
 
 var model = require('../../models/pr_model');
 
@@ -55,6 +57,60 @@ exports.index = function (req, res) {
                             success(res, data);
                             cache.add(key, data, {
                                 expire: 3600 * 24 * 30
+                            }, function () {
+                                model.create({
+                                    body: data,
+                                    key: key,
+                                    q: q
+                                });
+                            });
+                        }
+                    });
+                }
+
+            }
+        });
+    } else {
+        error(res);
+    }
+};
+
+exports.sr = function (req, res) {
+
+    var q = req.params.q;
+    var parsed = parseDomain(q);
+
+    if (parsed) {
+
+        q = parsed.domain + '.' + parsed.tld;
+        q = parsed.subdomain ? parsed.subdomain + '.' + q : q;
+
+        var key = 'api/pr/sr/' + q;
+
+        cache.get(key, function (err, entries) {
+            if (err) {
+                fail(res, err);
+            } else {
+
+                var body = entries[0] ? entries[0].body : null;
+
+                if (body) {
+                    success(res, body);
+                } else {
+
+                    var url = 'http://rank.ie.sogou.com/sogourank.php?ur=http://' + q + '/';
+
+                    needle.get(url, function (err, resp, body) {
+
+                        var data = null;
+
+                        if (err || resp.statusCode !== 200) {
+                            fail(res, err);
+                        } else {
+                            data = _.trim(body).replace('sogourank=', '');
+                            success(res, data);
+                            cache.add(key, data, {
+                                expire: 3600 * 24 * 7
                             }, function () {
                                 model.create({
                                     body: data,
