@@ -191,6 +191,11 @@ exports.sogou = function (req, res) {
     var cmd = req.params.cmd;
     var parsed = parseDomain(q);
 
+    if (cmd === 'rank') {
+        this.sogou_rank(req, res);
+        return;
+    }
+
     if (parsed) {
         q = parsed.domain + '.' + parsed.tld;
         q = parsed.subdomain ? parsed.subdomain + '.' + q : q;
@@ -298,7 +303,7 @@ exports.google = function (req, res) {
     }
 };
 
-exports.sr = function (req, res) {
+exports.sogou_rank = function (req, res) {
 
     var q = req.params.q;
     var parsed = parseDomain(q);
@@ -307,7 +312,7 @@ exports.sr = function (req, res) {
         q = parsed.domain + '.' + parsed.tld;
         q = parsed.subdomain ? parsed.subdomain + '.' + q : q;
 
-        var key = 'api/indexed/sr/' + q;
+        var key = 'api/indexed/sogou/rank/' + q;
 
         cache.get(key, function (err, entries) {
             if (err) {
