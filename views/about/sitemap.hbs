@@ -1,6 +1,6 @@
 <div class="row about">
-    {{#if id}}
-        <div class="col-xs-12 col-sm-8 col-md-8 col-lg-9">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        {{#if id}}
             <h2>{{id}}</h2>
             <br>
             <ul>
@@ -13,43 +13,7 @@
                     <li><a href="http://www.cc.la/whois/{{.}}">http://www.cc.la/whois/{{.}}</a></li>
                 {{/lines}}
             </ul>
-        </div>
-        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
-            <div class="list-group">
-                <a href="/sitemap/{{time}}_00" class="list-group-item">{{time}}_00</a>
-                <a href="/sitemap/{{time}}_01" class="list-group-item">{{time}}_01</a>
-                <a href="/sitemap/{{time}}_02" class="list-group-item">{{time}}_02</a>
-                <a href="/sitemap/{{time}}_03" class="list-group-item">{{time}}_03</a>
-                <a href="/sitemap/{{time}}_04" class="list-group-item">{{time}}_04</a>
-                <a href="/sitemap/{{time}}_05" class="list-group-item">{{time}}_05</a>
-                <a href="/sitemap/{{time}}_06" class="list-group-item">{{time}}_06</a>
-                <a href="/sitemap/{{time}}_07" class="list-group-item">{{time}}_07</a>
-                <a href="/sitemap/{{time}}_08" class="list-group-item">{{time}}_08</a>
-                <a href="/sitemap/{{time}}_09" class="list-group-item">{{time}}_09</a>
-                <a href="/sitemap/{{time}}_10" class="list-group-item">{{time}}_10</a>
-                <a href="/sitemap/{{time}}_11" class="list-group-item">{{time}}_11</a>
-                <a href="/sitemap/{{time}}_12" class="list-group-item">{{time}}_12</a>
-                <a href="/sitemap/{{time}}_13" class="list-group-item">{{time}}_13</a>
-                <a href="/sitemap/{{time}}_14" class="list-group-item">{{time}}_14</a>
-                <a href="/sitemap/{{time}}_15" class="list-group-item">{{time}}_15</a>
-                <a href="/sitemap/{{time}}_16" class="list-group-item">{{time}}_16</a>
-                <a href="/sitemap/{{time}}_17" class="list-group-item">{{time}}_17</a>
-                <a href="/sitemap/{{time}}_18" class="list-group-item">{{time}}_18</a>
-                <a href="/sitemap/{{time}}_19" class="list-group-item">{{time}}_19</a>
-                <a href="/sitemap/{{time}}_20" class="list-group-item">{{time}}_20</a>
-                <a href="/sitemap/{{time}}_21" class="list-group-item">{{time}}_21</a>
-                <a href="/sitemap/{{time}}_22" class="list-group-item">{{time}}_22</a>
-                <a href="/sitemap/{{time}}_23" class="list-group-item">{{time}}_23</a>
-                <a href="/sitemap/{{time}}_24" class="list-group-item">{{time}}_24</a>
-                <a href="/sitemap/{{time}}_25" class="list-group-item">{{time}}_25</a>
-                <a href="/sitemap/{{time}}_26" class="list-group-item">{{time}}_26</a>
-                <a href="/sitemap/{{time}}_27" class="list-group-item">{{time}}_27</a>
-                <a href="/sitemap/{{time}}_28" class="list-group-item">{{time}}_28</a>
-                <a href="/sitemap/{{time}}_29" class="list-group-item">{{time}}_29</a>
-            </div>
-        </div>
-    {{else}}
-        <div class="col-xs-12 col-sm-8 col-md-8 col-lg-9">
+        {{else}}
             <h2>网站地图</h2>
             <br>
             <ul>
@@ -57,7 +21,6 @@
                     <li><a href="http://www.cc.la/sitemap/{{.}}">http://www.cc.la/sitemap/{{.}}</a></li>
                 {{/lines}}
             </ul>
-        </div>
-        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3"></div>
-    {{/if}}
+        {{/if}}
+    </div>
 </div>

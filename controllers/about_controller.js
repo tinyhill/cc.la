@@ -42,15 +42,14 @@ exports.links = function (req, res) {
 
 exports.sitemap = function (req, res) {
 
-    var id = req.params.id;
-    var data = {lines: []};
+    var data = {
+        id: req.params.id,
+        lines: []
+    };
     var file = null;
 
-    if (id) {
-
-        file = path.join(__dirname, '../data/q/' + id.replace(/_/g, '/') + '.log');
-        data.id = id;
-        data.time = id.replace(/_\d{2}$/g, '');
+    if (data.id) {
+        file = path.join(__dirname, '../data/q/' + data.id.replace(/_/g, '/') + '.log');
         fs.exists(file, function (exists) {
             if (exists) {
                 lineReader.eachLine(file, function (line) {
@@ -61,7 +60,6 @@ exports.sitemap = function (req, res) {
             }
         });
     } else {
-
         file = path.join(__dirname, '../data/q/*/*/*/*.log');
         glob(file, function (err, files) {
             _.each(files, function (v) {
