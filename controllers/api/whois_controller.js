@@ -37,9 +37,9 @@ exports.index = function (req, res) {
 
     if (parsed) {
         q = parsed.domain + '.' + parsed.tld;
-        q = parsed.subdomain ? parsed.subdomain + '.' + q : q;
 
-        var key = 'api/whois/' + q;
+        var _q = parsed.subdomain ? parsed.subdomain + '.' + q : q;
+        var key = 'api/whois/' + _q;
 
         cache.get(key, function (err, entries) {
             if (err) {
@@ -68,7 +68,7 @@ exports.index = function (req, res) {
                                 model.create({
                                     body: body,
                                     key: key,
-                                    q: q
+                                    q: _q
                                 });
                             });
                         }
