@@ -32,11 +32,13 @@ function error(res) {
 
 exports.index = function (req, res) {
 
-    var parsed = parseDomain(req.params.q);
+    var q = req.params.q;
+    var parsed = parseDomain(q);
 
     if (parsed) {
+        q = parsed.domain + '.' + parsed.tld;
+        q = parsed.subdomain ? parsed.subdomain + '.' + q : q;
 
-        var q = parsed.domain + '.' + parsed.tld;
         var key = 'api/whois/' + q;
 
         cache.get(key, function (err, entries) {
@@ -81,11 +83,12 @@ exports.index = function (req, res) {
 
 exports.refresh = function (req, res) {
 
-    var parsed = parseDomain(req.params.q);
+    var q = req.params.q;
+    var parsed = parseDomain(q);
 
     if (parsed) {
-
-        var q = parsed.domain + '.' + parsed.tld;
+        q = parsed.domain + '.' + parsed.tld;
+        q = parsed.subdomain ? parsed.subdomain + '.' + q : q;
 
         cache.del('api/whois/' + q, function (err, deletions) {
             if (err) {
