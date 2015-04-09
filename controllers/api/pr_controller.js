@@ -27,11 +27,14 @@ function error(res) {
 
 exports.index = function (req, res) {
 
-    var parsed = parseDomain(req.params.q);
+    var q = req.params.q;
+    var parsed = parseDomain(q);
 
     if (parsed) {
 
-        var q = parsed.domain + '.' + parsed.tld;
+        q = parsed.domain + '.' + parsed.tld;
+        q = parsed.subdomain ? parsed.subdomain + '.' + q : q;
+
         var key = 'api/pr/' + q;
 
         cache.get(key, function (err, entries) {
