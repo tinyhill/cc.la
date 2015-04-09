@@ -39,15 +39,17 @@ exports.index = function (req, res) {
 
 exports.baidu = function (req, res) {
 
+    var q = req.params.q;
     var cmd = req.params.cmd;
     var period = req.params.period;
     var periodKey = period ? '/' + period : '';
     var periodParams = period ? '&lm=' + period : '';
-    var parsed = parseDomain(req.params.q);
+    var parsed = parseDomain(q);
 
     if (parsed) {
+        q = parsed.domain + '.' + parsed.tld;
+        q = parsed.subdomain ? parsed.subdomain + '.' + q : q;
 
-        var q = parsed.domain + '.' + parsed.tld;
         var key = 'api/indexed/baidu/' + cmd + '/' + q + periodKey;
 
         cache.get(key, function (err, entries) {
@@ -129,12 +131,14 @@ exports.baidu = function (req, res) {
 
 exports.haosou = function (req, res) {
 
+    var q = req.params.q;
     var cmd = req.params.cmd;
-    var parsed = parseDomain(req.params.q);
+    var parsed = parseDomain(q);
 
     if (parsed) {
+        q = parsed.domain + '.' + parsed.tld;
+        q = parsed.subdomain ? parsed.subdomain + '.' + q : q;
 
-        var q = parsed.domain + '.' + parsed.tld;
         var key = 'api/indexed/haosou/' + cmd + '/' + q;
 
         cache.get(key, function (err, entries) {
@@ -183,12 +187,14 @@ exports.haosou = function (req, res) {
 
 exports.sogou = function (req, res) {
 
+    var q = req.params.q;
     var cmd = req.params.cmd;
-    var parsed = parseDomain(req.params.q);
+    var parsed = parseDomain(q);
 
     if (parsed) {
+        q = parsed.domain + '.' + parsed.tld;
+        q = parsed.subdomain ? parsed.subdomain + '.' + q : q;
 
-        var q = parsed.domain + '.' + parsed.tld;
         var key = 'api/indexed/sogou/' + cmd + '/' + q;
 
         cache.get(key, function (err, entries) {
@@ -236,12 +242,14 @@ exports.sogou = function (req, res) {
 
 exports.google = function (req, res) {
 
+    var q = req.params.q;
     var cmd = req.params.cmd;
-    var parsed = parseDomain(req.params.q);
+    var parsed = parseDomain(q);
 
     if (parsed) {
+        q = parsed.domain + '.' + parsed.tld;
+        q = parsed.subdomain ? parsed.subdomain + '.' + q : q;
 
-        var q = parsed.domain + '.' + parsed.tld;
         var key = 'api/indexed/google/' + cmd + '/' + q;
 
         cache.get(key, function (err, entries) {
@@ -269,6 +277,59 @@ exports.google = function (req, res) {
                             $ = cheerio.load(body);
                             data = $('#resultStats').text().split(' ');
                             data = data[1] ? data[1] : '0';
+                            success(res, data);
+                            cache.add(key, data, {
+                                expire: 3600 * 24
+                            }, function () {
+                                model.create({
+                                    body: data,
+                                    key: key,
+                                    q: q
+                                });
+                            });
+                        }
+                    });
+                }
+
+            }
+        });
+    } else {
+        error(res);
+    }
+};
+
+exports.sr = function (req, res) {
+
+    var q = req.params.q;
+    var parsed = parseDomain(q);
+
+    if (parsed) {
+        q = parsed.domain + '.' + parsed.tld;
+        q = parsed.subdomain ? parsed.subdomain + '.' + q : q;
+
+        var key = 'api/indexed/sr/' + q;
+
+        cache.get(key, function (err, entries) {
+            if (err) {
+                fail(res, err);
+            } else {
+
+                var body = entries[0] ? entries[0].body : null;
+
+                if (body) {
+                    success(res, body);
+                } else {
+
+                    var url = 'http://rank.ie.sogou.com/sogourank.php?ur=http://' + q + '/';
+
+                    needle.get(url, function (err, resp, body) {
+
+                        var data = null;
+
+                        if (err || resp.statusCode !== 200) {
+                            fail(res, err);
+                        } else {
+                            data = _.trim(body).replace('sogourank=', '');
                             success(res, data);
                             cache.add(key, data, {
                                 expire: 3600 * 24

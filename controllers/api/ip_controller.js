@@ -50,7 +50,6 @@ exports.index = function (req, res) {
         var parsed = parseDomain(req.params.q);
 
         if (parsed) {
-
             q = parsed.domain + '.' + parsed.tld;
             q = parsed.subdomain ? parsed.subdomain + '.' + q : q;
 

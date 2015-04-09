@@ -15,10 +15,10 @@
                         <td colspan="5">
                             <ul class="clearfix">
                                 <li>
-                                    百度快照：<a href="http://www.baidu.com/s?wd=site%3A{{q}}" target="_blank">已取消</a>
+                                    百度首页位置：<span data-search="baidu/position"><a href="http://www.baidu.com/s?wd=site%3A{{q}}" target="_blank"></a></span>
                                 </li>
                                 <li>
-                                    首页位置：<span data-search="baidu/position"><a href="http://www.baidu.com/s?wd=site%3A{{q}}" target="_blank"></a></span>
+                                    搜狗评级：<span data-search="sr"><a href="http://www.sogou.com/" target="_blank"></a></span>
                                 </li>
                             </ul>
                         </td>
@@ -157,7 +157,7 @@
             request(this);
         });
 
-        $('.table span > a, .table td > a').each(function (k, v) {
+        $('.table a').each(function (k, v) {
             request(v);
         });
     </script>
