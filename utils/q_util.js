@@ -1,10 +1,12 @@
 var fs = require('fs');
 var path = require('path');
 var moment = require('moment');
+var mkdirp = require('mkdirp');
 var _ = require('lodash');
 
-var id = moment().format('YYYY/MM/DD/HH');
-var file = path.join(__dirname, '../data/q/' + id + '.log');
+var now = moment();
+var key = now.format('YYYY/MM/DD/HH');
+var file = path.join(__dirname, '../data/q/' + key + '.log');
 
 exports.read = function () {
 
@@ -29,9 +31,16 @@ exports.write = function (res, q) {
                     }
                 }
             });
-        } else {console.log(111);
-            fs.writeFile(file, q, function (err) {
-                console.log(err);
+        } else {
+
+            var dir = path.join(__dirname, '../data/q/' + now.format('YYYY/MM/DD'));
+
+            mkdirp(dir, function (err) {
+                if (!err) {
+                    fs.writeFile(file, q, function (err) {
+                        console.log(err);
+                    });
+                }
             });
         }
     });
