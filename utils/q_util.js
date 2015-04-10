@@ -10,10 +10,10 @@ exports.read = function () {
 
     if (fs.existsSync(file)) {
 
-        var queries = fs.readFileSync(file, 'utf-8');
+        var data = fs.readFileSync(file, 'utf8');
 
-        if (queries) {
-            return queries.split('\n').slice(-10);
+        if (data) {
+            return data.split('\n').slice(-10);
         }
     }
 };
@@ -29,7 +29,7 @@ exports.write = function (res, q) {
                     }
                 }
             });
-        } else {
+        } else {console.log(111);
             fs.writeFile(file, q);
         }
     });
