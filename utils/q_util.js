@@ -30,7 +30,9 @@ exports.write = function (res, q) {
                 }
             });
         } else {console.log(111);
-            fs.writeFile(file, q);
+            fs.writeFile(file, q, function (err) {
+                console.log(err);
+            });
         }
     });
     res.cookie('q', q);
