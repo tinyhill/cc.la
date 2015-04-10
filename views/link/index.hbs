@@ -47,6 +47,17 @@
                 友链检查工具，可以查询指定网站的友情链接是否链至本站，可以识破欺骗链接。
             </div>
         </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">查询记录</div>
+            <div class="panel-body">
+                {{#queries}}
+                    <a href="/indexed/{{.}}">{{.}}</a>&nbsp;&nbsp;
+                {{/queries}}
+                {{^queries}}
+                    <div class="text-center">暂无记录</div>
+                {{/queries}}
+            </div>
+        </div>
     </div>
 </div>
 {{#if q}}

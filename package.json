@@ -24,7 +24,7 @@
     "lib-qqwry": "0.0.5",
     "line-reader": "^0.2.4",
     "lodash": "~3.1.0",
-    "moment": "^2.9.0",
+    "moment": "^2.10.2",
     "mongoose": "~3.8.24",
     "mongoose-timestamp": "^0.4.0",
     "morgan": "~1.5.1",
