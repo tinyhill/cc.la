@@ -158,7 +158,7 @@ function fetch(parsed, q, cb) {
     // 判断响应码、资源类型
     if (res.statusCode >= 400) {
         cb(null, '<span style="color:red">无法访问</span>');
-    } else if (res.headers['content-type'].indexOf('text/html') === -1) {
+    } else if (res.headers['content-type'] && res.headers['content-type'].indexOf('text/html') === -1) {
         cb(null, '<span style="color:red">不是网页</span>');
     } else
 
