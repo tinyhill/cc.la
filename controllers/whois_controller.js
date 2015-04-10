@@ -8,6 +8,7 @@ exports.index = function (req, res) {
     var data = {
         active: 'whois',
         layout: 'layouts/default',
+        queries: qUtil.read(),
         title: 'WHOIS查询_域名WHOIS查询_域名注册信息查询'
     };
 
@@ -18,7 +19,7 @@ exports.index = function (req, res) {
         if (parsed) {
             data.q = parsed.domain + '.' + parsed.tld;
             data.q = parsed.subdomain ? parsed.subdomain + '.' + data.q : data.q;
-            res.cookie('q', data.q);
+            qUtil.write(res, data.q);
             cache.get('api/whois/' + data.q, function (err, entries) {
                 if (err) {
                     data.body = '服务器错误，请稍候重试';

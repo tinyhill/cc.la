@@ -18,7 +18,7 @@ exports.index = function (req, res) {
         if (parsed) {
             data.q = parsed.domain + '.' + parsed.tld;
             data.q = parsed.subdomain ? parsed.subdomain + '.' + data.q : data.q;
-            qUtil.write(res, q);
+            qUtil.write(res, data.q);
             res.render('link', data);
         } else {
             data.body = '请输入正确的网址';

@@ -55,6 +55,17 @@
                 网站排名查询工具，可以查询网站的全球排名信息、排名升降趋势、中国排名信息等，是目前较为权威的网站访问量评价指标。
             </div>
         </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">查询记录</div>
+            <div class="panel-body">
+                {{#queries}}
+                    <a href="/alexa/{{.}}">{{.}}</a>&nbsp;&nbsp;
+                {{/queries}}
+                {{^queries}}
+                    <div class="text-center">暂无记录</div>
+                {{/queries}}
+            </div>
+        </div>
     </div>
 </div>
 {{#if q}}

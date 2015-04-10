@@ -22,6 +22,17 @@
                 PR 查询工具，可以查询指定域名的 PR 值，同时能检测真假情况，识破劫持欺骗。
             </div>
         </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">查询记录</div>
+            <div class="panel-body">
+                {{#queries}}
+                    <a href="/pr/{{.}}">{{.}}</a>&nbsp;&nbsp;
+                {{/queries}}
+                {{^queries}}
+                    <div class="text-center">暂无记录</div>
+                {{/queries}}
+            </div>
+        </div>
     </div>
 </div>
 {{#if q}}

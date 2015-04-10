@@ -6,6 +6,7 @@ exports.index = function (req, res) {
     var data = {
         active: 'pr',
         layout: 'layouts/default',
+        queries: qUtil.read(),
         title: 'PR值_PR查询_PR真假查询_PR劫持检测'
     };
 
@@ -16,7 +17,7 @@ exports.index = function (req, res) {
         if (parsed) {
             data.q = parsed.domain + '.' + parsed.tld;
             data.q = parsed.subdomain ? parsed.subdomain + '.' + data.q : data.q;
-            res.cookie('q', data.q);
+            qUtil.write(res, data.q);
             res.render('pr', data);
         } else {
             data.body = '请输入正确的网址';

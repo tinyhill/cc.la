@@ -27,6 +27,17 @@
                 WHOIS 查询工具，可以查询域名的注册信息，包括注册人、注册邮箱、注册机构、注册日期、到期日期、联系人等信息。
             </div>
         </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">查询记录</div>
+            <div class="panel-body">
+                {{#queries}}
+                    <a href="/whois/{{.}}">{{.}}</a>&nbsp;&nbsp;
+                {{/queries}}
+                {{^queries}}
+                    <div class="text-center">暂无记录</div>
+                {{/queries}}
+            </div>
+        </div>
     </div>
 </div>
 {{#if touched}}

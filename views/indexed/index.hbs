@@ -115,6 +115,17 @@
                 网站收录查询工具，可以查询网站在百度、好搜、搜狗、谷歌等搜索引擎的收录情况反向链接，还可以查询网站的百度首页位置、搜狗网页评级以及近期收录等信息。
             </div>
         </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">查询记录</div>
+            <div class="panel-body">
+                {{#queries}}
+                    <a href="/indexed/{{.}}">{{.}}</a>&nbsp;&nbsp;
+                {{/queries}}
+                {{^queries}}
+                    <div class="text-center">暂无记录</div>
+                {{/queries}}
+            </div>
+        </div>
     </div>
 </div>
 {{#if q}}

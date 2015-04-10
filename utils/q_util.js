@@ -4,9 +4,9 @@ var moment = require('moment');
 var mkdirp = require('mkdirp');
 var _ = require('lodash');
 
+var dirPrefix = '../data/q';
 var now = moment();
-var key = now.format('YYYY/MM/DD/HH');
-var file = path.join(__dirname, '../data/q/' + key + '.log');
+var file = path.join(__dirname, dirPrefix, now.format('YYYY/MM/DD/HH') + '.log');
 
 exports.read = function () {
 
@@ -33,7 +33,8 @@ exports.write = function (res, q) {
             });
         } else {
 
-            var dir = path.join(__dirname, '../data/q/' + now.format('YYYY/MM/DD'));
+            var ymd = now.format('YYYY/MM/DD');
+            var dir = path.join(__dirname, dirPrefix, ymd);
 
             mkdirp(dir, function (err) {
                 if (!err) {

@@ -6,6 +6,7 @@ exports.index = function (req, res) {
     var data = {
         active: 'indexed',
         layout: 'layouts/default',
+        queries: qUtil.read(),
         title: '网站收录_收录查询_网站收录查询_百度收录查询'
     };
 
@@ -16,7 +17,7 @@ exports.index = function (req, res) {
         if (parsed) {
             data.q = parsed.domain + '.' + parsed.tld;
             data.q = parsed.subdomain ? parsed.subdomain + '.' + data.q : data.q;
-            res.cookie('q', data.q);
+            qUtil.write(res, data.q);
             res.render('indexed', data);
         } else {
             data.body = '请输入正确的网址';
