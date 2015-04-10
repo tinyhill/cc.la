@@ -1,6 +1,7 @@
 var cache = require('express-redis-cache')();
 var moment = require('moment');
 var parseDomain = require('parse-domain');
+var qUtil = require('../utils/q_util');
 
 exports.index = function (req, res) {
 
