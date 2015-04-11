@@ -38,9 +38,7 @@ exports.write = function (res, q) {
 
             mkdirp(dir, function (err) {
                 if (!err) {
-                    fs.writeFile(file, q, function (err) {
-                        console.log(err);
-                    });
+                    fs.writeFile(file, q);
                 }
             });
         }
