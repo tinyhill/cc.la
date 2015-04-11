@@ -4,12 +4,14 @@ var moment = require('moment');
 var mkdirp = require('mkdirp');
 var _ = require('lodash');
 
-var dirPrefix = '../data/q';
-var now = moment();
+function fullpath(p) {
+    return path.join(__dirname, '../data/q', p);
+}
 
 exports.read = function () {
 
-    var file = path.join(__dirname, dirPrefix, now.format('YYYY/MM/DD/HH') + '.log');
+    var now = moment();
+    var file = fullpath(now.format('YYYY/MM/DD/HH') + '.log');
 
     if (fs.existsSync(file)) {
 
@@ -23,7 +25,8 @@ exports.read = function () {
 
 exports.write = function (res, q) {
 
-    var file = path.join(__dirname, dirPrefix, now.format('YYYY/MM/DD/HH') + '.log');
+    var now = moment();
+    var file = fullpath(now.format('YYYY/MM/DD/HH') + '.log');
 
     fs.exists(file, function (exists) {
         if (exists) {
@@ -36,8 +39,7 @@ exports.write = function (res, q) {
             });
         } else {
 
-            var ymd = now.format('YYYY/MM/DD');
-            var dir = path.join(__dirname, dirPrefix, ymd);
+            var dir = fullpath(now.format('YYYY/MM/DD'));
 
             mkdirp(dir, function (err) {
                 if (!err) {
