@@ -6,9 +6,10 @@ var _ = require('lodash');
 
 var dirPrefix = '../data/q';
 var now = moment();
-var file = path.join(__dirname, dirPrefix, now.format('YYYY/MM/DD/HH') + '.log');
 
 exports.read = function () {
+
+    var file = path.join(__dirname, dirPrefix, now.format('YYYY/MM/DD/HH') + '.log');
 
     if (fs.existsSync(file)) {
 
@@ -21,6 +22,8 @@ exports.read = function () {
 };
 
 exports.write = function (res, q) {
+
+    var file = path.join(__dirname, dirPrefix, now.format('YYYY/MM/DD/HH') + '.log');
 
     fs.exists(file, function (exists) {
         if (exists) {
