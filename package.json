@@ -15,7 +15,6 @@
     "express": "~4.11.0",
     "express-redis-cache": "^0.1.7",
     "glob": "^5.0.3",
-    "gulp-less": "~2.0.1",
     "handlebars-helper": "0.0.12",
     "hbs": "~2.8.0",
     "iconv-lite": "^0.4.7",
