@@ -1,9 +1,10 @@
 exports.index = function (req, res, next) {
-    if (req['X-Requested-With'] && req['X-Requested-With'] === 'XMLHttpRequest') {
+
+    var headers = req.headers;
+
+    if (headers['x-requested-with'] && headers['x-requested-with'] === 'XMLHttpRequest') {
         next();
     } else {
-        res.status(401).render('error', {
-            message: 'Unauthorized'
-        });
+        res.status(401).send(null);
     }
 };
