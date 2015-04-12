@@ -277,7 +277,7 @@ exports.google = function (req, res) {
                     var url = 'http://210.242.125.99/search?q=' + cmd + '%3A' + q + '&hl=zh_CN';
 
                     needle.get(url, {
-                        proxy: proxyServer['li570-76']
+                        proxy: proxyServer['us-fremont-76']
                     }, function (err, resp, body) {
 
                         var data = null;
