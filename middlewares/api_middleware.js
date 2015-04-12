@@ -6,6 +6,6 @@ exports.index = function (req, res, next) {
     if (xRequestedWith && headers.referer) {
         next();
     } else {
-        res.status(403).send('403 Forbidden');
+        res.status(403).send(null);
     }
 };

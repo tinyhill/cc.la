@@ -27,7 +27,7 @@ exports.write = function (res, q) {
         if (exists) {
             fs.readFile(file, 'utf8', function (err, data) {
                 if (!err) {
-                    if (_.indexOf(data.split('\n'), q) === -1 && !/\.cc\.la$/.test(q)) {
+                    if (_.indexOf(data.split('\n'), q) === -1 || /\.cc\.la$/.test(q)) {
                         fs.appendFile(file, '\n' + q);
                     }
                 }
