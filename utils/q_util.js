@@ -27,7 +27,7 @@ exports.write = function (res, q) {
         if (exists) {
             fs.readFile(file, 'utf8', function (err, data) {
                 if (!err) {
-                    data = _.union(data, ['www.cc.la', 'cc.la']);
+                    data += '\ncc.la\nwww.cc.la';
                     if (_.indexOf(data.split('\n'), q) === -1) {
                         fs.appendFile(file, '\n' + q);
                     }
