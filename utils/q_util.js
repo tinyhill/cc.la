@@ -29,6 +29,7 @@ exports.write = function (res, q) {
                 if (!err) {
                     data += '\ncc.la';
                     data += '\nwww.cc.la';
+                    console.log(data);
                     if (_.indexOf(data.split('\n'), q) === -1) {
                         fs.appendFile(file, '\n' + q);
                     }
