@@ -23,11 +23,17 @@ exports.write = function (res, q) {
     var now = moment();
     var file = path.join(__dirname, '../data/q', now.format('YYYY/MM/DD/HH') + '.log');
 
+    res.cookie('q', q);
+
+    if (q !== 'www.cc.la' && q !== 'cc.la') {
+        return;
+    }
+
     fs.exists(file, function (exists) {
         if (exists) {
             fs.readFile(file, 'utf8', function (err, data) {
                 if (!err) {
-                    if (_.indexOf(data.split('\n'), q) === -1 && _.indexOf(['cc.la', 'www.cc.la'], q) === -1) {
+                    if (_.indexOf(data.split('\n'), q) === -1) {
                         fs.appendFile(file, '\n' + q);
                     }
                 }
@@ -43,5 +49,4 @@ exports.write = function (res, q) {
             });
         }
     });
-    res.cookie('q', q);
 };
