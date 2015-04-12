@@ -274,10 +274,10 @@ exports.google = function (req, res) {
                     success(res, body);
                 } else {
 
-                    var url = 'http://www.google.com.hk/search?q=' + cmd + '%3A' + q + '&hl=zh_CN';
+                    var url = 'http://210.242.125.99/search?q=' + cmd + '%3A' + q + '&hl=zh_CN';
 
                     needle.get(url, {
-                        proxy: proxyServer.tokyo
+                        proxy: proxyServer['li570-76']
                     }, function (err, resp, body) {
 
                         var data = null;
