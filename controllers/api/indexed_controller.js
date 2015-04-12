@@ -274,7 +274,7 @@ exports.google = function (req, res) {
                     success(res, body);
                 } else {
 
-                    var url = 'http://64.233.181.104/search?q=' + cmd + '%3A' + q + '&hl=zh_CN';
+                    var url = 'http://www.google.com.hk/search?q=' + cmd + '%3A' + q + '&hl=zh_CN';
 
                     needle.get(url, {
                         proxy: proxyServer.tokyo
