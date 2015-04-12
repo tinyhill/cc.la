@@ -25,7 +25,7 @@ exports.write = function (res, q) {
 
     res.cookie('q', q);
 
-    if (q === 'www.cc.la' && q === 'cc.la') {
+    if (q === 'www.cc.la' || q === 'cc.la') {
         return;
     }
 
