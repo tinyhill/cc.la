@@ -5,6 +5,7 @@ var cheerio = require('cheerio');
 var charset = require('charset');
 var iconv = require('iconv-lite');
 var robots = require('robots');
+var url = require('url');
 var _ = require('lodash');
 
 function success(res, data) {
@@ -48,7 +49,7 @@ function parse(uri, cb) {
         uri: uri,
         followRedirect: true,
         encoding: null,
-        timeout: 5000
+        timeout: 10000
     };
 
     request(options, function (err, res) {
