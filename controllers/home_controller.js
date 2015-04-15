@@ -2,6 +2,7 @@ var parseDomain = require('parse-domain');
 var path = require('path');
 var qqwry = require('lib-qqwry').info(path.join(__dirname, '../data/qqwry/qqwry.dat'));
 var uaParser = require('ua-parser');
+var _ = require('lodash');
 
 function getClientIp(req) {
     return req.headers['x-forwarded-for'] ||
@@ -20,7 +21,7 @@ function getQQWry(ip) {
 exports.index = function (req, res) {
 
     var ip = getClientIp(req);
-    var q = req.params.q || req.query.q || req.cookies.q || '';
+    var q = _.trim(req.params.q || req.query.q || req.cookies.q || '');
     var r = uaParser.parse(req.headers['user-agent']);
 
     if (q && parseDomain(q)) {

@@ -1,9 +1,10 @@
 var parseDomain = require('parse-domain');
 var qUtil = require('../utils/q_util');
+var _ = require('lodash');
 
 exports.index = function (req, res) {
 
-    var q = req.params.q || req.query.q || '';
+    var q = _.trim(req.params.q || req.query.q || '');
     var data = {
         active: 'pr',
         layout: 'layouts/default',
