@@ -1,8 +1,9 @@
 var cache = require('express-redis-cache')();
-var PageRank = require('pagerank');
+var PageRank = require('pagerank-hk');
 var parseDomain = require('parse-domain');
 
 var model = require('../../models/pr_model');
+var proxyServer = require('../../config/proxy_server');
 
 function success(res, data) {
     res.send({
@@ -46,8 +47,13 @@ exports.index = function (req, res) {
                 if (body) {
                     success(res, body);
                 } else {
-                    PageRank.HOST = 'toolbarqueries.google.com.hk';
-                    PageRank.get(q, function (err, data) {
+
+                    var server = proxyServer['us-fremont-76'].split(':');
+
+                    PageRank.get(q, {
+                        host: server[0],
+                        port: server[1]
+                    }, function (err, data) {console.log(err);
                         if (err || data === null) {
                             fail(res, err);
                         } else {

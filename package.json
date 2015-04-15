@@ -30,7 +30,7 @@
     "morgan": "~1.5.1",
     "needle": "^0.8.2",
     "node-whois": "^2.1.0",
-    "pagerank": "~1.2.0",
+    "pagerank-hk": "latest",
     "parse-domain": "~0.1.2",
     "request": "^2.53.0",
     "robots": "~0.9.4",
