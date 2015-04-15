@@ -3,7 +3,6 @@ var PageRank = require('pagerank-hk');
 var parseDomain = require('parse-domain');
 
 var model = require('../../models/pr_model');
-var proxyServer = require('../../config/proxy_server');
 
 function success(res, data) {
     res.send({
@@ -47,13 +46,7 @@ exports.index = function (req, res) {
                 if (body) {
                     success(res, body);
                 } else {
-
-                    var server = proxyServer['us-fremont-76'].split(':');
-
-                    PageRank.get(q, {
-                        host: server[0],
-                        port: server[1]
-                    }, function (err, data) {console.log(err);
+                    PageRank.get(q, function (err, data) {
                         if (err || data === null) {
                             fail(res, err);
                         } else {

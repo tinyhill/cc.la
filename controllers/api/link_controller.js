@@ -5,7 +5,6 @@ var cheerio = require('cheerio');
 var charset = require('charset');
 var iconv = require('iconv-lite');
 var robots = require('robots');
-var url = require('url');
 var _ = require('lodash');
 
 function success(res, data) {

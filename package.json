@@ -30,13 +30,12 @@
     "morgan": "~1.5.1",
     "needle": "^0.8.2",
     "node-whois": "^2.1.0",
-    "pagerank-hk": "latest",
+    "pagerank-hk": "0.0.4",
     "parse-domain": "~0.1.2",
     "request": "^2.53.0",
     "robots": "~0.9.4",
     "serve-favicon": "~2.2.0",
     "ua-parser": "^0.3.5",
-    "url": "~0.10.3",
     "xml2js": "^0.4.5"
   },
   "devDependencies": {
