@@ -1,5 +1,5 @@
 var cache = require('express-redis-cache')();
-var PageRank = require('pagerank-hk');
+var PageRank = require('pagerank');
 var parseDomain = require('parse-domain');
 
 var model = require('../../models/pr_model');
@@ -46,6 +46,8 @@ exports.index = function (req, res) {
                 if (body) {
                     success(res, body);
                 } else {
+                    PageRank.HOST = 'toolbarqueries.google.com.hk';
+                    PageRank.USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.104 Safari/537.36';
                     PageRank.get(q, function (err, data) {
                         if (err || data === null) {
                             fail(res, err);
