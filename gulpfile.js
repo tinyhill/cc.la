@@ -9,6 +9,7 @@ var bower = './bower_components/';
 var build = './public/';
 
 gulp.task('css', function () {
+
     gulp.src([
         assets + 'less/global.less'
     ])
@@ -16,14 +17,18 @@ gulp.task('css', function () {
         .pipe(concat('global.css'))
         .pipe(minify())
         .pipe(gulp.dest(build + 'css'));
+
 });
 
 gulp.task('fonts', function () {
+
     gulp.src(bower + 'bootstrap/dist/fonts/*.*')
         .pipe(gulp.dest(build + 'fonts'));
+
 });
 
 gulp.task('js', function () {
+
     gulp.src([
         bower + 'jquery/dist/jquery.js',
         bower + 'bootstrap/dist/js/bootstrap.js',
@@ -32,28 +37,31 @@ gulp.task('js', function () {
         .pipe(concat('global.js'))
         .pipe(uglify())
         .pipe(gulp.dest(build + 'js'));
+
 });
 
-gulp.task('js:respond', function () {
+gulp.task('respond', function () {
+
     gulp.src(bower + 'respond/src/respond.js')
         .pipe(uglify())
         .pipe(gulp.dest(build + 'js'));
+
 });
 
 gulp.task('default', [
     'css',
     'fonts',
     'js',
-    'js:respond'
+    'respond'
 ]);
 
 gulp.task('watch', function () {
+
     gulp.watch([
         assets + 'less/*.less',
-        assets + 'less/*/*.less',
-        assets + 'js/*.js'
-    ], [
-        'css',
-        'js'
-    ]);
+        assets + 'less/*/*.less'
+    ], ['css']);
+
+    gulp.watch([assets + 'js/*.js'], ['js']);
+
 });
