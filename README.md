@@ -22,7 +22,7 @@ source ~/.nvm/nvm.sh
 
 ```
 $ nvm install 0.11.14
-$ nvm default 0.11.14
+$ nvm alias default 0.11.14
 ```
 
 ## 安装 pm2
