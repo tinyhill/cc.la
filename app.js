@@ -13,6 +13,7 @@ var api = require('./routes/api');
 
 var app = express();
 
+// handlebars
 hbs.registerPartials(__dirname + '/views/partials');
 hbsHelper.help(hbs);
 
