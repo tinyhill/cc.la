@@ -2,7 +2,7 @@ var cache = require('express-redis-cache')();
 var PageRank = require('pagerank');
 var parseDomain = require('parse-domain');
 
-var model = require('../../models/pr_model');
+//var model = require('../../models/pr_model');
 
 function success(res, data) {
     res.send({
@@ -56,11 +56,11 @@ exports.index = function (req, res) {
                             cache.add(key, data, {
                                 expire: 3600 * 24 * 30
                             }, function () {
-                                model.create({
-                                    body: data,
-                                    key: key,
-                                    q: q
-                                });
+                                //model.create({
+                                //    body: data,
+                                //    key: key,
+                                //    q: q
+                                //});
                             });
                         }
                     });

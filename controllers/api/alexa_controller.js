@@ -3,7 +3,7 @@ var parseDomain = require('parse-domain');
 var request = require('request');
 var xml2js = require('xml2js');
 
-var model = require('../../models/alexa_model');
+//var model = require('../../models/alexa_model');
 
 function success(res, data) {
     res.send({
@@ -95,11 +95,11 @@ exports.index = function (req, res) {
                             cache.add(key, body, {
                                 expire: 3600 * 24
                             }, function () {
-                                model.create({
-                                    body: body,
-                                    key: key,
-                                    q: q
-                                });
+                                //model.create({
+                                //    body: body,
+                                //    key: key,
+                                //    q: q
+                                //});
                             });
                         }
                     });

@@ -6,8 +6,7 @@ var parseDomain = require('parse-domain');
 var path = require('path');
 var qqwry = require('lib-qqwry').info(path.join(__dirname, '../../data/qqwry/qqwry.dat'));
 
-
-var model = require('../../models/ip_model');
+//var model = require('../../models/ip_model');
 
 function getQQWry(ip) {
 
@@ -73,11 +72,11 @@ exports.index = function (req, res) {
                                 cache.add(key, data, {
                                     expire: 3600 * 24
                                 }, function () {
-                                    model.create({
-                                        body: data,
-                                        key: key,
-                                        q: q
-                                    });
+                                    //model.create({
+                                    //    body: data,
+                                    //    key: key,
+                                    //    q: q
+                                    //});
                                 });
                             }
                         });

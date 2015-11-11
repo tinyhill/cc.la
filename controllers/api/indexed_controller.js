@@ -4,7 +4,7 @@ var parseDomain = require('parse-domain');
 var cheerio = require('cheerio');
 var _ = require('lodash');
 
-var model = require('../../models/indexed_model');
+//var model = require('../../models/indexed_model');
 var proxyServer = require('../../config/proxy_server');
 
 function success(res, data) {
@@ -112,11 +112,11 @@ exports.baidu = function (req, res) {
                             cache.add(key, data, {
                                 expire: 3600 * 24
                             }, function () {
-                                model.create({
-                                    body: data,
-                                    key: key,
-                                    q: q
-                                });
+                                //model.create({
+                                //    body: data,
+                                //    key: key,
+                                //    q: q
+                                //});
                             });
                         }
                     });
@@ -168,11 +168,11 @@ exports.haosou = function (req, res) {
                             cache.add(key, data, {
                                 expire: 3600 * 24
                             }, function () {
-                                model.create({
-                                    body: data,
-                                    key: key,
-                                    q: q
-                                });
+                                //model.create({
+                                //    body: data,
+                                //    key: key,
+                                //    q: q
+                                //});
                             });
                         }
                     });
@@ -234,11 +234,11 @@ exports.sogou = function (req, res) {
                             cache.add(key, data, {
                                 expire: 3600 * 24
                             }, function () {
-                                model.create({
-                                    body: data,
-                                    key: key,
-                                    q: q
-                                });
+                                //model.create({
+                                //    body: data,
+                                //    key: key,
+                                //    q: q
+                                //});
                             });
                         }
                     });
@@ -292,11 +292,11 @@ exports.google = function (req, res) {
                             cache.add(key, data, {
                                 expire: 3600 * 24
                             }, function () {
-                                model.create({
-                                    body: data,
-                                    key: key,
-                                    q: q
-                                });
+                                //model.create({
+                                //    body: data,
+                                //    key: key,
+                                //    q: q
+                                //});
                             });
                         }
                     });
