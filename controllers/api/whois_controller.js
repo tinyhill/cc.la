@@ -2,7 +2,7 @@ var cache = require('express-redis-cache')({
     auth_pass: process.env.REDIS_PASSWORD
 });
 var parseDomain = require('parse-domain');
-var whois = require('node-whois');
+var whois = require('whois');
 var _ = require('lodash');
 
 function success(res, data) {
