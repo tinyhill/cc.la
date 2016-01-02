@@ -21,8 +21,8 @@ source ~/.nvm/nvm.sh
 安装 node 环境：
 
 ```
-$ nvm install 0.11.14
-$ nvm alias default 0.11.14
+$ nvm install stable
+$ nvm alias default stable
 ```
 
 ## 安装 pm2
