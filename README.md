@@ -2,34 +2,7 @@
 
 ## 安装 nvm
 
-```
-$ curl https://raw.githubusercontent.com/creationix/nvm/v0.23.3/install.sh | bash
-```
-
-编辑文件：
-
-```
-$ vim ~/.bash_profile
-```
-
-添加配置：
-
-```
-source ~/.nvm/nvm.sh
-```
-
-安装 node 环境：
-
-```
-$ nvm install stable
-$ nvm alias default stable
-```
-
-## 安装 pm2
-
-```
-$ npm install pm2 -g
-```
+参考：[https://github.com/creationix/nvm](https://github.com/creationix/nvm)
 
 ## 设置 NODE_ENV
 
@@ -43,14 +16,6 @@ $ export NODE_ENV=production
 $ cd /usr/local/redis/bin
 $ ./redis-cli
 $ FLUSHALL
-```
-
-## 清理 mongodb
-
-```
-$ mongo
-$ use cc_la
-$ db.dropDatabase()
 ```
 
 ## 启动
