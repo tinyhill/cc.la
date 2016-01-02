@@ -10,14 +10,6 @@
 $ export NODE_ENV=production
 ```
 
-## 配置 redis 密码
-
-在项目根目录中创建 `.env` 文件，并配置 `redis` 密码：
-
-```
-REDIS_PASSWORD=[你的 redis 密码]
-```
-
 ## 启动
 
 ```

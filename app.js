@@ -7,15 +7,11 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var hbs = require('hbs');
 var hbsHelper = require('handlebars-helper');
-var dotenv = require('dotenv');
 
 var routes = require('./routes/index');
 var api = require('./routes/api');
 
 var app = express();
-
-// dotenv
-dotenv.load();
 
 // handlebars
 hbs.registerPartials(__dirname + '/views/partials');

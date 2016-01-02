@@ -1,6 +1,4 @@
-var cache = require('express-redis-cache')({
-    auth_pass: process.env.REDIS_PASSWORD
-});
+var cache = require('express-redis-cache')();
 var parseDomain = require('parse-domain');
 var request = require('request');
 var xml2js = require('xml2js');

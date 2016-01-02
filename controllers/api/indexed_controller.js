@@ -1,6 +1,4 @@
-var cache = require('express-redis-cache')({
-    auth_pass: process.env.REDIS_PASSWORD
-});
+var cache = require('express-redis-cache')();
 var needle = require('needle');
 var parseDomain = require('parse-domain');
 var cheerio = require('cheerio');

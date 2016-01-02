@@ -1,6 +1,4 @@
-var cache = require('express-redis-cache')({
-    auth_pass: process.env.REDIS_PASSWORD
-});
+var cache = require('express-redis-cache')();
 var moment = require('moment');
 var parseDomain = require('parse-domain');
 var qUtil = require('../utils/q_util');
