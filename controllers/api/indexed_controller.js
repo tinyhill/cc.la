@@ -1,11 +1,10 @@
-var cache = require('express-redis-cache')();
+var cache = require('express-redis-cache')({
+    auth_pass: process.env.REDIS_PASSWORD
+});
 var needle = require('needle');
 var parseDomain = require('parse-domain');
 var cheerio = require('cheerio');
 var _ = require('lodash');
-
-//var model = require('../../models/indexed_model');
-var proxyServer = require('../../config/proxy_server');
 
 function success(res, data) {
     res.send({
@@ -276,9 +275,7 @@ exports.google = function (req, res) {
 
                     var url = 'http://210.242.125.99/search?q=' + cmd + '%3A' + q + '&hl=zh_CN';
 
-                    needle.get(url, {
-                        proxy: proxyServer['us-fremont-76']
-                    }, function (err, resp, body) {
+                    needle.get(url, function (err, resp, body) {
 
                         var data = null;
 
@@ -291,12 +288,6 @@ exports.google = function (req, res) {
                             success(res, data);
                             cache.add(key, data, {
                                 expire: 3600 * 24
-                            }, function () {
-                                //model.create({
-                                //    body: data,
-                                //    key: key,
-                                //    q: q
-                                //});
                             });
                         }
                     });

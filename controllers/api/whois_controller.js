@@ -1,9 +1,9 @@
-var cache = require('express-redis-cache')();
+var cache = require('express-redis-cache')({
+    auth_pass: process.env.REDIS_PASSWORD
+});
 var parseDomain = require('parse-domain');
 var whois = require('node-whois');
 var _ = require('lodash');
-
-//var model = require('../../models/whois_model');
 
 function success(res, data) {
 
@@ -64,12 +64,6 @@ exports.index = function (req, res) {
                             success(res, data);
                             cache.add(key, body, {
                                 expire: 3600 * 24 * 30
-                            }, function () {
-                                //model.create({
-                                //    body: body,
-                                //    key: key,
-                                //    q: _q
-                                //});
                             });
                         }
                     });

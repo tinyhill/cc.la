@@ -1,9 +1,9 @@
-var cache = require('express-redis-cache')();
+var cache = require('express-redis-cache')({
+    auth_pass: process.env.REDIS_PASSWORD
+});
 var parseDomain = require('parse-domain');
 var request = require('request');
 var xml2js = require('xml2js');
-
-//var model = require('../../models/alexa_model');
 
 function success(res, data) {
     res.send({
@@ -94,12 +94,6 @@ exports.index = function (req, res) {
                             success(res, data);
                             cache.add(key, body, {
                                 expire: 3600 * 24
-                            }, function () {
-                                //model.create({
-                                //    body: body,
-                                //    key: key,
-                                //    q: q
-                                //});
                             });
                         }
                     });

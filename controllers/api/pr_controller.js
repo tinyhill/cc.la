@@ -1,8 +1,8 @@
-var cache = require('express-redis-cache')();
+var cache = require('express-redis-cache')({
+    auth_pass: process.env.REDIS_PASSWORD
+});
 var PageRank = require('pagerank');
 var parseDomain = require('parse-domain');
-
-//var model = require('../../models/pr_model');
 
 function success(res, data) {
     res.send({
@@ -55,12 +55,6 @@ exports.index = function (req, res) {
                             success(res, data);
                             cache.add(key, data, {
                                 expire: 3600 * 24 * 30
-                            }, function () {
-                                //model.create({
-                                //    body: data,
-                                //    key: key,
-                                //    q: q
-                                //});
                             });
                         }
                     });
