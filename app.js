@@ -15,7 +15,7 @@ var api = require('./routes/api');
 var app = express();
 
 // dotenv
-dotenv.laod();
+dotenv.load();
 
 // handlebars
 hbs.registerPartials(__dirname + '/views/partials');
