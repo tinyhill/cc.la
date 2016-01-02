@@ -10,14 +10,6 @@
 $ export NODE_ENV=production
 ```
 
-## 清理 redis
-
-```
-$ cd /usr/local/redis/bin
-$ ./redis-cli
-$ FLUSHALL
-```
-
 ## 启动
 
 ```
