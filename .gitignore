@@ -1,6 +1,7 @@
 .DS_Store
 .env
 .idea/
+.user.ini
 bower_components/
 node_modules/
 npm-debug.log
