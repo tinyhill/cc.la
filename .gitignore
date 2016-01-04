@@ -2,7 +2,9 @@
 .env
 .idea/
 .user.ini
+.well-known/
 bower_components/
 data/q/
 node_modules/
 npm-debug.log
+ssl/
