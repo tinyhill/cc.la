@@ -3,5 +3,6 @@
 .idea/
 .user.ini
 bower_components/
+data/q/
 node_modules/
 npm-debug.log
